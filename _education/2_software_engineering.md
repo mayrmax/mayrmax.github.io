@@ -15,4 +15,4 @@ I started with the basics and moved on to specialize in **web engineering**.
 What I liked most about the study program was the **broad range of topics** covered where one could find out what interests him most.
 One of my bigger web projects that I did for my studies was a [biodiversity][biodiversity] project for the national park’s association Austria.
 
-[biodiversity]: /projects/#biodiversity
+[biodiversity]: /projects#biodiversity

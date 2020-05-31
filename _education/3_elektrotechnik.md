@@ -14,5 +14,5 @@ User applications only played a side role in my chosen program but through the o
 I quickly discovered my **love for programming**. As my final project,
 I choose to do a software project that enables users to [create digital notes][mynoteboard].
 
-[mynoteboard]: /projects/#mynoteboard
+[mynoteboard]: /projects#mynoteboard
 
