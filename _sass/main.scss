@@ -6,7 +6,7 @@ html, body {
   margin: 0;
   padding: 0;
 }
-.container, article {
+.container, article, footer {
   a:not(.no-style) {
     text-decoration:none;
     border-bottom: 2px solid #ef8b80;
@@ -32,6 +32,10 @@ html, body {
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+}
+
+section.is-spaced {
+  margin: 2.5rem;
 }
 
 .is-flex-left-center {
