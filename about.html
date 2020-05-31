@@ -1,0 +1,163 @@
+---
+layout: default
+title: About
+permalink: /about
+---
+<section class="section hero is-light">
+    <div class="container has-text-centered">
+        <h1 class="title is-marginless">ABOUT ME</h1>
+        <div class="is-vertical-line"></div>
+    </div>
+    <div class="container">
+        <div class="columns">
+            <div class="column">
+                <figure class="image is-300x300 is-centered ">
+                    <img class="is-rounded" src="/assets/images/me.jpg">
+                </figure>
+            </div>
+            <div class="column">
+                <h3 class="subtitle">Hello, I'm Max.</h3>
+                <p>
+                    I'm a <span class="has-text-weight-bold">software engineer</span> based in Linz, 🇦🇹.
+                    I love <span class="has-text-weight-bold">creating things</span> that live on the internet.
+                    My goal is to <span class="has-text-weight-bold">create software</span> that <span class="has-text-weight-bold">helps people</span>
+                    in their daily lives by <span class="has-text-weight-bold">solving problems</span> they might not even know they have.
+                </p>
+                <p>
+                    I like to fiddle around with the <span class="has-text-weight-bold">newest technologies</span> and patterns in my private projects.
+                </p>
+                <div class="is-flex is-align-items-center ">
+                    <div class="is-inline-line"></div>
+                    <a class="no-style" href="https://github.com/mayrmax"><span class="icon"><i class="fab fa-lg fa-github"></i></span></a>
+                    <a class="no-style" href="https://www.linkedin.com/in/mayrmax/"><span class="icon"><i class="fab fa-lg fa-linkedin"></i></span></a>
+                    <a class="no-style" href="https://twitter.com/max_mayr"><span class="icon"><i class="fab fa-lg fa-twitter"></i></span></a>
+                    <div class="is-inline-line"></div>
+                </div>
+            </div>
+            <div class="column">
+                <h3 class="subtitle">Interests</h3>
+                <p>When I'm <span class="has-text-weight-bold">not playing</span> around with one of my <span class="has-text-weight-bold">side projects</span>, I enjoy spending my time with the following:</p>
+                <ul class="is-ul">
+                    <li>I participate in the <span class="has-text-weight-bold">political process</span> in Europe and Austria <a href="https://www.voltoesterreich.org/">@Volt</a>;</li>
+                    <li>I'm a <a href="https://en.wikipedia.org/wiki/Futurologist"><span class="has-text-weight-bold">futurologist</span></a>;</li>
+                    <li>I love watching series and movies;</li>
+                    <li>I practice my archery skills;</li>
+                    <li>I <span class="has-text-weight-bold">travel the world</span> and experience different cultures.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container has-text-centered">
+        <h1 class="title is-marginless">TECHNICAL SKILLS</h1>
+        <div class="is-vertical-line is-centered"></div>
+        <p class="subtitle">
+            I discovered my <span class="has-text-weight-bold">love for programming</span> early on and learned a lot of stuff by myself.
+            Later I wanted to dive deeper and attended a university, where I further <span class="has-text-weight-bold">shaped my skills</span>.
+            I worked in a wide variety of areas from mobile, desktop, IoT, and the web.
+            Nowadays I mostly work on <span class="has-text-weight-bold">web projects</span> based on <a href="https://nodejs.org/">Node.JS</a>
+            and <a href="https://www.typescriptlang.org/">TypeScript</a>.
+        </p>
+
+        <h3 class="subtitle is-marginless">Expert</h3>
+        <div class="is-vertical-sub-line is-centered"></div>
+        <div class="is-flex is-flex-centered pb-8">
+            <span>TypeScript</span>
+            <span class="bullet"></span>
+            <span>JavaScript</span>
+            <span class="bullet"></span>
+            <span>Angular</span>
+            <span class="bullet"></span>
+            <span>Node.JS</span>
+            <span class="bullet"></span>
+            <span>Nest.JS</span>
+        </div>
+
+        <h3 class="subtitle is-marginless">Advanced</h3>
+        <div class="is-vertical-sub-line is-centered"></div>
+        <div class="is-flex is-flex-centered pb-8">
+            <span>C#</span>
+            <span class="bullet"></span>
+            <span>Java</span>
+            <span class="bullet"></span>
+            <span>Spring</span>
+        </div>
+
+        <h3 class="subtitle is-marginless">Other</h3>
+        <div class="is-vertical-sub-line is-centered"></div>
+        <div class="is-flex is-flex-centered pb-8">
+            <div>Neo4J</div>
+            <span class="bullet"></span>
+            <div>GraphQL</div>
+            <span class="bullet"></span>
+            <div>TypeORM</div>
+        </div>
+    </div>
+</section>
+
+<section class="section hero is-light">
+    <div class="container has-text-centered">
+        <h1 class="title is-marginless">WORK EXPERIENCE</h1>
+        <div class="is-vertical-line"></div>
+    </div>
+
+    {% for experience in site.experience %}
+    <article class="container has-text-centered">
+        <div class="container is-centered">
+            <div class="is-flex is-flex-centered ">
+                <h3 class="subtitle is-marginless has-text-weight-bold pr-8">{{ experience.position }}</h3>
+                <a href="{{experience.company.url}}"> @{{experience.company.name}}</a>
+            </div>
+            <div><span>{{ experience.duration.start }} </span> - <span> {{ experience.duration.end }}</span></div>
+            <div class="is-vertical-sub-line is-centered"></div>
+        </div>
+        <div class="is-flex is-flex-centered pb-8">
+            {% for technology in experience.main_technologies %}
+            <span>{{ technology }}</span>
+            {% if forloop.last == false %}
+            <span class="bullet"></span>
+            {% endif %}
+            {% endfor %}
+        </div>
+
+        <p>{{ experience.content | markdownify }}</p>
+    </article>
+    {% endfor %}
+
+</section>
+
+<section class="section hero">
+    <div class="container has-text-centered">
+        <h1 class="title is-marginless">EDUCATION</h1>
+        <div class="is-vertical-line"></div>
+    </div>
+
+    {% for education in site.education %}
+    <article class="is-section has-text-centered container">
+        <div class="container is-centered">
+            <div class="is-flex is-flex-centered">
+                <h3 class="subtitle is-marginless has-text-weight-bold">{{ education.place.name }}</h3>
+                <a class="no-style" href="{{education.place.url}}"><span class="icon"><i class="fas fa-link"></i></span></a>
+            </div>
+            <div class="is-flex is-flex-centered">
+                {% for detail in education.details %}
+                <span class="subtitle is-marginless">{{ detail }}</span>
+                {% if forloop.last == false %}
+                <span class="bullet"></span>
+                {% endif %}
+                {% endfor %}
+            </div>
+            <div class="is-flex is-flex-centered">
+                <div><span>{{ education.duration.start }}</span>-<span>{{ education.duration.end }}</span></div>
+            </div>
+            <div class="is-vertical-sub-line is-centered"></div>
+        </div>
+
+
+        <p>{{ education.content | markdownify }}</p>
+    </article>
+    {% endfor %}
+
+</section>

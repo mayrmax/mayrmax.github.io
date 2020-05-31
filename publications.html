@@ -1,0 +1,45 @@
+---
+layout: default
+title: Publications
+permalink: /publications
+---
+
+<section class="hero is-light">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">
+                Publications
+            </h1>
+            <h2 class="subtitle">
+                Some stuff that got published.
+            </h2>
+        </div>
+    </div>
+</section>
+
+
+{% for publication in site.publications %}
+<section class="section container hero pb-0">
+    <article class="is-section has-text-centered">
+        <div class="container is-centered">
+            <div class="is-flex is-flex-centered">
+                <h1 class="title is-marginless has-text-weight-bold">{{ publication.title }}</h1>
+            </div>
+            <div class="is-flex is-flex-centered">
+                <h3 class="subtitle is-marginless has-text-weight-bold pr-8">{{ publication.subtitle }}</h3>
+                <span>{{publication.year}}</span>
+            </div>
+            <div class="is-flex is-flex-centered">
+                {% for tag in publication.tags %}
+                <span class="subtitle is-marginless">{{ tag }}</span>
+                {% if forloop.last == false %}
+                <span class="bullet"></span>
+                {% endif %}
+                {% endfor %}
+            </div>
+            <div class="is-vertical-sub-line is-centered"></div>
+        </div>
+        <p>{{ publication.content | markdownify }}</p>
+    </article>
+</section>
+{% endfor %}

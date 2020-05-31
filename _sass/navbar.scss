@@ -1,0 +1,118 @@
+$red:     #FF6059;
+$yellow:  #f7c143;
+$green:   #859916;
+$blue: #2c8bd2;
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono');
+
+.terminal-style {
+  display: flex;
+  align-items: center;
+  font-family: 'Roboto Mono', monospace;
+  font-weight: inherit;
+  font-size: inherit;
+  color: black;
+
+  .path {
+    display: inline-flex;
+    font-size: 0.85em;
+    margin-right: 5px;
+    i {
+      position: relative;
+      padding-left: 15px;
+      font-style: normal;
+      color: black;
+      &:after {
+        border-left: 10px solid white;
+        content: "";
+        position: absolute;
+        border-bottom: 10px solid transparent;
+        border-top: 10px solid transparent;
+        height: 0px;
+        width: 0px;
+        margin-right: -10px;
+        right: 0;
+        z-index: 3;
+      }
+      &:first-child {
+        padding-left: 4px;
+      }
+
+      &.blue {
+        background-color: $blue;
+        &:after {
+          border-left: 10px solid $blue;
+        }
+      }
+      &.red {
+        background-color: $red;
+        &:after {
+          border-left: 10px solid $red;
+        }
+      }
+      &.yellow {
+        background-color: $yellow;
+        &:after {
+          border-left: 10px solid $yellow;
+        }
+      }
+      &.green {
+        background-color: $green;
+        &:after {
+          border-left: 10px solid $green;
+        }
+      }
+    }
+  }
+
+  .home-text {
+    margin-left: 10px;
+  }
+
+  .blinker {
+    animation-name: blinker;
+    animation-iteration-count: infinite;
+    animation-timing-function: cubic-bezier(1,0,0,1);
+    animation-duration: 1s;
+  }
+}
+
+.navbar-menu:not(.is-active) {
+  .navbar-end {
+    a.navbar-item {
+      &.active {
+        text-decoration: none;
+        border-bottom: 2px solid lightgray;
+        box-shadow: inset 0 -4px 0 lightgray;
+        color: inherit;
+        transition: background 0.1s cubic-bezier(.33, .66, .66, 1);
+      }
+
+      &:hover {
+        background: lightgray !important;
+      }
+    }
+  }
+}
+
+.navbar-menu.is-active {
+  .navbar-end {
+    a.navbar-item {
+      &.active {
+        text-decoration: none;
+        border-left: 2px solid lightgray;
+        box-shadow: inset 6px 0 0 0 lightgray;
+        color: inherit;
+        transition: background 0.1s cubic-bezier(.33, .66, .66, 1);
+      }
+
+      &:hover {
+        background: lightgray !important;
+      }
+    }
+  }
+}
+
+@keyframes blinker {
+  from { opacity: 1.0; } to { opacity: 0.0; }
+}
