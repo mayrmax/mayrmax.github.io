@@ -53,9 +53,14 @@ section.is-spaced {
   background-color: #ccc;
 }
 
+.container {
+  max-width: 100%;
+}
+
 .is-vertical-line {
   display: block;
   width: 450px;
+  max-width: 100%;
   height: 3px;
   padding: 0!important;
   background: #ccc;
