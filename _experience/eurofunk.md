@@ -5,7 +5,7 @@ company:
     url: https://www.eurofunk.com/
 duration:
     start: April 2017
-    end: Present
+    end: February 2021
 main_technologies: 
     - Angular
     - Akita
