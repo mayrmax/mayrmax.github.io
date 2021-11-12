@@ -1,5 +1,5 @@
 ---
-position: Frontend Developer
+position: Lead Web Developer
 company: 
     name: Tributech Solutions GmBH
     url: https://www.tributech.io/
