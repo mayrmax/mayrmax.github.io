@@ -263,6 +263,14 @@ function homeSingleton(locale: LocaleId) {
     schema: {
       greeting: fields.text({ label: 'Greeting', validation: { isRequired: true } }),
       name: fields.text({ label: 'Name', validation: { isRequired: true } }),
+      ctaLabel: fields.text({
+        label: 'Button label',
+        description: 'Links to the services page. Leave empty to hide the button.',
+      }),
+      seoTitle: fields.text({
+        label: 'SEO title',
+        description: 'Browser tab and search result title; "— Max Mayr" is appended.',
+      }),
       content: markdown('Tagline'),
     },
   });
@@ -274,6 +282,10 @@ function aboutBioSingleton(locale: LocaleId) {
     path: `src/content/${locale}/sections/about-bio`,
     format: { contentField: 'content' },
     schema: {
+      seoTitle: fields.text({
+        label: 'SEO title',
+        description: 'Browser tab and search result title; "— Max Mayr" is appended.',
+      }),
       sectionHeading: fields.text({ label: 'Section heading', validation: { isRequired: true } }),
       heading: fields.text({ label: 'Heading', validation: { isRequired: true } }),
       photo: fields.text({ label: 'Photo path', validation: { isRequired: true } }),
@@ -336,6 +348,22 @@ function pageIntrosSingleton(locale: LocaleId) {
     path: `src/content/${locale}/sections/page-intros`,
     format: { contentField: 'content' },
     schema: {
+      servicesSeoTitle: fields.text({
+        label: 'Services SEO title',
+        description: 'Search result title; "— Max Mayr" is appended. Falls back to the heading.',
+      }),
+      projectsSeoTitle: fields.text({
+        label: 'Projects SEO title',
+        description: 'Search result title; "— Max Mayr" is appended. Falls back to the heading.',
+      }),
+      publicationsSeoTitle: fields.text({
+        label: 'Publications SEO title',
+        description: 'Search result title; "— Max Mayr" is appended. Falls back to the heading.',
+      }),
+      blogSeoTitle: fields.text({
+        label: 'Blog SEO title',
+        description: 'Search result title; "— Max Mayr" is appended. Falls back to the heading.',
+      }),
       servicesHeading: fields.text({ label: 'Services heading', validation: { isRequired: true } }),
       servicesSubtitle: fields.text({
         label: 'Services subtitle',

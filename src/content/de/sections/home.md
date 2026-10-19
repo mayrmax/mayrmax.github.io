@@ -1,4 +1,5 @@
 ---
+ctaLabel: "Was ich für Sie tun kann"
 greeting: Hallo, mein Name ist
 name: Max Mayr.
 ---

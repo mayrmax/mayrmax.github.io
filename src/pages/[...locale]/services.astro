@@ -23,7 +23,7 @@ const [page, intros, services, references] = await Promise.all([
 <BaseLayout
   locale={locale}
   path="/services"
-  title={intros.servicesHeading ?? ''}
+  title={intros.servicesSeoTitle ?? intros.servicesHeading ?? ''}
   description={page.subtitle}
   schema="services"
   services={services.map((service) => ({

@@ -21,7 +21,7 @@ const posts = (await getLocalized('blog', locale)).sort(
 <BaseLayout
   locale={locale}
   path="/blog"
-  title={intros.blogHeading ?? ''}
+  title={intros.blogSeoTitle ?? intros.blogHeading ?? ''}
   description={intros.blogSubtitle}
 >
   <PageHero heading={intros.blogHeading ?? ''} subtitle={intros.blogSubtitle} />

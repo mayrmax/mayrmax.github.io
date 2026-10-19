@@ -28,7 +28,7 @@ const [bio, interests, skills, experience, education] = await Promise.all([
 <BaseLayout
   locale={locale}
   path="/about"
-  title={t('title.about')}
+  title={bio.seoTitle ?? t('title.about')}
   description={t('meta.about')}
   schema="profile"
 >

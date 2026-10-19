@@ -1,4 +1,8 @@
 ---
+servicesSeoTitle: "Fractional CTO, .NET & KI-Beratung"
+projectsSeoTitle: "Projekte: .NET, Angular & Microservices"
+publicationsSeoTitle: "Arbeiten zu Personal Data Stores & WebRTC"
+blogSeoTitle: "Blog über dezentrales Web & Linked Data"
 servicesHeading: Leistungen
 servicesSubtitle: Architektur, Backend, Web und KI.
 blogHeading: Blog

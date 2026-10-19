@@ -14,12 +14,18 @@ const t = useTranslations(locale);
 const home = await getSection('home', locale);
 ---
 
-<BaseLayout locale={locale} path="/" title={t('title.home')} description={t('meta.home')}>
+<BaseLayout
+  locale={locale}
+  path="/"
+  title={home.seoTitle ?? t('title.home')}
+  description={t('meta.home')}
+>
   <section class="flex min-h-[calc(100vh-3.25rem)] flex-col justify-center px-6 py-12">
     <div>
-      <h2 class="mb-7 ml-1 font-body text-[26px] tracking-[-2px] text-ink-faint">
+      {/* A lead-in, not a heading — an h2 here sat above the page's only h1. */}
+      <p class="mb-7 ml-1 font-body text-[26px] tracking-[-2px] text-ink-faint">
         {home.greeting}
-      </h2>
+      </p>
       <h1
         class="mt-1 mb-12 font-mono text-[64px] leading-none tracking-[-4px] sm:text-[100px] sm:tracking-[-7px]"
       >
@@ -30,6 +36,16 @@ const home = await getSection('home', locale);
       >
         <home.Content />
       </div>
+      {
+        home.ctaLabel && (
+          <a
+            class="mt-12 inline-block border-2 border-black px-6 py-3 font-mono text-lg text-black transition-colors hover:bg-black hover:text-white"
+            href={localePath(locale, '/services')}
+          >
+            {home.ctaLabel} →
+          </a>
+        )
+      }
     </div>
   </section>
 </BaseLayout>

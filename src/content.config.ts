@@ -133,6 +133,10 @@ const sections = defineCollection({
     // home
     greeting: z.string().optional(),
     name: z.string().optional(),
+    ctaLabel: z.string().optional(),
+    // <title> override where the visible heading is too terse for search results;
+    // the site name is still appended. Used by home and about-bio.
+    seoTitle: z.string().optional(),
     // about-bio
     sectionHeading: z.string().optional(),
     heading: z.string().optional(),
@@ -150,6 +154,10 @@ const sections = defineCollection({
     partnerUrl: z.url().optional(),
     partnerText: z.string().optional(),
     // page-intros
+    servicesSeoTitle: z.string().optional(),
+    projectsSeoTitle: z.string().optional(),
+    publicationsSeoTitle: z.string().optional(),
+    blogSeoTitle: z.string().optional(),
     servicesHeading: z.string().optional(),
     servicesSubtitle: z.string().optional(),
     blogHeading: z.string().optional(),

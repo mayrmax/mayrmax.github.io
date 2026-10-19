@@ -18,7 +18,7 @@ const publications = await getLocalizedRendered('publications', locale);
 <BaseLayout
   locale={locale}
   path="/publications"
-  title={intros.publicationsHeading ?? ''}
+  title={intros.publicationsSeoTitle ?? intros.publicationsHeading ?? ''}
   description={intros.publicationsSubtitle}
 >
   <PageHero heading={intros.publicationsHeading ?? ''} subtitle={intros.publicationsSubtitle} />
