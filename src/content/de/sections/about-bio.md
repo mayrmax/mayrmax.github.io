@@ -4,10 +4,8 @@ heading: Hallo, ich bin Max.
 photo: /assets/images/me.webp
 photoAlt: Max Mayr
 links:
-  - platform: github
-    url: https://github.com/mayrmax
-  - platform: linkedin
-    url: https://www.linkedin.com/in/mayrmax/
+  - url: https://github.com/mayrmax
+  - url: https://www.linkedin.com/in/mayrmax/
 ---
 
 Ich bin **AI Solution Architect** in Innsbruck, 🇦🇹. Ich unterstütze Unternehmen dabei, die technischen Herausforderungen zu lösen, die sich nicht nebenbei erledigen lassen — von der **Architektur** bis zur Implementierung.

@@ -29,8 +29,6 @@ const duration = z.object({
   end: z.coerce.string(),
 });
 
-const socialPlatform = z.enum(['github', 'linkedin', 'twitter', 'youtube']);
-
 /**
  * Keystatic's datetime field stores a bare `YYYY-MM-DDTHH:mm`, which JavaScript
  * would read in the build machine's timezone. Pin it to UTC so a local build and
@@ -148,7 +146,7 @@ const sections = defineCollection({
     heading: z.string().optional(),
     photo: z.string().optional(),
     photoAlt: z.string().optional(),
-    links: z.array(z.object({ platform: socialPlatform, url: z.url() })).optional(),
+    links: z.array(z.object({ url: z.url() })).optional(),
     // about-skills
     groups: z.array(z.object({ level: z.string(), items: z.array(z.string()) })).optional(),
     // services

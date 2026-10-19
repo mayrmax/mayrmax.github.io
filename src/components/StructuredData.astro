@@ -14,8 +14,11 @@ const { locale, page, article, services } = Astro.props;
 const origin = new URL(Astro.site!).origin;
 const abs = (path: string) => new URL(localePath(locale, path), origin).href;
 
-// One source of truth for the skill list: the about page's own content.
-const skills = await getSection('about-skills', locale);
+// One source of truth for the skill list and the profiles: the about page's own content.
+const [skills, bio] = await Promise.all([
+  getSection('about-skills', locale),
+  getSection('about-bio', locale),
+]);
 const knowsAbout = (skills.groups ?? []).flatMap((group) => group.items);
 
 const person = {
@@ -36,7 +39,7 @@ const person = {
     addressRegion: 'Tirol',
     addressCountry: 'AT',
   },
-  sameAs: ['https://github.com/mayrmax', 'https://www.linkedin.com/in/mayrmax/'],
+  sameAs: (bio.links ?? []).map((link) => link.url),
   knowsAbout,
   worksFor: {
     '@type': 'Organization',

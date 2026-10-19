@@ -19,6 +19,8 @@
     "@astrojs/sitemap": "^3.7.4",
     "@tailwindcss/vite": "^4.3.3",
     "astro": "^7.2.10",
+    "satori": "^0.63.0",
+    "sharp": "^0.35.5",
     "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
@@ -33,5 +35,8 @@
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
     "typescript": "^6.0.3"
+  },
+  "overrides": {
+    "fflate": "^0.8.2"
   }
 }

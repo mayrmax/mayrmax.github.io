@@ -1,4 +1,4 @@
-# mayrmax.github.io
+# mayrmax.com
 
 Personal website of Max Mayr, built with [Astro](https://astro.build/) and
 [Tailwind CSS](https://tailwindcss.com/), edited through
@@ -68,7 +68,9 @@ src/
 ├── content.config.ts collection schemas — frontmatter is validated at build time
 ├── i18n/             locales, URL helpers, UI strings, content accessors
 ├── layouts/          BaseLayout — <head>, navigation, footer
-├── pages/            routes; `[...locale]/` emits both languages from one file
+├── og/               social preview images and the favicon, rendered at build time
+├── pages/            routes; `[...locale]/` emits both languages from one file;
+│                     og/, favicon.* and apple-touch-icon.png are image endpoints
 ├── scripts/          client-side JS (menu toggle, opening linked <details>)
 ├── styles/           global.css — only the Tailwind theme tokens
 └── utils/            date formatting
@@ -92,6 +94,16 @@ ordered by `date`, newest first.
 
 A reference with `featured` ticked gets the full treatment on /work and appears
 on the home page; the rest form the compact list underneath.
+
+### Preview images and favicon
+
+Every page gets its own social preview image — the prompt with a page-specific
+command, the page's claim, and the portrait — rendered at build time by satori
+(layout to SVG) and sharp (SVG to JPEG) in `src/og/`. A new blog post gets one
+automatically. The favicon is the prompt's first segment, rendered the same way
+so the letter is a path rather than text that depends on installed fonts. The
+fonts live in `src/og/fonts/` with their OFL licences; satori cannot read WOFF2,
+which is why they are not taken from Astro's font pipeline.
 
 ### Retired routes
 

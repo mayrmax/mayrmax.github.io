@@ -298,20 +298,8 @@ function aboutBioSingleton(locale: LocaleId) {
       photo: fields.text({ label: 'Photo path', validation: { isRequired: true } }),
       photoAlt: fields.text({ label: 'Photo alt text', validation: { isRequired: true } }),
       links: fields.array(
-        fields.object({
-          platform: fields.select({
-            label: 'Platform',
-            options: [
-              { label: 'GitHub', value: 'github' },
-              { label: 'LinkedIn', value: 'linkedin' },
-              { label: 'Twitter', value: 'twitter' },
-              { label: 'YouTube', value: 'youtube' },
-            ],
-            defaultValue: 'github',
-          }),
-          url: fields.url({ label: 'URL', validation: { isRequired: true } }),
-        }),
-        { label: 'Social links', itemLabel: (props) => props.fields.platform.value },
+        fields.object({ url: fields.url({ label: 'URL', validation: { isRequired: true } }) }),
+        { label: 'Profile links', itemLabel: (props) => props.fields.url.value ?? '' },
       ),
       content: markdown('Bio'),
     },
