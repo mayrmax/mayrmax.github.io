@@ -271,15 +271,38 @@ function homeSingleton(locale: LocaleId) {
         validation: { isRequired: true },
       }),
       headline: fields.text({ label: 'Headline', validation: { isRequired: true } }),
+      contactLabel: fields.text({
+        label: 'Contact button label',
+        description: 'Jumps to the contact block at the end of the page.',
+        validation: { isRequired: true },
+      }),
       ctaLabel: fields.text({
-        label: 'Button label',
-        description: 'Links to the services page. Leave empty to hide the button.',
+        label: 'Services link label',
+        description: 'Links to the services page. Leave empty to hide the link.',
       }),
       seoTitle: fields.text({
         label: 'SEO title',
         description: 'Browser tab and search result title; "— Max Mayr" is appended.',
       }),
       content: markdown('Introduction'),
+    },
+  });
+}
+
+function contactSingleton(locale: LocaleId) {
+  return singleton({
+    label: `Contact block (${locale.toUpperCase()})`,
+    path: `src/content/${locale}/sections/contact`,
+    format: { contentField: 'content' },
+    schema: {
+      heading: fields.text({ label: 'Heading', validation: { isRequired: true } }),
+      ctaLabel: fields.text({ label: 'Button label', validation: { isRequired: true } }),
+      email: fields.text({ label: 'Email address', validation: { isRequired: true } }),
+      emailSubject: fields.text({
+        label: 'Email subject',
+        description: 'Filled in when a visitor clicks the button.',
+      }),
+      content: markdown('Text'),
     },
   });
 }
@@ -385,6 +408,7 @@ export default config({
         'aboutInterestsEn',
         'aboutSkillsEn',
         'pageIntrosEn',
+        'contactEn',
         'blogEn',
         'projectsEn',
         'experienceEn',
@@ -400,6 +424,7 @@ export default config({
         'aboutInterestsDe',
         'aboutSkillsDe',
         'pageIntrosDe',
+        'contactDe',
         'blogDe',
         'projectsDe',
         'experienceDe',
@@ -432,12 +457,14 @@ export default config({
     aboutInterestsEn: aboutInterestsSingleton('en'),
     aboutSkillsEn: aboutSkillsSingleton('en'),
     pageIntrosEn: pageIntrosSingleton('en'),
+    contactEn: contactSingleton('en'),
     homeDe: homeSingleton('de'),
     servicesPageDe: servicesPageSingleton('de'),
     aboutBioDe: aboutBioSingleton('de'),
     aboutInterestsDe: aboutInterestsSingleton('de'),
     aboutSkillsDe: aboutSkillsSingleton('de'),
     pageIntrosDe: pageIntrosSingleton('de'),
+    contactDe: contactSingleton('de'),
     datenschutz: singleton({
       label: 'Datenschutz (German, both languages)',
       path: 'src/content/shared/datenschutz',

@@ -1,6 +1,7 @@
 ---
 command: "build --backend dotnet --ai llm,rag --host eu"
 headline: "Software, die in zwei Jahren noch Sinn ergibt."
+contactLabel: "Projekt anfragen"
 ctaLabel: "Leistungen ansehen"
 ---
 

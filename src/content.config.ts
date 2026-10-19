@@ -129,7 +129,8 @@ const references = defineCollection({
 
 /**
  * Editable copy for the parts of a page that are not a list of entries: the
- * home hero, the three blocks of the about page, and the page intros.
+ * home hero, the three blocks of the about page, the page intros and the
+ * contact block.
  * Every field is optional because each section uses a different subset.
  */
 const sections = defineCollection({
@@ -139,6 +140,7 @@ const sections = defineCollection({
     command: z.string().optional(),
     headline: z.string().optional(),
     ctaLabel: z.string().optional(),
+    contactLabel: z.string().optional(),
     // <title> override where the visible heading is too terse for search results;
     // the site name is still appended. Used by home and about-bio.
     seoTitle: z.string().optional(),
@@ -167,6 +169,9 @@ const sections = defineCollection({
     blogSubtitle: z.string().optional(),
     notFoundHeading: z.string().optional(),
     notFoundSubtitle: z.string().optional(),
+    // contact
+    email: z.email().optional(),
+    emailSubject: z.string().optional(),
   }),
 });
 

@@ -126,7 +126,10 @@ const socialImage = new URL(ogImagePath(locale, noindex ? '/' : path), Astro.sit
       )
     }
     <Navigation locale={locale} path={path} />
-    <slot />
+    <!-- Pages that end on the black contact block run straight into the footer. -->
+    <main class="pb-24 [&:has(>[data-contact]:last-child)]:pb-0">
+      <slot />
+    </main>
     <Footer locale={locale} />
     <script>
       import '../scripts/main';

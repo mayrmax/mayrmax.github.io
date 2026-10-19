@@ -1,6 +1,7 @@
 ---
 import type { GetStaticPaths } from 'astro';
 
+import Contact from '../../components/Contact.astro';
 import Container from '../../components/Container.astro';
 import PageHeader from '../../components/PageHeader.astro';
 import Prose from '../../components/Prose.astro';
@@ -140,4 +141,5 @@ const yearOf = (value: string) => value.match(/\d{4}/)?.[0] ?? value;
       </ul>
     </details>
   </Container>
+  <Contact locale={locale} />
 </BaseLayout>

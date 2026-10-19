@@ -1,0 +1,50 @@
+---
+/**
+ * The contact block at the end of the main pages, set in black so the page
+ * ends on it. The home hero's main button jumps here. The address is shown as
+ * well as linked, for visitors without a mail client set up.
+ */
+import Container from './Container.astro';
+import Prose from './Prose.astro';
+import type { Locale } from '../i18n/config';
+import { getSection } from '../i18n/content';
+import { useTranslations } from '../i18n/ui';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const contact = await getSection('contact', locale);
+
+const mailto = `mailto:${contact.email}${
+  contact.emailSubject ? `?subject=${encodeURIComponent(contact.emailSubject)}` : ''
+}`;
+---
+
+<section id={t('contact.anchor')} data-contact class="mt-24 scroll-mt-6 bg-black text-white">
+  <Container class="py-18 sm:py-24">
+    <p class="font-mono text-base text-white/60" aria-hidden="true">$ mail max</p>
+    <h2
+      class="mt-4 max-w-[20ch] text-[clamp(30px,3.6vw,44px)] leading-tight font-bold tracking-[-0.02em]"
+    >
+      {contact.heading}
+    </h2>
+    <Prose class="mt-4 max-w-xl text-white/75"><contact.Content /></Prose>
+    <div class="mt-8.5 flex flex-wrap items-center gap-x-7 gap-y-4">
+      <a
+        class="inline-block bg-white px-5.5 py-3.5 font-bold text-black hover:bg-neutral-200 focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-white"
+        href={mailto}
+      >
+        {contact.ctaLabel}
+      </a>
+      <a
+        class="font-mono text-base text-white/75 underline underline-offset-4 hover:text-white hover:decoration-2"
+        href={mailto}
+      >
+        {contact.email}
+      </a>
+    </div>
+  </Container>
+</section>

@@ -46,7 +46,11 @@ Diese Website setzt **keine Cookies**, verwendet **keine Analyse- oder Tracking-
 
 Schriftarten werden von diesem Server ausgeliefert und nicht von einem externen Anbieter nachgeladen. Beim Aufruf dieser Website wird folglich keine Verbindung zu Servern Dritter hergestellt und es werden keine Daten an Dritte übermittelt.
 
-## 9. Verlinkung auf externe Plattformen
+## 9. Kontakt per E-Mail
+
+Wenn du mir eine E-Mail schreibst, verarbeite ich deine E-Mail-Adresse, deinen Namen und den Inhalt deiner Nachricht, um deine Anfrage zu beantworten. Geht es um ein mögliches Projekt, ist die Rechtsgrundlage Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Maßnahmen), sonst mein berechtigtes Interesse, Anfragen zu beantworten (Art. 6 Abs. 1 lit. f DSGVO). Die E-Mails liegen bei meinem E-Mail-Provider (siehe Punkt 5). Ich lösche deine Nachricht, sobald deine Anfrage erledigt ist, es sei denn, gesetzliche Aufbewahrungspflichten stehen dem entgegen.
+
+## 10. Verlinkung auf externe Plattformen
 
 Diese Website verlinkt auf meine Profile bei externen Plattformen. Ein solcher Link überträgt für sich genommen keine Daten — erst wenn du ihm folgst, verarbeitet der jeweilige Anbieter deine Daten als eigener Verantwortlicher auf Basis seiner eigenen Datenschutzerklärung. Auf Art und Umfang dieser Verarbeitung habe ich keinen Einfluss.
 

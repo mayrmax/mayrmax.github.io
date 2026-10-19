@@ -1,6 +1,7 @@
 ---
 import type { GetStaticPaths } from 'astro';
 
+import Contact from '../../components/Contact.astro';
 import Container from '../../components/Container.astro';
 import Prompt from '../../components/Prompt.astro';
 import Prose from '../../components/Prose.astro';
@@ -41,16 +42,24 @@ const featured = references.filter((reference) => reference.data.featured);
         {home.headline}
       </h1>
       <Prose class="mt-5.5 max-w-xl text-xl text-muted"><home.Content /></Prose>
-      {
-        home.ctaLabel && (
-          <a
-            class="mt-8.5 inline-block bg-black px-5.5 py-3.5 font-bold text-white hover:bg-neutral-800 focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-pl-blue"
-            href={localePath(locale, '/services')}
-          >
-            {home.ctaLabel}
-          </a>
-        )
-      }
+      <div class="mt-8.5 flex flex-wrap items-center gap-x-7 gap-y-4">
+        <a
+          class="inline-block bg-black px-5.5 py-3.5 font-bold text-white hover:bg-neutral-800 focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-pl-blue"
+          href={`#${t('contact.anchor')}`}
+        >
+          {home.contactLabel}
+        </a>
+        {
+          home.ctaLabel && (
+            <a
+              class="font-bold underline decoration-1 underline-offset-4 hover:decoration-2"
+              href={localePath(locale, '/services')}
+            >
+              {home.ctaLabel}
+            </a>
+          )
+        }
+      </div>
     </Container>
   </section>
 
@@ -107,4 +116,5 @@ const featured = references.filter((reference) => reference.data.featured);
       </a>
     </Container>
   </section>
+  <Contact locale={locale} />
 </BaseLayout>
