@@ -38,11 +38,13 @@ Zum Betrieb und zur Aufrechterhaltung der Sicherheit und Funktionstüchtigkeit d
 
 Ich behalte mir vor, diese Daten nachträglich zu prüfen, wenn mir konkrete Anhaltspunkte für eine rechtswidrige Nutzung bekannt werden. Diese Log-Files werden für 30 Tage gespeichert.
 
+Außerdem werte ich die Server-Log-Files in zusammengefasster Form aus, um zu sehen, welche Seiten wie oft aufgerufen werden und über welche Seiten Besucher hierher kommen (Zugriffsstatistik). Dafür nutze ich die Traffic-Auswertung von Coolify, der Plattform, auf der diese Website läuft. Sie läuft auf meinem eigenen Server bei Hetzner in Nürnberg, die Daten verlassen diesen Server nicht. Für die Statistik wird kein Script in deinem Browser ausgeführt, nichts auf deinem Gerät gespeichert und kein Profil über dich erstellt. Rechtsgrundlage ist mein berechtigtes Interesse, die Website anhand der Zugriffe zu verbessern (Art 6 Abs 1 lit f DSGVO).
+
 Die Rechtsgrundlage ist einerseits die Erfüllung des Vertrags, konkret die kostenlose Zurverfügungstellung dieser Webseite (Art 6 Abs 1 lit b DSGVO), mein überwiegendes Interesse an der Sicherheit und Funktionstüchtigkeit der Webseite (Art 6 Abs 1 lit f DSGVO) und schlussendlich sind diese technisch für den Betrieb der Webseite erforderlich (§ 165 Abs 3 TKG).
 
-## 8. Keine Cookies, kein Tracking, keine Einbindungen Dritter
+## 8. Keine Cookies, keine Tracking-Skripte, keine Einbindungen Dritter
 
-Diese Website setzt **keine Cookies**, verwendet **keine Analyse- oder Tracking-Werkzeuge** und bindet **keine Inhalte Dritter** ein. Es gibt daher auch keinen Cookie-Manager und keine Einwilligung, die du erteilen oder widerrufen müsstest.
+Diese Website setzt **keine Cookies**, führt **keine Analyse- oder Tracking-Skripte** in deinem Browser aus und bindet **keine Inhalte Dritter** ein. Die Zugriffsstatistik entsteht ausschließlich auf dem Server, aus den Server-Log-Files (siehe Punkt 7). Es gibt daher auch keinen Cookie-Manager und keine Einwilligung, die du erteilen oder widerrufen müsstest.
 
 Schriftarten werden von diesem Server ausgeliefert und nicht von einem externen Anbieter nachgeladen. Beim Aufruf dieser Website wird folglich keine Verbindung zu Servern Dritter hergestellt und es werden keine Daten an Dritte übermittelt.
 
