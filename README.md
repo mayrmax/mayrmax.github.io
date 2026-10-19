@@ -81,21 +81,8 @@ when an entry's title changes. Blog posts are ordered by `date`, newest first.
 
 ## Deployment
 
-The site is a pile of static files, so anything that can serve them works. Two
-paths are set up.
-
-### The site URL is a build-time setting
-
-Astro bakes the canonical links, the `hreflang` alternates, `sitemap-index.xml`,
-`robots.txt` and both RSS feeds into the output. The public URL therefore has to
-be known when the site is built — it cannot be swapped at runtime. Both paths
-below pass it as `SITE_URL`; it defaults to `https://mayrmax.github.io`.
-
-### GitHub Pages
-
-Pushing to `master` runs `.github/workflows/deploy.yml`, which builds the site
-and publishes `dist/`. This requires **Settings → Pages → Build and deployment →
-Source** to be set to **GitHub Actions**.
+The site is hosted on [Coolify](https://coolify.io/). GitHub Pages still answers
+on `mayrmax.github.io`, but only to redirect to the new domain.
 
 ### Coolify
 
@@ -103,14 +90,15 @@ Source** to be set to **GitHub Actions**.
 
 1. New resource → **Public/Private Repository** → this repo, branch `master`.
 2. **Build Pack: Dockerfile** (not Nixpacks, not Static — see below).
-3. Set the domain under **Domains**, e.g. `https://mayr.dev`.
+3. Set the domain under **Domains**, e.g. `https://mayrmax.com`.
 4. Add an environment variable `SITE_URL` with that same URL and tick
    **Build Variable**, so it reaches the build rather than just the container.
 5. Deploy. The exposed port is 80 and the image has a healthcheck, so Coolify
    can gate the rollover on nginx actually answering.
 
-Changing the domain means redeploying, not just editing the variable, because
-of the build-time baking described above.
+Astro bakes absolute URLs into the output — canonical links, hreflang
+alternates, `og:url`, both sitemaps, both feeds and `robots.txt` — so changing
+the domain means redeploying, not just editing the variable.
 
 **Why not Coolify's Static build pack:** `astro.config.mjs` sets
 `build.format: 'file'`, so the page at `/about` is `about.html` on disk. A
@@ -126,3 +114,21 @@ To build and run it locally the way Coolify will:
 docker build --build-arg SITE_URL=http://localhost:8080 -t mayrmax-site .
 docker run --rm -p 8080:80 mayrmax-site
 ```
+
+### GitHub Pages, as a redirect only
+
+`.github/workflows/github-pages-redirect.yml` builds the site, runs
+`scripts/build-redirects.mjs` over the output, and publishes the result — a stub
+for every page carrying `rel="canonical"` and a `meta refresh` to the same path
+on the new domain, plus a catch-all `404.html` that preserves whatever path it
+was given. The stubs come from the real build, so a new page cannot be forgotten.
+
+GitHub Pages is a static host and cannot issue a 301, so this is a client-side
+redirect. Readers land on the right page; search engines treat it as a soft
+redirect and follow the canonical. Feed readers do not follow a meta refresh, so
+the old feeds stay valid XML with one entry saying where to subscribe instead.
+
+This requires **Settings → Pages → Build and deployment → Source** set to
+**GitHub Actions**, and `mayrmax.com` must _not_ be added as a custom domain
+there — it belongs to Coolify. The workflow is also the project's only CI, so it
+still runs `npm run check` and the full build.

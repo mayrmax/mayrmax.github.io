@@ -15,10 +15,10 @@ const keystaticIntegrations = isDevServer
     ])
   : [];
 
-// Canonical URLs, hreflang links, the sitemap and the RSS feeds are baked into
+// Canonical URLs, hreflang links, the sitemaps and the RSS feeds are baked into
 // the static output, so the public URL has to be known when the site is built.
-// GitHub Pages uses the default; Coolify passes SITE_URL as a build argument.
-const site = process.env.SITE_URL ?? 'https://mayrmax.github.io';
+// Coolify passes SITE_URL as a build argument.
+const site = process.env.SITE_URL ?? 'https://mayrmax.com';
 
 // https://astro.build/config
 export default defineConfig({

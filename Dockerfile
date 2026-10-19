@@ -14,11 +14,11 @@ RUN npm ci --omit=dev
 
 COPY . .
 
-# Astro bakes canonical URLs, hreflang links, the sitemap, robots.txt and the
+# Astro bakes canonical URLs, hreflang links, the sitemaps, robots.txt and the
 # RSS feeds into the static output, so the public URL must be known here — it
 # cannot be changed at runtime. In Coolify, add SITE_URL as an environment
 # variable and tick "Build Variable" so it is passed to the build.
-ARG SITE_URL=https://mayrmax.github.io
+ARG SITE_URL=https://mayrmax.com
 ENV SITE_URL=$SITE_URL
 
 RUN npm run build

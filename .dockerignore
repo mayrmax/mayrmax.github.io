@@ -2,6 +2,7 @@
 .github
 node_modules
 dist
+dist-redirect
 .astro
 .keystatic
 .idea

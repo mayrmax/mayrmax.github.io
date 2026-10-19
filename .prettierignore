@@ -1,4 +1,5 @@
 dist
+dist-redirect
 .astro
 package-lock.json
 
