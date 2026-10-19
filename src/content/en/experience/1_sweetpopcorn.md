@@ -10,7 +10,7 @@ duration:
 main_technologies:
   - C# / .NET
   - Angular
-  - Astro
+  - PostgreSQL
   - Cloud Architecture
 ---
 

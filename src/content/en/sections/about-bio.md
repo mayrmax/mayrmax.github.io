@@ -8,8 +8,6 @@ links:
     url: https://github.com/mayrmax
   - platform: linkedin
     url: https://www.linkedin.com/in/mayrmax/
-  - platform: twitter
-    url: https://twitter.com/max_mayr
 ---
 
 I'm an **AI solution architect** based in Innsbruck, 🇦🇹. I help companies solve the technical problems they cannot solve on the side — from the **architecture** right through to the implementation.
