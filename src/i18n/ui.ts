@@ -7,6 +7,7 @@ import type { Locale } from './config';
  */
 export const ui = {
   en: {
+    'nav.services': 'services',
     'nav.about': 'about',
     'nav.projects': 'projects',
     'nav.publications': 'publications',
@@ -34,6 +35,7 @@ export const ui = {
     'link.website': 'Website',
   },
   de: {
+    'nav.services': 'leistungen',
     'nav.about': 'über mich',
     'nav.projects': 'projekte',
     'nav.publications': 'publikationen',
@@ -72,6 +74,7 @@ export function useTranslations(locale: Locale) {
 
 /** Route segments, shared across locales so /de/about mirrors /about. */
 export const navigation = [
+  { key: 'nav.services', path: '/services' },
   { key: 'nav.about', path: '/about' },
   { key: 'nav.projects', path: '/projects' },
   { key: 'nav.publications', path: '/publications' },

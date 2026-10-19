@@ -190,6 +190,71 @@ function publicationsCollection(locale: LocaleId) {
   });
 }
 
+function servicesCollection(locale: LocaleId) {
+  return collection({
+    label: `Services (${locale.toUpperCase()})`,
+    path: `src/content/${locale}/services/*`,
+    slugField: 'title',
+    format: { contentField: 'content' },
+    columns: ['order', 'title'],
+    schema: {
+      order: fields.integer({
+        label: 'Order',
+        description: 'Lower numbers appear first on the page.',
+        validation: { isRequired: true },
+      }),
+      title: fields.slug({ name: { label: 'Title' } }),
+      items: technologyList('Bullet points'),
+      content: markdown('Description'),
+    },
+  });
+}
+
+function referencesCollection(locale: LocaleId) {
+  return collection({
+    label: `References (${locale.toUpperCase()})`,
+    path: `src/content/${locale}/references/*`,
+    slugField: 'name',
+    format: { contentField: 'content' },
+    columns: ['order', 'name'],
+    schema: {
+      order: fields.integer({
+        label: 'Order',
+        description: 'Lower numbers appear first on the page.',
+        validation: { isRequired: true },
+      }),
+      name: fields.slug({ name: { label: 'Name' } }),
+      url: fields.url({ label: 'URL', description: 'Optional.' }),
+      role: fields.text({ label: 'What it is', validation: { isRequired: true } }),
+      duration: durationFields('From', 'Until'),
+      technologies: technologyList('Technologies'),
+      content: markdown('Description'),
+    },
+  });
+}
+
+function servicesPageSingleton(locale: LocaleId) {
+  return singleton({
+    label: `Services page (${locale.toUpperCase()})`,
+    path: `src/content/${locale}/sections/services`,
+    format: { contentField: 'content' },
+    schema: {
+      heading: fields.text({ label: 'Heading', validation: { isRequired: true } }),
+      subtitle: fields.text({ label: 'Subtitle', validation: { isRequired: true } }),
+      referencesHeading: fields.text({
+        label: 'References heading',
+        validation: { isRequired: true },
+      }),
+      referencesSubtitle: fields.text({ label: 'References subtitle' }),
+      partnerHeading: fields.text({ label: 'Partner heading' }),
+      partnerName: fields.text({ label: 'Partner name' }),
+      partnerUrl: fields.url({ label: 'Partner URL' }),
+      partnerText: fields.text({ label: 'Partner text', multiline: true }),
+      content: markdown('Intro'),
+    },
+  });
+}
+
 function homeSingleton(locale: LocaleId) {
   return singleton({
     label: `Home page (${locale.toUpperCase()})`,
@@ -271,6 +336,11 @@ function pageIntrosSingleton(locale: LocaleId) {
     path: `src/content/${locale}/sections/page-intros`,
     format: { contentField: 'content' },
     schema: {
+      servicesHeading: fields.text({ label: 'Services heading', validation: { isRequired: true } }),
+      servicesSubtitle: fields.text({
+        label: 'Services subtitle',
+        validation: { isRequired: true },
+      }),
       blogHeading: fields.text({ label: 'Blog heading', validation: { isRequired: true } }),
       blogSubtitle: fields.text({ label: 'Blog subtitle', validation: { isRequired: true } }),
       projectsHeading: fields.text({ label: 'Projects heading', validation: { isRequired: true } }),
@@ -300,6 +370,9 @@ export default config({
     navigation: {
       English: [
         'homeEn',
+        'servicesPageEn',
+        'servicesEn',
+        'referencesEn',
         'aboutBioEn',
         'aboutInterestsEn',
         'aboutSkillsEn',
@@ -312,6 +385,9 @@ export default config({
       ],
       Deutsch: [
         'homeDe',
+        'servicesPageDe',
+        'servicesDe',
+        'referencesDe',
         'aboutBioDe',
         'aboutInterestsDe',
         'aboutSkillsDe',
@@ -326,11 +402,15 @@ export default config({
     },
   },
   collections: {
+    servicesEn: servicesCollection('en'),
+    referencesEn: referencesCollection('en'),
     blogEn: blogCollection('en'),
     projectsEn: projectsCollection('en'),
     experienceEn: experienceCollection('en'),
     educationEn: educationCollection('en'),
     publicationsEn: publicationsCollection('en'),
+    servicesDe: servicesCollection('de'),
+    referencesDe: referencesCollection('de'),
     blogDe: blogCollection('de'),
     projectsDe: projectsCollection('de'),
     experienceDe: experienceCollection('de'),
@@ -339,11 +419,13 @@ export default config({
   },
   singletons: {
     homeEn: homeSingleton('en'),
+    servicesPageEn: servicesPageSingleton('en'),
     aboutBioEn: aboutBioSingleton('en'),
     aboutInterestsEn: aboutInterestsSingleton('en'),
     aboutSkillsEn: aboutSkillsSingleton('en'),
     pageIntrosEn: pageIntrosSingleton('en'),
     homeDe: homeSingleton('de'),
+    servicesPageDe: servicesPageSingleton('de'),
     aboutBioDe: aboutBioSingleton('de'),
     aboutInterestsDe: aboutInterestsSingleton('de'),
     aboutSkillsDe: aboutSkillsSingleton('de'),

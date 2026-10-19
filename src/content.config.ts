@@ -99,6 +99,29 @@ const publications = defineCollection({
   }),
 });
 
+/** What I offer, listed on the services page. */
+const services = defineCollection({
+  loader: localizedGlob('services'),
+  schema: z.object({
+    order: z.number(),
+    title: z.string(),
+    items: z.array(z.string()).default([]),
+  }),
+});
+
+/** Work worth pointing at, listed under the services. */
+const references = defineCollection({
+  loader: localizedGlob('references'),
+  schema: z.object({
+    order: z.number(),
+    name: z.string(),
+    url: z.url().optional(),
+    role: z.string(),
+    duration,
+    technologies: z.array(z.string()).default([]),
+  }),
+});
+
 /**
  * Editable copy for the parts of a page that are not a list of entries: the
  * home hero, the three blocks of the about page, and the page intros.
@@ -118,7 +141,17 @@ const sections = defineCollection({
     links: z.array(z.object({ platform: socialPlatform, url: z.url() })).optional(),
     // about-skills
     groups: z.array(z.object({ level: z.string(), items: z.array(z.string()) })).optional(),
+    // services
+    subtitle: z.string().optional(),
+    referencesHeading: z.string().optional(),
+    referencesSubtitle: z.string().optional(),
+    partnerHeading: z.string().optional(),
+    partnerName: z.string().optional(),
+    partnerUrl: z.url().optional(),
+    partnerText: z.string().optional(),
     // page-intros
+    servicesHeading: z.string().optional(),
+    servicesSubtitle: z.string().optional(),
     blogHeading: z.string().optional(),
     blogSubtitle: z.string().optional(),
     projectsHeading: z.string().optional(),
@@ -138,6 +171,8 @@ const shared = defineCollection({
 
 export const collections = {
   blog,
+  services,
+  references,
   experience,
   education,
   projects,

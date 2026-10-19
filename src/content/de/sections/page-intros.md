@@ -1,4 +1,6 @@
 ---
+servicesHeading: Leistungen
+servicesSubtitle: Architektur, Backend, Web und KI.
 blogHeading: Blog
 blogSubtitle: Interessantes, das mir begegnet ist, Gedanken, die ich habe, und mehr.
 projectsHeading: Projekte
