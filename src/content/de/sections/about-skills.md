@@ -10,6 +10,7 @@ groups:
       - Softwarearchitektur
   - level: Fortgeschritten
     items:
+      - Technisches SEO
       - Microsoft Orleans
       - Event Sourcing & DDD
       - PostgreSQL

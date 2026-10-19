@@ -1,5 +1,5 @@
 ---
-order: 3
+order: 4
 flag: "--ai"
 title: KI & Automatisierung
 items:

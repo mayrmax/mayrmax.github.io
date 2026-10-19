@@ -10,6 +10,7 @@ groups:
       - Software Architecture
   - level: Advanced
     items:
+      - Technical SEO
       - Microsoft Orleans
       - Event Sourcing & DDD
       - PostgreSQL

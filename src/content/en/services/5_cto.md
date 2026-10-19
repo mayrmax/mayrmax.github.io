@@ -1,5 +1,5 @@
 ---
-order: 4
+order: 5
 flag: "--role cto"
 title: Fractional CTO
 items:

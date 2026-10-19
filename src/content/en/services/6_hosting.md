@@ -1,10 +1,10 @@
 ---
-order: 5
+order: 6
 flag: "--host eu"
 title: Hosting in Europe
 items:
   - Self-hosting with Coolify
-  - European providers such as Hetzner
+  - European providers such as Hetzner and Bunny CDN
   - Moving off US clouds
   - Privacy by design
 ---

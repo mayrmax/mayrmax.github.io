@@ -42,7 +42,7 @@ export const ui = {
     'meta.datenschutz':
       'Datenschutzerklärung für mayrmax.com: keine Cookies, kein Tracking, keine Einbindungen Dritter. Verarbeitung von Server-Logs und Betroffenenrechte nach DSGVO.',
     'meta.keywords':
-      'Max Mayr, AI Solution Architect, C#, .NET, Astro, Angular, LLM, RAG, IoT, Fractional CTO, Innsbruck',
+      'Max Mayr, AI Solution Architect, C#, .NET, Astro, Angular, LLM, RAG, IoT, Technical SEO, Fractional CTO, Innsbruck',
   },
   de: {
     'nav.label': 'Hauptnavigation',
@@ -80,7 +80,7 @@ export const ui = {
     'meta.datenschutz':
       'Datenschutzerklärung für mayrmax.com: keine Cookies, kein Tracking, keine Einbindungen Dritter. Verarbeitung von Server-Logs und Betroffenenrechte nach DSGVO.',
     'meta.keywords':
-      'Max Mayr, AI Solution Architect, C#, .NET, Astro, Angular, LLM, RAG, IoT, Fractional CTO, Innsbruck',
+      'Max Mayr, AI Solution Architect, C#, .NET, Astro, Angular, LLM, RAG, IoT, Technical SEO, Fractional CTO, Innsbruck',
   },
 } as const satisfies Record<Locale, Record<string, string>>;
 
