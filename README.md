@@ -91,14 +91,19 @@ on `mayrmax.github.io`, but only to redirect to the new domain.
 1. New resource → **Public/Private Repository** → this repo, branch `master`.
 2. **Build Pack: Dockerfile** (not Nixpacks, not Static — see below).
 3. Set the domain under **Domains**, e.g. `https://mayrmax.com`.
-4. Add an environment variable `SITE_URL` with that same URL and tick
-   **Build Variable**, so it reaches the build rather than just the container.
-5. Deploy. The exposed port is 80 and the image has a healthcheck, so Coolify
+4. Deploy. The exposed port is 80 and the image has a healthcheck, so Coolify
    can gate the rollover on nginx actually answering.
 
-Astro bakes absolute URLs into the output — canonical links, hreflang
-alternates, `og:url`, both sitemaps, both feeds and `robots.txt` — so changing
-the domain means redeploying, not just editing the variable.
+There is no environment variable to set. Astro bakes absolute URLs into the
+output — canonical links, hreflang alternates, `og:url`, both sitemaps, both
+feeds and `robots.txt` — so a host has to be chosen at build time. Coolify knows
+the domain but only exposes it to the running container, not to the image build,
+so `docker-entrypoint.d/10-site-origin.sh` rewrites the baked host from
+`COOLIFY_URL` before nginx starts. Changing the domain in Coolify therefore
+needs a restart, not a rebuild.
+
+`SITE_URL` still overrides, at build time or at runtime, for building the image
+outside Coolify. Where several domains are attached, the first one wins.
 
 **Why not Coolify's Static build pack:** `astro.config.mjs` sets
 `build.format: 'file'`, so the page at `/about` is `about.html` on disk. A
@@ -111,8 +116,8 @@ caches `/_astro/*` (content-hashed, so immutable) forever while keeping HTML on
 To build and run it locally the way Coolify will:
 
 ```bash
-docker build --build-arg SITE_URL=http://localhost:8080 -t mayrmax-site .
-docker run --rm -p 8080:80 mayrmax-site
+docker build -t mayrmax-site .
+docker run --rm -p 8080:80 -e COOLIFY_URL=http://localhost:8080 mayrmax-site
 ```
 
 ### GitHub Pages, as a redirect only

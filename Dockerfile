@@ -15,9 +15,9 @@ RUN npm ci --omit=dev
 COPY . .
 
 # Astro bakes canonical URLs, hreflang links, the sitemaps, robots.txt and the
-# RSS feeds into the static output, so the public URL must be known here — it
-# cannot be changed at runtime. In Coolify, add SITE_URL as an environment
-# variable and tick "Build Variable" so it is passed to the build.
+# RSS feeds into the static output, so a host has to be chosen here. It does not
+# have to be the final one: docker-entrypoint.d/10-site-origin.sh rewrites it on
+# startup from Coolify's COOLIFY_URL, so the domain follows Coolify by itself.
 ARG SITE_URL=https://mayrmax.com
 ENV SITE_URL=$SITE_URL
 
@@ -28,8 +28,17 @@ RUN npm run build
 # ---------------------------------------------------------------------------
 FROM nginx:1.29-alpine AS runtime
 
+ARG SITE_URL=https://mayrmax.com
+
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /app/dist /usr/share/nginx/html
+
+# What the output currently says, so the startup hook knows what to replace.
+RUN printf '%s' "$SITE_URL" > /etc/site-origin
+
+# The nginx image runs every executable script in here before starting.
+COPY docker-entrypoint.d/10-site-origin.sh /docker-entrypoint.d/10-site-origin.sh
+RUN chmod +x /docker-entrypoint.d/10-site-origin.sh
 
 EXPOSE 80
 

@@ -16,8 +16,9 @@ const keystaticIntegrations = isDevServer
   : [];
 
 // Canonical URLs, hreflang links, the sitemaps and the RSS feeds are baked into
-// the static output, so the public URL has to be known when the site is built.
-// Coolify passes SITE_URL as a build argument.
+// the static output, so a host has to be picked at build time. The container
+// rewrites it on startup from Coolify's COOLIFY_URL, so this is only the
+// default — see docker-entrypoint.d/10-site-origin.sh.
 const site = process.env.SITE_URL ?? 'https://mayrmax.com';
 
 // https://astro.build/config
