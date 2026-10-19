@@ -1,7 +1,7 @@
 ---
 /**
- * The contact block at the end of the main pages, set in black so the page
- * ends on it. The home hero's main button jumps here. The address is shown as
+ * The contact block at the end of the main pages, set apart in black
+ * (raised grey in dark mode) so the page ends on it. The home hero's main button jumps here. The address is shown as
  * well as linked, for visitors without a mail client set up.
  */
 import Container from './Container.astro';
@@ -23,24 +23,24 @@ const mailto = `mailto:${contact.email}${
 }`;
 ---
 
-<section id={t('contact.anchor')} data-contact class="mt-24 scroll-mt-6 bg-black text-white">
+<section id={t('contact.anchor')} data-contact class="mt-24 scroll-mt-6 bg-block text-on-block">
   <Container class="py-18 sm:py-24">
-    <p class="font-mono text-base text-white/60" aria-hidden="true">$ mail max</p>
+    <p class="font-mono text-base text-on-block/60" aria-hidden="true">$ mail max</p>
     <h2
       class="mt-4 max-w-[20ch] text-[clamp(30px,3.6vw,44px)] leading-tight font-bold tracking-[-0.02em]"
     >
       {contact.heading}
     </h2>
-    <Prose class="mt-4 max-w-xl text-white/75"><contact.Content /></Prose>
+    <Prose class="mt-4 max-w-xl text-on-block/75"><contact.Content /></Prose>
     <div class="mt-8.5 flex flex-wrap items-center gap-x-7 gap-y-4">
       <a
-        class="inline-block bg-white px-5.5 py-3.5 font-bold text-black hover:bg-neutral-200 focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-white"
+        class="inline-block bg-on-block px-5.5 py-3.5 font-bold text-block hover:bg-on-block/85 focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-on-block"
         href={mailto}
       >
         {contact.ctaLabel}
       </a>
       <a
-        class="font-mono text-base text-white/75 underline underline-offset-4 hover:text-white hover:decoration-2"
+        class="font-mono text-base text-on-block/75 underline underline-offset-4 hover:text-on-block hover:decoration-2"
         href={mailto}
       >
         {contact.email}

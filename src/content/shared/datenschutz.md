@@ -46,6 +46,8 @@ Diese Website setzt **keine Cookies**, verwendet **keine Analyse- oder Tracking-
 
 Schriftarten werden von diesem Server ausgeliefert und nicht von einem externen Anbieter nachgeladen. Beim Aufruf dieser Website wird folglich keine Verbindung zu Servern Dritter hergestellt und es werden keine Daten an Dritte übermittelt.
 
+Wählst du über den Schalter in der Navigation ein helles oder dunkles Design, speichert dein Browser diese Einstellung lokal (im sogenannten Local Storage). Sie verlässt deinen Browser nie und wird nicht an mich übertragen. Du kannst sie jederzeit löschen, indem du die Website-Daten in deinem Browser entfernst.
+
 ## 9. Kontakt per E-Mail
 
 Wenn du mir eine E-Mail schreibst, verarbeite ich deine E-Mail-Adresse, deinen Namen und den Inhalt deiner Nachricht, um deine Anfrage zu beantworten. Geht es um ein mögliches Projekt, ist die Rechtsgrundlage Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Maßnahmen), sonst mein berechtigtes Interesse, Anfragen zu beantworten (Art. 6 Abs. 1 lit. f DSGVO). Die E-Mails liegen bei meinem E-Mail-Provider (siehe Punkt 5). Ich lösche deine Nachricht, sobald deine Anfrage erledigt ist, es sei denn, gesetzliche Aufbewahrungspflichten stehen dem entgegen.

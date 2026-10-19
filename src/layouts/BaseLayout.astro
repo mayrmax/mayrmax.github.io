@@ -116,17 +116,31 @@ const socialImage = new URL(ogImagePath(locale, noindex ? '/' : path), Astro.sit
       href={localePath(locale, '/feed.xml')}
     />
 
+    <script is:inline>
+      // Resolve the theme before first paint, so a dark page never flashes
+      // white. A choice made with the toggle wins over the system setting.
+      (() => {
+        let theme;
+        try {
+          theme = localStorage.getItem('theme');
+        } catch {}
+        if (theme !== 'light' && theme !== 'dark') {
+          theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script>
     <Font cssVariable="--font-hanken" preload />
     <Font cssVariable="--font-jetbrains" preload />
   </head>
-  <body class="bg-white font-sans wrap-break-word text-lg leading-[1.55] text-ink antialiased">
+  <body class="bg-paper font-sans wrap-break-word text-lg leading-[1.55] text-ink antialiased">
     {
       !noindex && (
         <StructuredData locale={locale} page={schema} article={article} services={services} />
       )
     }
     <Navigation locale={locale} path={path} />
-    <!-- Pages that end on the black contact block run straight into the footer. -->
+    <!-- Pages that end on the contact block run straight into the footer. -->
     <main class="pb-24 [&:has(>[data-contact]:last-child)]:pb-0">
       <slot />
     </main>

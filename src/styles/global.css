@@ -1,17 +1,70 @@
 @import 'tailwindcss';
 
+/* dark: follows the resolved theme, which BaseLayout sets before first paint. */
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
 /*
  * Everything else is Tailwind utilities in the components. This file only
  * declares the design tokens they draw on.
  */
+
+/*
+ * Light and dark palettes. Dark follows the system setting unless the visitor
+ * picked one with the toggle in the navigation, which sets data-theme on
+ * <html> (BaseLayout.astro, src/scripts/main.ts).
+ */
+:root {
+  color-scheme: light;
+  --paper: #ffffff;
+  --ink: #000000;
+  --muted: #666666;
+  --rule: #e4e4e4;
+  /* Edge around black elements that would vanish on the dark page. */
+  --edge: transparent;
+  /* The contact block: black on the light page, a raised dark grey on the
+     dark one, where a light block would glare. */
+  --block: #000000;
+  --on-block: #ffffff;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+    --paper: #0e0e0e;
+    --ink: #ededed;
+    --muted: #a3a3a3;
+    --rule: #2b2b2b;
+    --edge: #3a3a3a;
+    --block: #1c1c1c;
+    --on-block: #ededed;
+  }
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --paper: #0e0e0e;
+  --ink: #ededed;
+  --muted: #a3a3a3;
+  --rule: #2b2b2b;
+  --edge: #3a3a3a;
+  --block: #1c1c1c;
+  --on-block: #ededed;
+}
+
 @theme {
   /* Self-hosted by Astro's font pipeline (astro.config.mjs). */
   --font-sans: var(--font-hanken), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, monospace;
 
-  --color-ink: #000000;
-  --color-muted: #666666;
-  --color-rule: #e4e4e4;
+  /* Page background, text, secondary text, hairlines. The hero button
+     swaps paper and ink. */
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-rule: var(--rule);
+  --color-edge: var(--edge);
+  --color-block: var(--block);
+  --color-on-block: var(--on-block);
 
   /* The three powerline colours of the prompt. They are the brand, so they
      appear in the prompt and nowhere else. */

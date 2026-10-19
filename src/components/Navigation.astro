@@ -27,53 +27,69 @@ const isCurrent = (itemPath: string) => path === itemPath || path.startsWith(`${
       max mayr
     </a>
 
-    <button
-      type="button"
-      class="navbar-burger -mr-2 flex size-11 cursor-pointer items-center justify-center md:hidden"
-      aria-label={t('nav.menu')}
-      aria-expanded="false"
-      aria-controls="navbar-menu"
-    >
-      <Icon name="menu" size={24} />
-    </button>
+    <div class="flex items-center gap-1 md:gap-5">
+      <button
+        type="button"
+        class="navbar-burger order-last -mr-2 flex size-11 cursor-pointer items-center justify-center md:hidden"
+        aria-label={t('nav.menu')}
+        aria-expanded="false"
+        aria-controls="navbar-menu"
+      >
+        <Icon name="menu" size={24} />
+      </button>
 
-    <div
-      id="navbar-menu"
-      class="navbar-menu absolute top-full right-0 left-0 z-20 hidden border-y border-rule bg-white py-2 md:static md:flex md:border-0 md:bg-transparent md:py-0"
-    >
-      <ul class="md:flex md:items-center md:gap-6.5">
-        {
-          navigation.map((item) => (
-            <li>
-              <a
-                href={localePath(locale, item.path)}
-                aria-current={isCurrent(item.path) ? 'page' : undefined}
-                class="block py-2.5 decoration-2 underline-offset-[6px] hover:underline aria-[current=page]:underline md:py-0"
-              >
-                {t(item.key)}
-              </a>
-            </li>
-          ))
-        }
-        <li class="py-2.5 text-muted md:py-0" aria-label={t('nav.language')}>
+      <div
+        id="navbar-menu"
+        class="navbar-menu absolute top-full right-0 left-0 z-20 hidden border-y border-rule bg-paper py-2 md:static md:flex md:border-0 md:bg-transparent md:py-0"
+      >
+        <ul class="md:flex md:items-center md:gap-6.5">
           {
-            locales.map((candidate, index) => (
-              <Fragment>
-                {index > 0 && ' / '}
-                {candidate === locale ? (
-                  <span class="text-ink" aria-current="true">
-                    {localeName[candidate]}
-                  </span>
-                ) : (
-                  <a class="hover:text-ink" href={localePath(candidate, path)} hreflang={candidate}>
-                    {localeName[candidate]}
-                  </a>
-                )}
-              </Fragment>
+            navigation.map((item) => (
+              <li>
+                <a
+                  href={localePath(locale, item.path)}
+                  aria-current={isCurrent(item.path) ? 'page' : undefined}
+                  class="block py-2.5 decoration-2 underline-offset-[6px] hover:underline aria-[current=page]:underline md:py-0"
+                >
+                  {t(item.key)}
+                </a>
+              </li>
             ))
           }
-        </li>
-      </ul>
+          <li class="py-2.5 text-muted md:py-0" aria-label={t('nav.language')}>
+            {
+              locales.map((candidate, index) => (
+                <Fragment>
+                  {index > 0 && ' / '}
+                  {candidate === locale ? (
+                    <span class="text-ink" aria-current="true">
+                      {localeName[candidate]}
+                    </span>
+                  ) : (
+                    <a
+                      class="hover:text-ink"
+                      href={localePath(candidate, path)}
+                      hreflang={candidate}
+                    >
+                      {localeName[candidate]}
+                    </a>
+                  )}
+                </Fragment>
+              ))
+            }
+          </li>
+        </ul>
+      </div>
+
+      <button
+        type="button"
+        class="theme-toggle flex size-11 cursor-pointer items-center justify-center text-muted hover:text-ink md:order-last md:-mr-3"
+        aria-label={t('nav.theme')}
+        aria-pressed="false"
+      >
+        <Icon name="moon" size={20} class="dark:hidden" />
+        <Icon name="sun" size={20} class="hidden dark:block" />
+      </button>
     </div>
   </nav>
 </Container>
