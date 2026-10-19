@@ -25,9 +25,15 @@ const [bio, interests, skills, experience, education] = await Promise.all([
 ]);
 ---
 
-<BaseLayout locale={locale} path="/about" title={t('title.about')}>
+<BaseLayout
+  locale={locale}
+  path="/about"
+  title={t('title.about')}
+  description={t('meta.about')}
+  schema="profile"
+>
   <section class="bg-surface px-6 py-12">
-    <SectionHeading title={bio.sectionHeading ?? ''} />
+    <SectionHeading title={bio.sectionHeading ?? ''} as="h1" />
 
     <div class="grid gap-6 md:grid-cols-3">
       <div>
@@ -45,13 +51,13 @@ const [bio, interests, skills, experience, education] = await Promise.all([
       </div>
 
       <div>
-        <h3 class="mb-4 text-xl">{bio.heading}</h3>
+        <h2 class="mb-4 text-xl">{bio.heading}</h2>
         <div class="prose-content"><bio.Content /></div>
         {bio.links && <SocialLinks locale={locale} links={bio.links} />}
       </div>
 
       <div>
-        <h3 class="mb-4 text-xl">{interests.heading}</h3>
+        <h2 class="mb-4 text-xl">{interests.heading}</h2>
         <div class="prose-content"><interests.Content /></div>
       </div>
     </div>

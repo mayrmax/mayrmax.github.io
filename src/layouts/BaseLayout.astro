@@ -5,25 +5,54 @@ import '../styles/global.css';
 
 import Footer from '../components/Footer.astro';
 import Navigation from '../components/Navigation.astro';
-import { htmlLang, localePath, locales, ogLocale, type Locale } from '../i18n/config';
+import StructuredData from '../components/StructuredData.astro';
+import {
+  defaultLocale,
+  htmlLang,
+  localePath,
+  locales,
+  ogLocale,
+  type Locale,
+} from '../i18n/config';
 import { useTranslations } from '../i18n/ui';
+import type { ComponentProps } from 'astro/types';
 
 interface Props {
   locale: Locale;
   /** Path without a locale prefix, e.g. `/about`. Drives the nav highlight,
       the language switcher and the alternate-language links. */
   path: string;
+  /** Page name; the site name is appended for the <title>. */
   title: string;
   description?: string;
   /** Keep the page out of search results and off the canonical trail. */
   noindex?: boolean;
+  /** Extra schema.org node for this page. */
+  schema?: ComponentProps<typeof StructuredData>['page'];
+  article?: ComponentProps<typeof StructuredData>['article'];
+  services?: ComponentProps<typeof StructuredData>['services'];
 }
 
-const { locale, path, title, description, noindex = false } = Astro.props;
+const {
+  locale,
+  path,
+  title,
+  description,
+  noindex = false,
+  schema,
+  article,
+  services,
+} = Astro.props;
 const t = useTranslations(locale);
+
+const siteName = t('site.name');
+// "About — Max Mayr": the page first, the brand after, so the useful half
+// survives truncation in a result listing.
+const documentTitle = title === siteName ? title : `${title} — ${siteName}`;
 
 const metaDescription = description ?? t('meta.description');
 const canonical = new URL(localePath(locale, path), Astro.site).href;
+const socialImage = new URL('/assets/images/og-card.webp', Astro.site).href;
 ---
 
 <!doctype html>
@@ -31,7 +60,7 @@ const canonical = new URL(localePath(locale, path), Astro.site).href;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
+    <title>{documentTitle}</title>
 
     <meta name="author" content="Max Mayr" />
     <meta name="description" content={metaDescription} />
@@ -50,15 +79,30 @@ const canonical = new URL(localePath(locale, path), Astro.site).href;
               href={new URL(localePath(alternate, path), Astro.site).href}
             />
           ))}
+          <link
+            rel="alternate"
+            hreflang="x-default"
+            href={new URL(localePath(defaultLocale, path), Astro.site).href}
+          />
           <meta property="og:url" content={canonical} />
         </Fragment>
       )
     }
 
     <meta property="og:type" content="website" />
-    <meta property="og:title" content={title} />
+    <meta property="og:title" content={documentTitle} />
     <meta property="og:description" content={metaDescription} />
     <meta property="og:locale" content={ogLocale[locale]} />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`${siteName} — ${t('meta.description')}`} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={documentTitle} />
+    <meta name="twitter:description" content={metaDescription} />
+    <meta name="twitter:image" content={socialImage} />
 
     <link
       rel="icon"
@@ -76,6 +120,11 @@ const canonical = new URL(localePath(locale, path), Astro.site).href;
     <Font cssVariable="--font-mono" />
   </head>
   <body>
+    {
+      !noindex && (
+        <StructuredData locale={locale} page={schema} article={article} services={services} />
+      )
+    }
     <Navigation locale={locale} path={path} />
     <slot />
     <Footer locale={locale} />

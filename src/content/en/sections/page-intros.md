@@ -2,11 +2,11 @@
 servicesHeading: Services
 servicesSubtitle: Architecture, backend, web and AI.
 blogHeading: Blog
-blogSubtitle: Interesting stuff I encountered, thoughts I have and more.
+blogSubtitle: Notes on things I run into while building — the decentralised web, linked data and where software is heading.
 projectsHeading: Projects
-projectsSubtitle: Some of my favorites that I did over the years.
+projectsSubtitle: A selection of the projects I built over the years — from microservice platforms and personal data stores to real-time collaboration and GPU rendering.
 publicationsHeading: Publications
-publicationsSubtitle: Some stuff that got published.
+publicationsSubtitle: My master's and bachelor's theses on personal data stores, WebRTC real-time communication and enterprise design patterns for Angular.
 notFoundHeading: "404"
 notFoundSubtitle: Page not found :(
 ---

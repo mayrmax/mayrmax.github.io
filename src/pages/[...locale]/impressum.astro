@@ -14,7 +14,12 @@ const t = useTranslations(locale);
 const impressum = await getShared('impressum');
 ---
 
-<BaseLayout locale={locale} path="/impressum" title={t('title.impressum')}>
+<BaseLayout
+  locale={locale}
+  path="/impressum"
+  title={t('title.impressum')}
+  description={t('meta.impressum')}
+>
   <div class="px-6 py-12">
     <h1 class="text-[2rem] leading-tight font-semibold">{impressum.heading}</h1>
     <div class="prose-content mt-4 max-w-4xl"><impressum.Content /></div>

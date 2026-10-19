@@ -1,7 +1,7 @@
 ---
 sectionHeading: ÜBER MICH
 heading: Hallo, ich bin Max.
-photo: /assets/images/me.jpg
+photo: /assets/images/me.webp
 photoAlt: Max Mayr
 links:
   - platform: github

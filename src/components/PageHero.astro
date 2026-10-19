@@ -9,5 +9,6 @@ const { heading, subtitle } = Astro.props;
 
 <section class="bg-surface px-6 py-12">
   <h1 class="text-[2rem] leading-tight font-semibold">{heading}</h1>
-  {subtitle && <h2 class="mt-1 text-xl text-ink-muted">{subtitle}</h2>}
+  {/* A tagline is not a section heading, so it must not take an h2. */}
+  {subtitle && <p class="mt-1 text-xl text-ink-muted">{subtitle}</p>}
 </section>

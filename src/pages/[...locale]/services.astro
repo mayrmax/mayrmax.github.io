@@ -25,6 +25,11 @@ const [page, intros, services, references] = await Promise.all([
   path="/services"
   title={intros.servicesHeading ?? ''}
   description={page.subtitle}
+  schema="services"
+  services={services.map((service) => ({
+    name: service.data.title,
+    description: service.data.items.join(', '),
+  }))}
 >
   <section class="bg-surface px-6 py-12">
     <h1 class="text-[2rem] leading-tight font-semibold">{page.heading}</h1>

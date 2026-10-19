@@ -13,7 +13,8 @@ export const ui = {
     'nav.publications': 'publications',
     'nav.blog': 'blog',
     'nav.menu': 'menu',
-    'title.home': 'Home',
+    'site.name': 'Max Mayr',
+    'title.home': 'AI Solution Architect in Innsbruck',
     'title.about': 'About',
     'title.impressum': 'Impressum',
     'title.datenschutz': 'Datenschutz',
@@ -28,6 +29,14 @@ export const ui = {
     'footer.datenschutz': 'Datenschutz',
     'meta.description':
       'AI Solution Architect in Innsbruck — C# / .NET, Astro, Angular, AI integration and IoT.',
+    'meta.home':
+      'Max Mayr builds .NET backends, fast Astro and Angular frontends, and the AI that ties them together. Freelance architect and fractional CTO based in Innsbruck, Austria.',
+    'meta.about':
+      'Max Mayr, AI solution architect in Innsbruck: C# / .NET, Astro and Angular, LLM integration and IoT. Roles at SweetPopcorn.Studio, Malsati, Tributech and eurofunk.',
+    'meta.impressum':
+      'Impressum und Offenlegung nach § 5 ECG für mayrmax.com — Maximilian Mayr, Einzelunternehmen, Innsbruck.',
+    'meta.datenschutz':
+      'Datenschutzerklärung für mayrmax.com: keine Cookies, kein Tracking, keine Einbindungen Dritter. Verarbeitung von Server-Logs und Betroffenenrechte nach DSGVO.',
     'meta.keywords':
       'Max Mayr, AI Solution Architect, C#, .NET, Astro, Angular, LLM, RAG, IoT, Fractional CTO, Innsbruck',
     'link.github': 'GitHub',
@@ -43,7 +52,8 @@ export const ui = {
     'nav.publications': 'publikationen',
     'nav.blog': 'blog',
     'nav.menu': 'Menü',
-    'title.home': 'Startseite',
+    'site.name': 'Max Mayr',
+    'title.home': 'AI Solution Architect in Innsbruck',
     'title.about': 'Über mich',
     'title.impressum': 'Impressum',
     'title.datenschutz': 'Datenschutz',
@@ -58,6 +68,14 @@ export const ui = {
     'footer.datenschutz': 'Datenschutz',
     'meta.description':
       'AI Solution Architect in Innsbruck — C# / .NET, Astro, Angular, KI-Integration und IoT.',
+    'meta.home':
+      'Max Mayr baut .NET-Backends, schnelle Astro- und Angular-Frontends und die KI, die beides verbindet. Freiberuflicher Architekt und Fractional CTO in Innsbruck.',
+    'meta.about':
+      'Max Mayr, AI Solution Architect in Innsbruck: C# / .NET, Astro und Angular, LLM-Integration und IoT. Stationen bei SweetPopcorn.Studio, Malsati, Tributech und eurofunk.',
+    'meta.impressum':
+      'Impressum und Offenlegung nach § 5 ECG für mayrmax.com — Maximilian Mayr, Einzelunternehmen, Innsbruck.',
+    'meta.datenschutz':
+      'Datenschutzerklärung für mayrmax.com: keine Cookies, kein Tracking, keine Einbindungen Dritter. Verarbeitung von Server-Logs und Betroffenenrechte nach DSGVO.',
     'meta.keywords':
       'Max Mayr, AI Solution Architect, C#, .NET, Astro, Angular, LLM, RAG, IoT, Fractional CTO, Innsbruck',
     'link.github': 'GitHub',

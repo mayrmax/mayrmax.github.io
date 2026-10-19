@@ -2,7 +2,7 @@
 import type { GetStaticPaths } from 'astro';
 import { getCollection, render } from 'astro:content';
 
-import { localeParam, isLocale } from '../../../i18n/config';
+import { isLocale, localeParam, localePath } from '../../../i18n/config';
 import { entrySlug } from '../../../i18n/content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { formatDate, toISODate } from '../../../utils/date';
@@ -29,6 +29,13 @@ const slug = entrySlug(post.id);
   path={`/blog/${slug}`}
   title={post.data.title}
   description={post.data.subtitle}
+  schema="article"
+  article={{
+    headline: post.data.title,
+    description: post.data.subtitle,
+    datePublished: post.data.date.toISOString(),
+    url: new URL(localePath(locale, `/blog/${slug}`), Astro.site).href,
+  }}
 >
   <section class="bg-surface px-6 py-12">
     <p class="text-sm">

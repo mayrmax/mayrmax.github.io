@@ -14,7 +14,7 @@ const t = useTranslations(locale);
 const home = await getSection('home', locale);
 ---
 
-<BaseLayout locale={locale} path="/" title={t('title.home')}>
+<BaseLayout locale={locale} path="/" title={t('title.home')} description={t('meta.home')}>
   <section class="flex min-h-[calc(100vh-3.25rem)] flex-col justify-center px-6 py-12">
     <div>
       <h2 class="mb-7 ml-1 font-body text-[26px] tracking-[-2px] text-ink-faint">

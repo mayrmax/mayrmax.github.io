@@ -1,0 +1,107 @@
+---
+import { getSection } from '../i18n/content';
+import { htmlLang, localePath, type Locale } from '../i18n/config';
+
+interface Props {
+  locale: Locale;
+  /** Extra node for this page on top of the site-wide Person and WebSite. */
+  page?: 'profile' | 'services' | 'article';
+  article?: { headline: string; description?: string; datePublished: string; url: string };
+  services?: ReadonlyArray<{ name: string; description: string }>;
+}
+
+const { locale, page, article, services } = Astro.props;
+const origin = new URL(Astro.site!).origin;
+const abs = (path: string) => new URL(localePath(locale, path), origin).href;
+
+// One source of truth for the skill list: the about page's own content.
+const skills = await getSection('about-skills', locale);
+const knowsAbout = (skills.groups ?? []).flatMap((group) => group.items);
+
+const person = {
+  '@type': 'Person',
+  '@id': `${origin}/#person`,
+  name: 'Maximilian Mayr',
+  alternateName: 'Max Mayr',
+  url: `${origin}/`,
+  image: `${origin}/assets/images/me.webp`,
+  jobTitle: locale === 'de' ? 'AI Solution Architect' : 'AI Solution Architect',
+  description:
+    locale === 'de'
+      ? 'AI Solution Architect in Innsbruck — C# / .NET, Astro, Angular, KI-Integration und IoT.'
+      : 'AI Solution Architect in Innsbruck — C# / .NET, Astro, Angular, AI integration and IoT.',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Innsbruck',
+    addressRegion: 'Tirol',
+    addressCountry: 'AT',
+  },
+  sameAs: ['https://github.com/mayrmax', 'https://www.linkedin.com/in/mayrmax/'],
+  knowsAbout,
+  worksFor: {
+    '@type': 'Organization',
+    name: 'SweetPopcorn.Studio GmbH',
+    url: 'https://sweetpopcorn.studio/',
+  },
+};
+
+const website = {
+  '@type': 'WebSite',
+  '@id': `${origin}/#website`,
+  url: `${origin}/`,
+  name: 'Max Mayr',
+  inLanguage: htmlLang[locale],
+  publisher: { '@id': `${origin}/#person` },
+};
+
+const graph: Record<string, unknown>[] = [person, website];
+
+if (page === 'profile') {
+  graph.push({
+    '@type': 'ProfilePage',
+    '@id': `${abs('/about')}#page`,
+    url: abs('/about'),
+    inLanguage: htmlLang[locale],
+    mainEntity: { '@id': `${origin}/#person` },
+  });
+}
+
+if (page === 'services') {
+  graph.push({
+    '@type': 'ProfessionalService',
+    '@id': `${abs('/services')}#service`,
+    name: 'Max Mayr — Software & AI',
+    url: abs('/services'),
+    provider: { '@id': `${origin}/#person` },
+    areaServed: { '@type': 'Country', name: 'Austria' },
+    address: person.address,
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: locale === 'de' ? 'Leistungen' : 'Services',
+      itemListElement: (services ?? []).map((service) => ({
+        '@type': 'Offer',
+        itemOffered: { '@type': 'Service', name: service.name, description: service.description },
+      })),
+    },
+  });
+}
+
+if (page === 'article' && article) {
+  graph.push({
+    '@type': 'BlogPosting',
+    '@id': `${article.url}#article`,
+    headline: article.headline,
+    description: article.description,
+    datePublished: article.datePublished,
+    inLanguage: htmlLang[locale],
+    url: article.url,
+    author: { '@id': `${origin}/#person` },
+    publisher: { '@id': `${origin}/#person` },
+    mainEntityOfPage: article.url,
+  });
+}
+
+const jsonLd = JSON.stringify({ '@context': 'https://schema.org', '@graph': graph });
+---
+
+<script type="application/ld+json" is:inline set:html={jsonLd} />

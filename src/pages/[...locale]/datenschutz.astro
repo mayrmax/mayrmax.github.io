@@ -13,7 +13,12 @@ const t = useTranslations(locale);
 const datenschutz = await getShared('datenschutz');
 ---
 
-<BaseLayout locale={locale} path="/datenschutz" title={t('title.datenschutz')}>
+<BaseLayout
+  locale={locale}
+  path="/datenschutz"
+  title={t('title.datenschutz')}
+  description={t('meta.datenschutz')}
+>
   <div class="px-6 py-12">
     <h1 class="text-[2rem] leading-tight font-semibold">{datenschutz.heading}</h1>
     <div class="prose-content mt-4 max-w-4xl"><datenschutz.Content /></div>

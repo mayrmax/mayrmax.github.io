@@ -1,5 +1,5 @@
 ---
-order: 2
+order: 3
 name: Malsati
 url: https://malsati.com/
 role: Rezeptplattform, von Grund auf gebaut
