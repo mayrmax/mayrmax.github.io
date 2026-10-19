@@ -6,7 +6,13 @@ interface Props {
   locale: Locale;
   /** Extra node for this page on top of the site-wide Person and WebSite. */
   page?: 'profile' | 'services' | 'article';
-  article?: { headline: string; description?: string; datePublished: string; url: string };
+  article?: {
+    headline: string;
+    description?: string;
+    datePublished: string;
+    dateModified?: string;
+    url: string;
+  };
   services?: ReadonlyArray<{ name: string; description: string }>;
 }
 
@@ -96,6 +102,7 @@ if (page === 'article' && article) {
     headline: article.headline,
     description: article.description,
     datePublished: article.datePublished,
+    dateModified: article.dateModified ?? article.datePublished,
     inLanguage: htmlLang[locale],
     url: article.url,
     author: { '@id': `${origin}/#person` },

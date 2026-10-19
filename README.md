@@ -108,8 +108,10 @@ which is why they are not taken from Astro's font pipeline.
 
 ### Retired routes
 
-`/projects` and `/publications` were folded into `/work` and `/about`. nginx
-301s the old URLs, and the GitHub Pages stubs point straight at the new ones.
+`/projects` and `/publications` were folded into `/work` and `/about`, and the
+five 2018 posts `/blog/decentralized-1` to `-5` into one essay,
+`/blog/decentralized-web`, each old URL pointing at its section. nginx 301s the
+old URLs, and the GitHub Pages stubs point straight at the new ones.
 
 ## Deployment
 

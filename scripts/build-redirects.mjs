@@ -138,6 +138,16 @@ const retired = {
   '/de/projects': '/de/work',
   '/publications': '/about#theses',
   '/de/publications': '/de/about#theses',
+  '/blog/decentralized-1': '/blog/decentralized-web',
+  '/blog/decentralized-2': '/blog/decentralized-web#data-pods',
+  '/blog/decentralized-3': '/blog/decentralized-web#a-personal-api',
+  '/blog/decentralized-4': '/blog/decentralized-web#a-digital-soul',
+  '/blog/decentralized-5': '/blog/decentralized-web#autonomous-agents',
+  '/de/blog/decentralized-1': '/de/blog/decentralized-web',
+  '/de/blog/decentralized-2': '/de/blog/decentralized-web#datapods',
+  '/de/blog/decentralized-3': '/de/blog/decentralized-web#eine-pers%C3%B6nliche-api',
+  '/de/blog/decentralized-4': '/de/blog/decentralized-web#eine-digitale-seele',
+  '/de/blog/decentralized-5': '/de/blog/decentralized-web#autonome-agenten',
 };
 for (const [from, to] of Object.entries(retired)) {
   await write(`${from.slice(1)}.html`, redirectPage(to));

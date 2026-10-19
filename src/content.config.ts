@@ -43,9 +43,14 @@ const blog = defineCollection({
   loader: localizedGlob('blog'),
   schema: z.object({
     title: z.string(),
-    subtitle: z.string().optional(),
+    // Lede under the title, meta description and feed summary.
+    description: z.string().optional(),
     date: publishedAt,
-    categories: z.array(z.string()).default([]),
+    // Set when a post is revised; shown beside the date and sent as dateModified.
+    updated: publishedAt.optional(),
+    tags: z.array(z.string()).default([]),
+    // A boxed remark above the text, e.g. that a post is kept as written years ago.
+    note: z.string().optional(),
   }),
 });
 

@@ -62,11 +62,24 @@ function blogCollection(locale: LocaleId) {
     columns: ['title', 'date'],
     schema: {
       title: fields.slug({ name: { label: 'Title' } }),
-      subtitle: fields.text({ label: 'Subtitle' }),
+      description: fields.text({
+        label: 'Description',
+        description: 'Shown under the title, in search results and in the feed.',
+        multiline: true,
+      }),
       date: fields.datetime({ label: 'Published', validation: { isRequired: true } }),
-      categories: fields.array(fields.text({ label: 'Category' }), {
-        label: 'Categories',
+      updated: fields.datetime({
+        label: 'Updated',
+        description: 'Set when the post is revised.',
+      }),
+      tags: fields.array(fields.text({ label: 'Tag' }), {
+        label: 'Tags',
         itemLabel: (props) => props.value,
+      }),
+      note: fields.text({
+        label: 'Note',
+        description: 'Optional boxed remark above the text.',
+        multiline: true,
       }),
       content: markdown('Post'),
     },

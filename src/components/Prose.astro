@@ -13,11 +13,17 @@ const { class: className } = Astro.props;
 <div
   class:list={[
     'leading-[1.6]',
-    '[&_p+p]:mt-4 [&_p+ul]:mt-4 [&_ul+p]:mt-4',
+    '[&>*+*]:mt-4',
     '[&_a]:underline [&_a]:decoration-1 [&_a]:underline-offset-4 [&_a:hover]:decoration-2',
     '[&_strong]:font-bold [&_em]:italic',
-    "[&_ul]:list-['–_'] [&_ul]:pl-5 [&_li]:mt-1 [&_li]:marker:text-muted",
-    '[&_h2]:mt-10 [&_h2]:mb-3 [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:tracking-tight [&_h2:first-child]:mt-0',
+    "[&_ul]:list-['–_'] [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-6 [&_li]:mt-1 [&_li]:marker:text-muted",
+    '[&_h2]:mt-12 [&_h2]:mb-3 [&_h2]:scroll-mt-6 [&_h2]:text-2xl [&_h2]:leading-snug [&_h2]:font-bold [&_h2]:tracking-tight [&_h2:first-child]:mt-0',
+    '[&_h3]:mt-8 [&_h3]:mb-2 [&_h3]:scroll-mt-6 [&_h3]:text-xl [&_h3]:font-bold',
+    '[&_blockquote]:border-l-2 [&_blockquote]:border-ink [&_blockquote]:pl-5 [&_blockquote]:text-muted',
+    '[&_:not(pre)>code]:rounded-sm [&_:not(pre)>code]:bg-rule/60 [&_:not(pre)>code]:px-1.5 [&_:not(pre)>code]:py-0.5 [&_code]:font-mono [&_code]:text-[0.85em]',
+    '[&_pre]:overflow-x-auto [&_pre]:border [&_pre]:border-rule [&_pre]:p-4 [&_pre]:text-[15px] [&_pre]:leading-relaxed',
+    '[&_img]:h-auto [&_img]:max-w-full [&_hr]:my-10 [&_hr]:border-rule',
+    '[&_table]:w-full [&_table]:text-base [&_th]:border-b [&_th]:border-ink [&_th]:py-2 [&_th]:pr-4 [&_th]:text-left [&_td]:border-b [&_td]:border-rule [&_td]:py-2 [&_td]:pr-4',
     className,
   ]}
 >

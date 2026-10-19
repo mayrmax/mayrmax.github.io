@@ -25,9 +25,9 @@ export const GET: APIRoute = async (context) => {
     trailingSlash: false,
     items: posts.map((post) => ({
       title: post.data.title,
-      description: post.data.subtitle,
+      description: post.data.description,
       pubDate: post.data.date,
-      categories: post.data.categories,
+      categories: post.data.tags,
       link: localePath(locale, `/blog/${entrySlug(post.id)}`),
     })),
   });

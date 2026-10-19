@@ -2,12 +2,16 @@
 import type { GetStaticPaths } from 'astro';
 import { getCollection, render } from 'astro:content';
 
+import Contact from '../../../components/Contact.astro';
 import Container from '../../../components/Container.astro';
 import Prose from '../../../components/Prose.astro';
 import { isLocale, localeParam, localePath } from '../../../i18n/config';
-import { entrySlug } from '../../../i18n/content';
+import { entrySlug, getLocalized } from '../../../i18n/content';
+import { useTranslations } from '../../../i18n/ui';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { formatDate, toISODate } from '../../../utils/date';
+import { readingMinutes } from '../../../utils/reading-time';
+import { hashtag } from '../../../utils/tags';
 
 export const getStaticPaths = (async () => {
   const posts = await getCollection('blog');
@@ -22,20 +26,37 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 
 const { post, locale } = Astro.props;
-const { Content } = await render(post);
+const t = useTranslations(locale);
+const { Content, headings } = await render(post);
 const slug = entrySlug(post.id);
+const { title, description, date, updated, tags, note } = post.data;
+
+// A table of contents only pays off once a post has a few sections.
+const contents = headings.filter((heading) => heading.depth === 2);
+const showContents = contents.length >= 3;
+
+// Neighbours in the list, newest first: the one before is newer.
+const posts = (await getLocalized('blog', locale)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+const index = posts.findIndex((candidate) => candidate.id === post.id);
+const neighbours = [
+  { label: t('blog.newer'), post: posts[index - 1] },
+  { label: t('blog.older'), post: posts[index + 1] },
+].filter((neighbour) => neighbour.post);
 ---
 
 <BaseLayout
   locale={locale}
   path={`/blog/${slug}`}
-  title={post.data.title}
-  description={post.data.subtitle}
+  title={title}
+  description={description}
   schema="article"
   article={{
-    headline: post.data.title,
-    description: post.data.subtitle,
-    datePublished: post.data.date.toISOString(),
+    headline: title,
+    description,
+    datePublished: date.toISOString(),
+    dateModified: updated?.toISOString(),
     url: new URL(localePath(locale, `/blog/${slug}`), Astro.site).href,
   }}
 >
@@ -43,19 +64,102 @@ const slug = entrySlug(post.id);
     <header class="border-b border-rule">
       <Container class="pt-14 pb-12 sm:pt-20 sm:pb-16">
         <p class="font-mono text-sm text-muted">
-          <time datetime={toISODate(post.data.date)}>{formatDate(post.data.date, locale)}</time>
+          <time datetime={toISODate(date)}>{formatDate(date, locale)}</time>
+          {
+            updated && (
+              <Fragment>
+                {' · '}
+                {t('blog.updated')}{' '}
+                <time datetime={toISODate(updated)}>{formatDate(updated, locale)}</time>
+              </Fragment>
+            )
+          }
+          {' · '}
+          {readingMinutes(post.body)}
+          {' '}
+          {t('blog.minutes')}
         </p>
         <h1
-          class="hyphens-auto mt-4 max-w-[20ch] text-[clamp(36px,5.4vw,64px)] leading-[1.04] font-bold tracking-[-0.025em]"
+          class="hyphens-auto mt-4 max-w-[22ch] text-[clamp(36px,5.4vw,64px)] leading-[1.04] font-bold tracking-[-0.025em]"
         >
-          {post.data.title}
+          {title}
         </h1>
-        {post.data.subtitle && <p class="mt-4 text-xl text-muted">{post.data.subtitle}</p>}
+        {description && <p class="mt-5 max-w-2xl text-xl text-muted">{description}</p>}
+        {
+          tags.length > 0 && (
+            <ul class="mt-6 flex flex-wrap gap-x-4 gap-y-1 font-mono text-sm text-muted">
+              {tags.map((tag) => (
+                <li>{hashtag(tag)}</li>
+              ))}
+            </ul>
+          )
+        }
       </Container>
     </header>
 
     <Container class="pt-12">
-      <Prose class="max-w-prose"><Content /></Prose>
+      {
+        note && (
+          <aside class="mb-10 max-w-prose border-l-2 border-ink pl-5">
+            <p class="font-mono text-sm text-muted">{t('blog.note')}</p>
+            <p class="mt-1.5 text-base leading-relaxed">{note}</p>
+          </aside>
+        )
+      }
+      <div
+        class:list={[
+          'lg:grid lg:gap-16',
+          showContents && 'lg:grid-cols-[minmax(0,65ch)_minmax(0,1fr)]',
+        ]}
+      >
+        {
+          showContents && (
+            <nav
+              class="mb-10 border-l-2 border-rule pl-5 lg:sticky lg:top-8 lg:order-last lg:mb-0 lg:self-start"
+              aria-label={t('blog.contents')}
+            >
+              <p class="font-mono text-sm text-muted">{t('blog.contents')}</p>
+              <ol class="mt-3 space-y-1.5 text-base">
+                {contents.map((heading) => (
+                  <li>
+                    <a class="hover:underline hover:underline-offset-4" href={`#${heading.slug}`}>
+                      {heading.text}
+                    </a>
+                  </li>
+                ))}
+              </ol>
+            </nav>
+          )
+        }
+
+        <div class="max-w-prose">
+          <Prose><Content /></Prose>
+        </div>
+      </div>
+
+      {
+        neighbours.length > 0 && (
+          <nav class="mt-20 grid gap-6 border-t border-rule pt-8 sm:grid-cols-2">
+            {neighbours.map(({ label, post: neighbour }) => (
+              <a class="group block" href={localePath(locale, `/blog/${entrySlug(neighbour!.id)}`)}>
+                <span class="font-mono text-sm text-muted">{label}</span>
+                <span class="mt-1 block font-bold group-hover:underline group-hover:underline-offset-4">
+                  {neighbour!.data.title}
+                </span>
+              </a>
+            ))}
+          </nav>
+        )
+      }
+
+      <a
+        class="mt-12 inline-block font-bold underline decoration-1 underline-offset-4 hover:decoration-2"
+        href={localePath(locale, '/blog')}
+      >
+        {t('blog.all')}
+      </a>
     </Container>
   </article>
+
+  <Contact locale={locale} />
 </BaseLayout>
