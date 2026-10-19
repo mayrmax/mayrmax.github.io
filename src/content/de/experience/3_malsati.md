@@ -9,13 +9,14 @@ duration:
   end: Heute
 main_technologies:
   - C# / .NET
+  - Astro
   - Angular
   - PostgreSQL
   - DDD
   - Domain Events
-  - Meilisearch
+  - Bunny CDN
 ---
 
 [malsati](https://malsati.com/) ist eine Rezeptplattform, die ich **von Grund auf** entworfen und gebaut habe — authentische Rezepte aus aller Welt, mit dem regionalen Kontext, der sonst meist verloren geht.
-Das Backend ist **C# / .NET**, modelliert mit **Domain-Driven Design** und Domain Events auf **PostgreSQL**, die Suche übernimmt **Meilisearch**.
+Das Backend ist **C# / .NET**, modelliert mit **Domain-Driven Design** und Domain Events auf **PostgreSQL** — das auch die Suche direkt übernimmt, hinter einem eigenen Caching-Layer. Das Frontend ist **Astro**, ausgeliefert über **Bunny CDN**.
 Es ist das Projekt, in dem ich eine Architekturidee ohne Gremium dazwischen bis in die Produktion bringen kann.
