@@ -18,5 +18,5 @@ main_technologies:
 ---
 
 [malsati](https://malsati.com/) is a recipe platform I designed and built **from scratch** — authentic recipes from around the world, with the regional context that usually gets lost.
-The backend is **C# / .NET** modelled with **Domain-Driven Design** and domain events on **PostgreSQL**, which also handles search directly behind a caching layer of its own. The frontend is **Astro**, served through **Bunny CDN**. Today over 10,000 people visit every day, all through organic search — on a single server.
+The backend is **C# / .NET** modelled with **Domain-Driven Design** and domain events on **PostgreSQL**, which also handles search directly behind a caching layer of its own. The frontend is **Astro**, served through **Bunny CDN**. Today it draws 250,000 visitors a month, all through organic search — on a single server.
 It is the project where I get to take an architecture idea all the way through to production without a committee in the way.
