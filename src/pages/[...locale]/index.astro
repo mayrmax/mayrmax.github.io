@@ -11,7 +11,6 @@ import { getLocalized, getLocalizedRendered, getSection } from '../../i18n/conte
 import { localeRoutes } from '../../i18n/routes';
 import { useTranslations } from '../../i18n/ui';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { isNofollow } from '../../utils/links.mjs';
 
 export const getStaticPaths = (() => localeRoutes()) satisfies GetStaticPaths;
 
@@ -89,7 +88,6 @@ const featured = references.filter((reference) => reference.data.featured);
                   <a
                     class="mt-1.5 inline-block font-mono text-sm underline underline-offset-4 hover:decoration-2"
                     href={data.url}
-                    rel={isNofollow(data.url) ? 'nofollow' : undefined}
                   >
                     {new URL(data.url).hostname.replace(/^www\./, '')}
                   </a>

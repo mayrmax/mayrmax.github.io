@@ -10,7 +10,6 @@ import { getLocalizedRendered, getSection } from '../../i18n/content';
 import { localeRoutes } from '../../i18n/routes';
 import { useTranslations } from '../../i18n/ui';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { isNofollow } from '../../utils/links.mjs';
 
 export const getStaticPaths = (() => localeRoutes()) satisfies GetStaticPaths;
 
@@ -52,7 +51,6 @@ const yearOf = (value: string) => value.match(/\d{4}/)?.[0] ?? value;
                 <a
                   class="mt-1.5 inline-block font-mono text-sm underline underline-offset-4 hover:decoration-2"
                   href={data.url}
-                  rel={isNofollow(data.url) ? 'nofollow' : undefined}
                 >
                   {hostname(data.url)}
                 </a>
@@ -77,11 +75,7 @@ const yearOf = (value: string) => value.match(/\d{4}/)?.[0] ?? value;
             <li class="grid gap-1 border-b border-rule py-4 md:grid-cols-[11rem_1fr_6rem] md:gap-7">
               <span class="font-bold">
                 {data.url ? (
-                  <a
-                    class="underline underline-offset-4 hover:decoration-2"
-                    href={data.url}
-                    rel={isNofollow(data.url) ? 'nofollow' : undefined}
-                  >
+                  <a class="underline underline-offset-4 hover:decoration-2" href={data.url}>
                     {data.name}
                   </a>
                 ) : (

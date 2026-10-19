@@ -71,7 +71,7 @@ src/
 ├── pages/            routes; `[...locale]/` emits both languages from one file
 ├── scripts/          client-side JS (menu toggle, opening linked <details>)
 ├── styles/           global.css — only the Tailwind theme tokens
-└── utils/            date formatting, nofollow rule
+└── utils/            date formatting
 public/               copied verbatim to the site root (images)
 ```
 
@@ -92,12 +92,6 @@ ordered by `date`, newest first.
 
 A reference with `featured` ticked gets the full treatment on /work and appears
 on the home page; the rest form the compact list underneath.
-
-### Links to former employers
-
-Links to the hosts in `src/utils/links.mjs` (Tributech, eurofunk) carry
-`rel="nofollow"` — in templates via `isNofollow`, and inside markdown via
-`Prose.astro`, which every rendered paragraph passes through.
 
 ### Retired routes
 
