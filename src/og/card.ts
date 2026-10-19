@@ -71,7 +71,6 @@ function loadShared() {
 const SEGMENTS: Array<[string, string]> = [
   ['max', '#2c8bd2'],
   ['~', '#ff6059'],
-  ['innsbruck', '#f7c143'],
   ['$', '#859916'],
 ];
 

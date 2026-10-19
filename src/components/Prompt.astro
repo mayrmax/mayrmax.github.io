@@ -1,8 +1,9 @@
 ---
 /**
- * The powerline prompt: Max's brand, promoted from the old navbar to the page's
- * headline. Flags in the command are muted so the line reads as the services
- * list in miniature.
+ * The powerline prompt above the headline. Flags in the command are muted so
+ * the line reads as the services list in miniature. Each flag stays on a line
+ * with its value, so a narrow screen breaks the command between options, never
+ * inside one, and a wrapped line starts flush left like a terminal's would.
  */
 interface Props {
   command: string;
@@ -14,39 +15,56 @@ const { command } = Astro.props;
 const segments = [
   { text: 'max', color: 'bg-pl-blue after:border-l-pl-blue' },
   { text: '~', color: 'bg-pl-red after:border-l-pl-red' },
-  { text: 'innsbruck', color: 'bg-pl-yellow after:border-l-pl-yellow' },
   { text: '$', color: 'bg-pl-green after:border-l-pl-green' },
 ];
 
-const tokens = command.split(' ').map((token) => ({ token, flag: token.startsWith('--') }));
+// "build --ai llm,rag" becomes [["build"], ["--ai", "llm,rag"]].
+const groups: string[][] = [];
+for (const token of command.split(' ')) {
+  const last = groups.at(-1);
+  if (last && last[0].startsWith('--') && last.length === 1 && !token.startsWith('--')) {
+    last.push(token);
+  } else {
+    groups.push([token]);
+  }
+}
 ---
 
-<p
-  class="flex flex-wrap items-center gap-y-3.5 font-mono text-[clamp(18px,2.6vw,30px)] font-semibold"
->
+<p class="font-mono text-[clamp(15px,1.8vw,20px)] leading-[2.1]">
+  <span class="mr-[1.4em] inline-flex align-middle font-semibold">
+    {
+      segments.map((segment, index) => (
+        <span
+          class:list={[
+            "relative inline-flex h-[1.75em] items-center pr-[0.5em] text-black after:absolute after:top-0 after:-right-[0.875em] after:z-10 after:border-y-[0.875em] after:border-l-[0.875em] after:border-y-transparent after:content-['']",
+            index === 0 ? 'pl-[0.6em]' : 'pl-[1.1em]',
+            segment.color,
+          ]}
+        >
+          {segment.text}
+        </span>
+      ))
+    }
+  </span>
   {
-    segments.map((segment, index) => (
-      <span
-        class:list={[
-          "relative inline-flex h-[1.7em] items-center pr-[0.55em] text-black after:absolute after:top-0 after:-right-[0.85em] after:z-10 after:border-y-[0.85em] after:border-l-[0.85em] after:border-y-transparent after:content-['']",
-          index === 0 ? 'pl-[0.5em]' : 'pl-[0.95em]',
-          segment.color,
-        ]}
-      >
-        {segment.text}
-      </span>
+    groups.map((group, index) => (
+      <Fragment>
+        {index > 0 && ' '}
+        <span class="whitespace-nowrap">
+          {group.map((token, position) => (
+            <Fragment>
+              {position > 0 && ' '}
+              <span class:list={[token.startsWith('--') && 'text-muted']}>{token}</span>
+            </Fragment>
+          ))}
+          {index === groups.length - 1 && (
+            <span
+              class="ml-[0.2em] inline-block h-[1.15em] w-[0.6em] animate-blink bg-black align-[-0.2em] motion-reduce:animate-none"
+              aria-hidden="true"
+            />
+          )}
+        </span>
+      </Fragment>
     ))
   }
-  <span class="ml-[1.3em] font-normal max-sm:ml-0 max-sm:basis-full max-sm:text-[15px]">
-    {
-      tokens.map(({ token, flag }, index) => (
-        <Fragment>
-          {index > 0 && ' '}
-          <span class:list={[flag && 'text-muted']}>{token}</span>
-        </Fragment>
-      ))
-    }<span
-      class="ml-[0.15em] inline-block h-[1.15em] w-[0.6em] animate-blink bg-black align-[-0.2em] motion-reduce:animate-none"
-      aria-hidden="true"></span>
-  </span>
 </p>

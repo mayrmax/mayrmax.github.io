@@ -13,11 +13,10 @@
   --color-muted: #666666;
   --color-rule: #e4e4e4;
 
-  /* The four powerline colours of the prompt. They are the brand, so they
+  /* The three powerline colours of the prompt. They are the brand, so they
      appear in the prompt and nowhere else. */
   --color-pl-blue: #2c8bd2;
   --color-pl-red: #ff6059;
-  --color-pl-yellow: #f7c143;
   --color-pl-green: #859916;
 
   --animate-blink: blink 1.1s steps(1) infinite;

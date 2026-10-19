@@ -81,7 +81,7 @@ public/               copied verbatim to the site root (images)
 
 Everything is Tailwind utility classes in the components. `global.css` only
 declares the design tokens — the two typefaces, black, grey, the rule colour,
-the four powerline colours of the prompt, and the cursor's blink animation.
+the three powerline colours of the prompt, and the cursor's blink animation.
 Rendered markdown cannot carry classes, so `Prose.astro` styles it from the
 wrapper with arbitrary variants (`[&_p+p]:mt-4`).
 
