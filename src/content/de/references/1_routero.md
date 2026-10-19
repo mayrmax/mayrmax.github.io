@@ -10,6 +10,7 @@ technologies:
   - C# / .NET
   - Angular
   - PostgreSQL
+  - GIS
 ---
 
 Eine Plattform, die aus der **Streckenkompatibilitätsprüfung** etwas macht, das Betreiber tatsächlich durchführen können: RCC durchführen, sauber dokumentieren und freigeben — statt sie durch Tabellen und E-Mail-Ketten zu schleppen. Entwickelt und betreut bei [SweetPopcorn.Studio](https://sweetpopcorn.studio/).

@@ -14,11 +14,13 @@ groups:
       - RAG
       - PostgreSQL
       - DDD & Domain Events
+      - GIS & geodata
       - Azure
       - Docker
   - level: Other
     items:
       - Microsoft Orleans
+      - Marten
       - Meilisearch
       - IoT & DTDL
       - Node.JS
