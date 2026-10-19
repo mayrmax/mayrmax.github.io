@@ -36,6 +36,8 @@ jobs:
         run: npm run check
 
       - name: Build
+        env:
+          SITE_URL: https://mayrmax.github.io
         run: npm run build
 
       - name: Upload artifact

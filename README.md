@@ -81,6 +81,48 @@ when an entry's title changes. Blog posts are ordered by `date`, newest first.
 
 ## Deployment
 
+The site is a pile of static files, so anything that can serve them works. Two
+paths are set up.
+
+### The site URL is a build-time setting
+
+Astro bakes the canonical links, the `hreflang` alternates, `sitemap-index.xml`,
+`robots.txt` and both RSS feeds into the output. The public URL therefore has to
+be known when the site is built — it cannot be swapped at runtime. Both paths
+below pass it as `SITE_URL`; it defaults to `https://mayrmax.github.io`.
+
+### GitHub Pages
+
 Pushing to `master` runs `.github/workflows/deploy.yml`, which builds the site
-and publishes `dist/` to GitHub Pages. This requires **Settings → Pages → Build
-and deployment → Source** to be set to **GitHub Actions**.
+and publishes `dist/`. This requires **Settings → Pages → Build and deployment →
+Source** to be set to **GitHub Actions**.
+
+### Coolify
+
+`Dockerfile` builds the site and serves it with nginx. In Coolify:
+
+1. New resource → **Public/Private Repository** → this repo, branch `master`.
+2. **Build Pack: Dockerfile** (not Nixpacks, not Static — see below).
+3. Set the domain under **Domains**, e.g. `https://mayr.dev`.
+4. Add an environment variable `SITE_URL` with that same URL and tick
+   **Build Variable**, so it reaches the build rather than just the container.
+5. Deploy. The exposed port is 80 and the image has a healthcheck, so Coolify
+   can gate the rollover on nginx actually answering.
+
+Changing the domain means redeploying, not just editing the variable, because
+of the build-time baking described above.
+
+**Why not Coolify's Static build pack:** `astro.config.mjs` sets
+`build.format: 'file'`, so the page at `/about` is `about.html` on disk. A
+server that only tries `$uri` and `$uri/index.html` returns 404 for every page
+except the home page. `nginx.conf` adds the `$uri.html` step that makes those
+URLs resolve, and points `error_page 404` at the site's own 404 page. It also
+caches `/_astro/*` (content-hashed, so immutable) forever while keeping HTML on
+`no-cache`, so a redeploy is visible on the next request.
+
+To build and run it locally the way Coolify will:
+
+```bash
+docker build --build-arg SITE_URL=http://localhost:8080 -t mayrmax-site .
+docker run --rm -p 8080:80 mayrmax-site
+```
