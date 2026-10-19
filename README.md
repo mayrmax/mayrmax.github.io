@@ -52,32 +52,57 @@ in `src/content/shared/`.
 keystatic.config.ts   CMS schema — collections and singletons, per language
 astro.config.mjs      i18n routing, self-hosted fonts, Tailwind, dev-only CMS
 src/
-├── components/       shared markup (navigation, footer, icons, small helpers)
+├── components/       Tailwind-only building blocks: Prompt, PageHeader, Row, Prose, …
 ├── content/
 │   ├── en/           English content
-│   │   ├── blog/         posts        → /blog/<filename>
-│   │   ├── education/    about page   → ordered by the `order` field
+│   │   ├── blog/         posts                     → /blog/<filename>
+│   │   ├── services/     what can be hired         → /services, home
+│   │   ├── references/   products and client work  → /work, home (featured only)
+│   │   ├── projects/     university projects       → /work, collapsed archive
 │   │   ├── experience/   about page
-│   │   ├── projects/     /projects
-│   │   ├── publications/ /publications
-│   │   └── sections/     editable copy for the home and about pages
+│   │   ├── education/    about page
+│   │   ├── publications/ theses, about page
+│   │   └── sections/     editable copy for the home, about and services pages
 │   ├── de/           German content, same shape
-│   └── shared/       language-independent documents (Impressum)
+│   └── shared/       language-independent documents (Impressum, Datenschutz)
 ├── content.config.ts collection schemas — frontmatter is validated at build time
 ├── i18n/             locales, URL helpers, UI strings, content accessors
 ├── layouts/          BaseLayout — <head>, navigation, footer
 ├── pages/            routes; `[...locale]/` emits both languages from one file
-├── scripts/          client-side JS (navbar toggle, typewriter)
-├── styles/           global.css — the Tailwind entry point and theme tokens
-└── utils/            date formatting
-public/               copied verbatim to the site root (images, robots.txt)
+├── scripts/          client-side JS (menu toggle, opening linked <details>)
+├── styles/           global.css — only the Tailwind theme tokens
+└── utils/            date formatting, nofollow rule
+public/               copied verbatim to the site root (images)
 ```
 
-### Ordering
+### Styling
 
-`education`, `experience`, `projects` and `publications` are sorted by an
-explicit `order` field rather than by filename, because Keystatic renames files
-when an entry's title changes. Blog posts are ordered by `date`, newest first.
+Everything is Tailwind utility classes in the components. `global.css` only
+declares the design tokens — the two typefaces, black, grey, the rule colour,
+the four powerline colours of the prompt, and the cursor's blink animation.
+Rendered markdown cannot carry classes, so `Prose.astro` styles it from the
+wrapper with arbitrary variants (`[&_p+p]:mt-4`).
+
+### Ordering and featuring
+
+`references`, `services`, `experience`, `education`, `projects` and
+`publications` are sorted by an explicit `order` field rather than by filename,
+because Keystatic renames files when an entry's title changes. Blog posts are
+ordered by `date`, newest first.
+
+A reference with `featured` ticked gets the full treatment on /work and appears
+on the home page; the rest form the compact list underneath.
+
+### Links to former employers
+
+Links to the hosts in `src/utils/links.mjs` (Tributech, eurofunk) carry
+`rel="nofollow"` — in templates via `isNofollow`, and inside markdown via
+`Prose.astro`, which every rendered paragraph passes through.
+
+### Retired routes
+
+`/projects` and `/publications` were folded into `/work` and `/about`. nginx
+301s the old URLs, and the GitHub Pages stubs point straight at the new ones.
 
 ## Deployment
 

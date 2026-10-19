@@ -1,4 +1,5 @@
 ---
+import Container from './Container.astro';
 import { localePath, type Locale } from '../i18n/config';
 import { useTranslations } from '../i18n/ui';
 
@@ -10,18 +11,34 @@ const { locale } = Astro.props;
 const t = useTranslations(locale);
 ---
 
-<footer class="bg-surface-footer px-6 pt-12 pb-24 text-center">
-  <p>
-    <strong>{t('footer.madeWith')}</strong>
-    {t('footer.by')}
-    <a class="link" href={localePath(locale, '/about')}>Max Mayr</a>. {t('footer.sourceLicense')}
-    <a class="link" href="http://opensource.org/licenses/mit-license.php">MIT</a>. {
-      t('footer.contentLicense')
-    }
-    <a class="link" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
-  </p>
-  <p class="mt-4 flex justify-center gap-4">
-    <a class="link" href={localePath(locale, '/impressum')}>{t('footer.impressum')}</a>
-    <a class="link" href={localePath(locale, '/datenschutz')}>{t('footer.datenschutz')}</a>
-  </p>
+<footer class="mt-24 border-t border-rule text-[15px] text-muted">
+  <Container class="flex flex-wrap justify-between gap-x-8 gap-y-3 pt-6.5 pb-12">
+    <span class="flex flex-wrap gap-x-5 gap-y-1">
+      <a
+        class="underline-offset-4 hover:text-ink hover:underline"
+        href={localePath(locale, '/impressum')}
+      >
+        {t('footer.impressum')}
+      </a>
+      <a
+        class="underline-offset-4 hover:text-ink hover:underline"
+        href={localePath(locale, '/datenschutz')}
+      >
+        {t('footer.datenschutz')}
+      </a>
+      <span>
+        {t('footer.code')}
+        <a
+          class="underline underline-offset-4 hover:text-ink"
+          href="https://opensource.org/licenses/MIT">MIT</a
+        >,
+        {t('footer.content')}
+        <a
+          class="underline underline-offset-4 hover:text-ink"
+          href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a
+        >
+      </span>
+    </span>
+    <span class="font-mono">{t('footer.hosting')}</span>
+  </Container>
 </footer>

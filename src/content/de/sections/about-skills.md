@@ -1,5 +1,5 @@
 ---
-heading: TECHNISCHE FÄHIGKEITEN
+heading: Technische Fähigkeiten
 groups:
   - level: Experte
     items:

@@ -1,0 +1,52 @@
+---
+/**
+ * The powerline prompt: Max's brand, promoted from the old navbar to the page's
+ * headline. Flags in the command are muted so the line reads as the services
+ * list in miniature.
+ */
+interface Props {
+  command: string;
+}
+
+const { command } = Astro.props;
+
+// Literal class strings, so Tailwind can see every colour it has to generate.
+const segments = [
+  { text: 'max', color: 'bg-pl-blue after:border-l-pl-blue' },
+  { text: '~', color: 'bg-pl-red after:border-l-pl-red' },
+  { text: 'innsbruck', color: 'bg-pl-yellow after:border-l-pl-yellow' },
+  { text: '$', color: 'bg-pl-green after:border-l-pl-green' },
+];
+
+const tokens = command.split(' ').map((token) => ({ token, flag: token.startsWith('--') }));
+---
+
+<p
+  class="flex flex-wrap items-center gap-y-3.5 font-mono text-[clamp(18px,2.6vw,30px)] font-semibold"
+>
+  {
+    segments.map((segment, index) => (
+      <span
+        class:list={[
+          "relative inline-flex h-[1.7em] items-center pr-[0.55em] text-black after:absolute after:top-0 after:-right-[0.85em] after:z-10 after:border-y-[0.85em] after:border-l-[0.85em] after:border-y-transparent after:content-['']",
+          index === 0 ? 'pl-[0.5em]' : 'pl-[0.95em]',
+          segment.color,
+        ]}
+      >
+        {segment.text}
+      </span>
+    ))
+  }
+  <span class="ml-[1.3em] font-normal max-sm:ml-0 max-sm:basis-full max-sm:text-[15px]">
+    {
+      tokens.map(({ token, flag }, index) => (
+        <Fragment>
+          {index > 0 && ' '}
+          <span class:list={[flag && 'text-muted']}>{token}</span>
+        </Fragment>
+      ))
+    }<span
+      class="ml-[0.15em] inline-block h-[1.15em] w-[0.6em] animate-blink bg-black align-[-0.2em] motion-reduce:animate-none"
+      aria-hidden="true"></span>
+  </span>
+</p>

@@ -1,5 +1,6 @@
 ---
 order: 3
+flag: "--ai"
 title: AI & Automation
 items:
   - LLM integration

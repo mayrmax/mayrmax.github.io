@@ -1,4 +1,5 @@
 ---
+import Container from './Container.astro';
 import Icon from './Icon.astro';
 import { localeName, locales, localePath, type Locale } from '../i18n/config';
 import { navigation, useTranslations } from '../i18n/ui';
@@ -12,103 +13,60 @@ interface Props {
 const { locale, path } = Astro.props;
 const t = useTranslations(locale);
 
-// The full prompt is wider than a phone, so the two middle segments drop out
-// on narrow screens rather than pushing the page into a horizontal scroll.
-const promptSegments = [
-  { text: 'root@host', color: 'var(--color-term-blue)', compact: true },
-  { text: '~', color: 'var(--color-term-red)', compact: false },
-  { text: 'web/static', color: 'var(--color-term-yellow)', compact: false },
-  { text: '$', color: 'var(--color-term-green)', compact: true },
-];
+const isCurrent = (itemPath: string) => path === itemPath || path.startsWith(`${itemPath}/`);
 ---
 
-<nav
-  class="relative flex min-h-[3.25rem] items-stretch overflow-x-hidden"
-  aria-label="main navigation"
->
-  <div class="flex flex-1 items-stretch justify-between">
-    <a
-      class="typewriter flex items-center px-3 font-mono text-black"
-      href={localePath(locale, '/')}
-    >
-      <span class="mr-[5px] inline-flex text-[0.85em]" aria-hidden="true">
-        {
-          promptSegments.map((segment) => (
-            <i
-              class:list={['term-segment', !segment.compact && 'hidden sm:inline']}
-              style={`--segment: ${segment.color}`}
-            >
-              {segment.text}
-            </i>
-          ))
-        }
-      </span>
-      <span class="home-text ml-[10px]">maxmayr</span>
-    </a>
+<Container>
+  <nav class="relative flex items-center justify-between py-5.5" aria-label={t('nav.label')}>
+    <a class="font-mono text-base font-semibold" href={localePath(locale, '/')}>max mayr</a>
 
     <button
       type="button"
-      class="navbar-burger flex h-[3.25rem] w-[3.25rem] cursor-pointer items-center justify-center md:hidden"
+      class="navbar-burger -mr-2 flex size-11 cursor-pointer items-center justify-center md:hidden"
       aria-label={t('nav.menu')}
       aria-expanded="false"
       aria-controls="navbar-menu"
     >
       <Icon name="menu" size={24} />
     </button>
-  </div>
 
-  <div
-    id="navbar-menu"
-    class="navbar-menu absolute top-full right-0 left-0 z-20 hidden bg-white py-2 shadow-md md:static md:flex md:items-stretch md:bg-transparent md:py-0 md:shadow-none"
-  >
-    <div class="md:flex md:items-stretch">
-      {
-        navigation.map((item) => {
-          const href = localePath(locale, item.path);
-          const isActive = path === item.path;
-          return (
-            <a
-              href={href}
-              aria-current={isActive ? 'page' : undefined}
-              class:list={[
-                'flex items-center px-3 py-2 font-mono text-black transition-colors hover:bg-gray-300',
-                isActive &&
-                  'border-l-2 border-gray-300 shadow-[inset_6px_0_0_0_var(--color-gray-300)] md:border-b-2 md:border-l-0 md:shadow-[inset_0_-4px_0_var(--color-gray-300)]',
-              ]}
-            >
-              {t(item.key)}
-            </a>
-          );
-        })
-      }
-
-      <div class="flex items-center gap-2 px-3 py-2 font-mono" aria-label={t('nav.language')}>
-        <Icon name="languages" size={16} class="text-ink-faint" />
+    <div
+      id="navbar-menu"
+      class="navbar-menu absolute top-full right-0 left-0 z-20 hidden border-y border-rule bg-white py-2 md:static md:flex md:border-0 md:bg-transparent md:py-0"
+    >
+      <ul class="md:flex md:items-center md:gap-6.5">
         {
-          locales.map((candidate, index) => (
-            <Fragment>
-              {index > 0 && (
-                <span class="text-ink-faint" aria-hidden="true">
-                  /
-                </span>
-              )}
-              {candidate === locale ? (
-                <span class="font-bold text-black" aria-current="true">
-                  {localeName[candidate]}
-                </span>
-              ) : (
-                <a
-                  href={localePath(candidate, path)}
-                  hreflang={candidate}
-                  class="text-ink-faint transition-colors hover:text-black"
-                >
-                  {localeName[candidate]}
-                </a>
-              )}
-            </Fragment>
+          navigation.map((item) => (
+            <li>
+              <a
+                href={localePath(locale, item.path)}
+                aria-current={isCurrent(item.path) ? 'page' : undefined}
+                class="block py-2.5 decoration-2 underline-offset-[6px] hover:underline aria-[current=page]:underline md:py-0"
+              >
+                {t(item.key)}
+              </a>
+            </li>
           ))
         }
-      </div>
+        <li class="py-2.5 text-muted md:py-0" aria-label={t('nav.language')}>
+          {
+            locales.map((candidate, index) => (
+              <Fragment>
+                {index > 0 && ' / '}
+                {candidate === locale ? (
+                  <span class="text-ink" aria-current="true">
+                    {localeName[candidate]}
+                  </span>
+                ) : (
+                  <a class="hover:text-ink" href={localePath(candidate, path)} hreflang={candidate}>
+                    {localeName[candidate]}
+                  </a>
+                )}
+              </Fragment>
+            ))
+          }
+        </li>
+      </ul>
     </div>
-  </div>
-</nav>
+  </nav>
+</Container>

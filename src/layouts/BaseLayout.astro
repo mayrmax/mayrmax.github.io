@@ -115,11 +115,10 @@ const socialImage = new URL('/assets/images/og-card.webp', Astro.site).href;
       href={localePath(locale, '/feed.xml')}
     />
 
-    <Font cssVariable="--font-display" preload />
-    <Font cssVariable="--font-body" preload />
-    <Font cssVariable="--font-mono" />
+    <Font cssVariable="--font-hanken" preload />
+    <Font cssVariable="--font-jetbrains" preload />
   </head>
-  <body>
+  <body class="bg-white font-sans wrap-break-word text-lg leading-[1.55] text-ink antialiased">
     {
       !noindex && (
         <StructuredData locale={locale} page={schema} article={article} services={services} />

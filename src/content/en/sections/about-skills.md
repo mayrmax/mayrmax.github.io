@@ -1,5 +1,5 @@
 ---
-heading: TECHNICAL SKILLS
+heading: Technical skills
 groups:
   - level: Expert
     items:

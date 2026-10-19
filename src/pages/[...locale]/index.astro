@@ -1,17 +1,30 @@
 ---
 import type { GetStaticPaths } from 'astro';
 
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getSection } from '../../i18n/content';
+import Container from '../../components/Container.astro';
+import Prompt from '../../components/Prompt.astro';
+import Prose from '../../components/Prose.astro';
+import Row from '../../components/Row.astro';
+import SectionTitle from '../../components/SectionTitle.astro';
 import { localePath } from '../../i18n/config';
+import { getLocalized, getLocalizedRendered, getSection } from '../../i18n/content';
 import { localeRoutes } from '../../i18n/routes';
 import { useTranslations } from '../../i18n/ui';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { isNofollow } from '../../utils/links.mjs';
 
 export const getStaticPaths = (() => localeRoutes()) satisfies GetStaticPaths;
 
 const { locale } = Astro.props;
 const t = useTranslations(locale);
-const home = await getSection('home', locale);
+
+const [home, intros, services, references] = await Promise.all([
+  getSection('home', locale),
+  getSection('page-intros', locale),
+  getLocalizedRendered('services', locale),
+  getLocalized('references', locale),
+]);
+const featured = references.filter((reference) => reference.data.featured);
 ---
 
 <BaseLayout
@@ -20,32 +33,80 @@ const home = await getSection('home', locale);
   title={home.seoTitle ?? t('title.home')}
   description={t('meta.home')}
 >
-  <section class="flex min-h-[calc(100vh-3.25rem)] flex-col justify-center px-6 py-12">
-    <div>
-      {/* A lead-in, not a heading — an h2 here sat above the page's only h1. */}
-      <p class="mb-7 ml-1 font-body text-[26px] tracking-[-2px] text-ink-faint">
-        {home.greeting}
-      </p>
+  <section class="border-b border-rule">
+    <Container class="pt-14 pb-16 sm:pt-24 sm:pb-26">
+      {home.command && <Prompt command={home.command} />}
       <h1
-        class="mt-1 mb-12 font-mono text-[64px] leading-none tracking-[-4px] sm:text-[100px] sm:tracking-[-7px]"
+        class="hyphens-auto mt-12 max-w-[18ch] text-[clamp(40px,6vw,76px)] leading-[1.02] font-bold tracking-[-0.025em] sm:mt-14"
       >
-        <a class="text-black" href={localePath(locale, '/about')}>{home.name}</a>
+        {home.headline}
       </h1>
-      <div
-        class="prose-content max-w-4xl font-body text-2xl tracking-[2px] text-ink-faint sm:text-[34px]"
-      >
-        <home.Content />
-      </div>
+      <Prose class="mt-5.5 max-w-xl text-xl text-muted"><home.Content /></Prose>
       {
         home.ctaLabel && (
           <a
-            class="mt-12 inline-block border-2 border-black px-6 py-3 font-mono text-lg text-black transition-colors hover:bg-black hover:text-white"
+            class="mt-8.5 inline-block bg-black px-5.5 py-3.5 font-bold text-white hover:bg-neutral-800 focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-pl-blue"
             href={localePath(locale, '/services')}
           >
-            {home.ctaLabel} →
+            {home.ctaLabel}
           </a>
         )
       }
-    </div>
+    </Container>
+  </section>
+
+  <section>
+    <Container class="pt-22">
+      <SectionTitle>{intros.servicesHeading}</SectionTitle>
+      <div class="border-t border-rule">
+        {
+          services.map(({ data, Content }) => (
+            <Row>
+              <code slot="aside" class="font-mono text-[15px] text-muted md:pt-1.5">
+                {data.flag}
+              </code>
+              <h3 class="text-[22px] font-bold tracking-[-0.01em]">{data.title}</h3>
+              <Prose class="mt-1.5 max-w-2xl">
+                <Content />
+              </Prose>
+            </Row>
+          ))
+        }
+      </div>
+    </Container>
+  </section>
+
+  <section>
+    <Container class="pt-22">
+      <SectionTitle>{intros.workHeading}</SectionTitle>
+      <div class="border-t border-rule">
+        {
+          featured.map(({ data }) => (
+            <Row>
+              <Fragment slot="aside">
+                <h3 class="text-[26px] leading-[1.1] font-bold tracking-[-0.015em]">{data.name}</h3>
+                {data.url && (
+                  <a
+                    class="mt-1.5 inline-block font-mono text-sm underline underline-offset-4 hover:decoration-2"
+                    href={data.url}
+                    rel={isNofollow(data.url) ? 'nofollow' : undefined}
+                  >
+                    {new URL(data.url).hostname.replace(/^www\./, '')}
+                  </a>
+                )}
+              </Fragment>
+              <p class="max-w-2xl">{data.role}</p>
+              <p class="mt-2 text-base text-muted">{data.technologies.join(', ')}</p>
+            </Row>
+          ))
+        }
+      </div>
+      <a
+        class="mt-7 inline-block font-bold underline decoration-1 underline-offset-4 hover:decoration-2"
+        href={localePath(locale, '/work')}
+      >
+        {t('work.all')}
+      </a>
+    </Container>
   </section>
 </BaseLayout>

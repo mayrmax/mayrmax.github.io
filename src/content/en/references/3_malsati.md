@@ -1,7 +1,7 @@
 ---
 order: 3
 featured: true
-name: Malsati
+name: malsati
 url: https://malsati.com/
 role: Recipe platform, built from scratch
 duration:

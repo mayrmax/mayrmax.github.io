@@ -1,26 +1,38 @@
 ---
+import Container from '../components/Container.astro';
+import Prompt from '../components/Prompt.astro';
+import Prose from '../components/Prose.astro';
 import { getSection } from '../i18n/content';
-import { defaultLocale, localePath, locales, localeName } from '../i18n/config';
+import { defaultLocale, localeName, localePath, locales } from '../i18n/config';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-// GitHub Pages only serves the 404 page at the site root, so it is English with
-// a link across to the German home page.
+// GitHub Pages and nginx both serve this one file for every missing path, so
+// it is English with a way across to the German home page.
 const intros = await getSection('page-intros', defaultLocale);
 ---
 
 <BaseLayout locale={defaultLocale} path="/404" title="404 — Page not found" noindex>
-  <div class="mx-auto max-w-2xl px-6 py-12 text-center">
-    <h1 class="my-8 text-6xl leading-none tracking-tight">{intros.notFoundHeading}</h1>
-    <p><strong>{intros.notFoundSubtitle}</strong></p>
-    <div class="prose-content mt-2"><intros.Content /></div>
-    <p class="mt-8 flex justify-center gap-3 font-mono">
+  <Container class="pt-14 pb-10 sm:pt-24">
+    <Prompt command="cd this-page" />
+    <p class="mt-6 font-mono text-muted">No such file or directory</p>
+    <h1
+      class="hyphens-auto mt-12 text-[clamp(40px,6vw,72px)] leading-[1.02] font-bold tracking-[-0.025em]"
+    >
+      {intros.notFoundSubtitle}
+    </h1>
+    <Prose class="mt-4 max-w-xl text-xl text-muted"><intros.Content /></Prose>
+    <p class="mt-8 flex gap-6 font-mono">
       {
         locales.map((locale) => (
-          <a class="link" href={localePath(locale, '/')} hreflang={locale}>
+          <a
+            class="underline underline-offset-4 hover:decoration-2"
+            href={localePath(locale, '/')}
+            hreflang={locale}
+          >
             {localeName[locale]}
           </a>
         ))
       }
     </p>
-  </div>
+  </Container>
 </BaseLayout>

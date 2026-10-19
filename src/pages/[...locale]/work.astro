@@ -1,0 +1,149 @@
+---
+import type { GetStaticPaths } from 'astro';
+
+import Container from '../../components/Container.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Prose from '../../components/Prose.astro';
+import Row from '../../components/Row.astro';
+import SectionTitle from '../../components/SectionTitle.astro';
+import { getLocalizedRendered, getSection } from '../../i18n/content';
+import { localeRoutes } from '../../i18n/routes';
+import { useTranslations } from '../../i18n/ui';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { isNofollow } from '../../utils/links.mjs';
+
+export const getStaticPaths = (() => localeRoutes()) satisfies GetStaticPaths;
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const [intros, references, studies] = await Promise.all([
+  getSection('page-intros', locale),
+  getLocalizedRendered('references', locale),
+  getLocalizedRendered('projects', locale),
+]);
+
+const featured = references.filter((reference) => reference.data.featured);
+const more = references.filter((reference) => !reference.data.featured);
+
+const years = ({ start, end }: { start: string; end: string }) =>
+  start === end ? start : `${start}–${end}`;
+const hostname = (url: string) => new URL(url).hostname.replace(/^www\./, '');
+// University projects carry full month names; the archive only needs the years.
+const yearOf = (value: string) => value.match(/\d{4}/)?.[0] ?? value;
+---
+
+<BaseLayout
+  locale={locale}
+  path="/work"
+  title={intros.workSeoTitle ?? intros.workHeading ?? ''}
+  description={intros.workSubtitle}
+>
+  <PageHeader heading={intros.workHeading ?? ''} subtitle={intros.workSubtitle} />
+
+  <Container class="pt-16">
+    <div class="border-t border-rule">
+      {
+        featured.map(({ data, Content }) => (
+          <Row>
+            <Fragment slot="aside">
+              <h2 class="text-[26px] leading-[1.1] font-bold tracking-[-0.015em]">{data.name}</h2>
+              {data.url && (
+                <a
+                  class="mt-1.5 inline-block font-mono text-sm underline underline-offset-4 hover:decoration-2"
+                  href={data.url}
+                  rel={isNofollow(data.url) ? 'nofollow' : undefined}
+                >
+                  {hostname(data.url)}
+                </a>
+              )}
+              <p class="mt-1 font-mono text-sm text-muted">{years(data.duration)}</p>
+            </Fragment>
+            <p class="max-w-2xl font-medium">{data.role}</p>
+            <Prose class="mt-2 max-w-2xl">
+              <Content />
+            </Prose>
+            <p class="mt-3 text-base text-muted">{data.technologies.join(', ')}</p>
+          </Row>
+        ))
+      }
+    </div>
+
+    <section class="pt-20">
+      <SectionTitle>{t('work.more')}</SectionTitle>
+      <ul class="border-t border-rule">
+        {
+          more.map(({ data }) => (
+            <li class="grid gap-1 border-b border-rule py-4 md:grid-cols-[11rem_1fr_6rem] md:gap-7">
+              <span class="font-bold">
+                {data.url ? (
+                  <a
+                    class="underline underline-offset-4 hover:decoration-2"
+                    href={data.url}
+                    rel={isNofollow(data.url) ? 'nofollow' : undefined}
+                  >
+                    {data.name}
+                  </a>
+                ) : (
+                  data.name
+                )}
+              </span>
+              <span>
+                {data.role}
+                {data.technologies.length > 0 && (
+                  <span class="block text-base text-muted">{data.technologies.join(', ')}</span>
+                )}
+              </span>
+              <span class="font-mono text-sm text-muted md:text-right">{years(data.duration)}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <details class="group mt-14 border-y border-rule" id="studies">
+      <summary
+        class="flex cursor-pointer list-none items-baseline gap-2 py-4.5 font-bold [&::-webkit-details-marker]:hidden"
+      >
+        <span class="w-6 font-mono text-muted group-open:hidden" aria-hidden="true">+</span>
+        <span class="hidden w-6 font-mono text-muted group-open:inline" aria-hidden="true">−</span>
+        {t('work.studies')}
+        <span class="font-normal text-muted">({studies.length})</span>
+      </summary>
+      <ul>
+        {
+          studies.map(({ data, Content }) => (
+            <li
+              id={data.anchor}
+              class="grid scroll-mt-8 gap-1 border-t border-rule py-4 md:grid-cols-[11rem_1fr_6rem] md:gap-7"
+            >
+              <span class="font-bold">
+                {data.github || data.youtube ? (
+                  <a
+                    class="underline underline-offset-4 hover:decoration-2"
+                    href={data.github ?? data.youtube}
+                  >
+                    {data.name}
+                  </a>
+                ) : (
+                  data.name
+                )}
+              </span>
+              <span>
+                <Prose class="text-base">
+                  <Content />
+                </Prose>
+                <span class="mt-1 block text-base text-muted">{data.technologies.join(', ')}</span>
+              </span>
+              <span class="font-mono text-sm text-muted md:text-right">
+                {yearOf(data.duration.start) === yearOf(data.duration.end)
+                  ? yearOf(data.duration.end)
+                  : `${yearOf(data.duration.start)}–${yearOf(data.duration.end)}`}
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+    </details>
+  </Container>
+</BaseLayout>

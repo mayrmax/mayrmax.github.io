@@ -75,7 +75,7 @@ function blogCollection(locale: LocaleId) {
 
 function projectsCollection(locale: LocaleId) {
   return collection({
-    label: `Projects (${locale.toUpperCase()})`,
+    label: `University projects (${locale.toUpperCase()})`,
     path: `src/content/${locale}/projects/*`,
     slugField: 'name',
     format: { contentField: 'content' },
@@ -203,6 +203,10 @@ function servicesCollection(locale: LocaleId) {
         description: 'Lower numbers appear first on the page.',
         validation: { isRequired: true },
       }),
+      flag: fields.text({
+        label: 'Flag',
+        description: 'Shown beside the service as a command-line flag, e.g. --backend.',
+      }),
       title: fields.slug({ name: { label: 'Title' } }),
       items: technologyList('Bullet points'),
       content: markdown('Description'),
@@ -212,7 +216,7 @@ function servicesCollection(locale: LocaleId) {
 
 function referencesCollection(locale: LocaleId) {
   return collection({
-    label: `References (${locale.toUpperCase()})`,
+    label: `Work (${locale.toUpperCase()})`,
     path: `src/content/${locale}/references/*`,
     slugField: 'name',
     format: { contentField: 'content' },
@@ -246,11 +250,6 @@ function servicesPageSingleton(locale: LocaleId) {
     schema: {
       heading: fields.text({ label: 'Heading', validation: { isRequired: true } }),
       subtitle: fields.text({ label: 'Subtitle', validation: { isRequired: true } }),
-      referencesHeading: fields.text({
-        label: 'References heading',
-        validation: { isRequired: true },
-      }),
-      referencesSubtitle: fields.text({ label: 'References subtitle' }),
       partnerHeading: fields.text({ label: 'Partner heading' }),
       partnerName: fields.text({ label: 'Partner name' }),
       partnerUrl: fields.url({ label: 'Partner URL' }),
@@ -266,8 +265,12 @@ function homeSingleton(locale: LocaleId) {
     path: `src/content/${locale}/sections/home`,
     format: { contentField: 'content' },
     schema: {
-      greeting: fields.text({ label: 'Greeting', validation: { isRequired: true } }),
-      name: fields.text({ label: 'Name', validation: { isRequired: true } }),
+      command: fields.text({
+        label: 'Prompt command',
+        description: 'Typed after the powerline prompt. Words starting with -- are shown muted.',
+        validation: { isRequired: true },
+      }),
+      headline: fields.text({ label: 'Headline', validation: { isRequired: true } }),
       ctaLabel: fields.text({
         label: 'Button label',
         description: 'Links to the services page. Leave empty to hide the button.',
@@ -276,7 +279,7 @@ function homeSingleton(locale: LocaleId) {
         label: 'SEO title',
         description: 'Browser tab and search result title; "— Max Mayr" is appended.',
       }),
-      content: markdown('Tagline'),
+      content: markdown('Introduction'),
     },
   });
 }
@@ -291,7 +294,6 @@ function aboutBioSingleton(locale: LocaleId) {
         label: 'SEO title',
         description: 'Browser tab and search result title; "— Max Mayr" is appended.',
       }),
-      sectionHeading: fields.text({ label: 'Section heading', validation: { isRequired: true } }),
       heading: fields.text({ label: 'Heading', validation: { isRequired: true } }),
       photo: fields.text({ label: 'Photo path', validation: { isRequired: true } }),
       photoAlt: fields.text({ label: 'Photo alt text', validation: { isRequired: true } }),
@@ -357,14 +359,6 @@ function pageIntrosSingleton(locale: LocaleId) {
         label: 'Services SEO title',
         description: 'Search result title; "— Max Mayr" is appended. Falls back to the heading.',
       }),
-      projectsSeoTitle: fields.text({
-        label: 'Projects SEO title',
-        description: 'Search result title; "— Max Mayr" is appended. Falls back to the heading.',
-      }),
-      publicationsSeoTitle: fields.text({
-        label: 'Publications SEO title',
-        description: 'Search result title; "— Max Mayr" is appended. Falls back to the heading.',
-      }),
       blogSeoTitle: fields.text({
         label: 'Blog SEO title',
         description: 'Search result title; "— Max Mayr" is appended. Falls back to the heading.',
@@ -374,21 +368,14 @@ function pageIntrosSingleton(locale: LocaleId) {
         label: 'Services subtitle',
         validation: { isRequired: true },
       }),
+      workSeoTitle: fields.text({
+        label: 'Work SEO title',
+        description: 'Search result title; "— Max Mayr" is appended. Falls back to the heading.',
+      }),
+      workHeading: fields.text({ label: 'Work heading', validation: { isRequired: true } }),
+      workSubtitle: fields.text({ label: 'Work subtitle', validation: { isRequired: true } }),
       blogHeading: fields.text({ label: 'Blog heading', validation: { isRequired: true } }),
       blogSubtitle: fields.text({ label: 'Blog subtitle', validation: { isRequired: true } }),
-      projectsHeading: fields.text({ label: 'Projects heading', validation: { isRequired: true } }),
-      projectsSubtitle: fields.text({
-        label: 'Projects subtitle',
-        validation: { isRequired: true },
-      }),
-      publicationsHeading: fields.text({
-        label: 'Publications heading',
-        validation: { isRequired: true },
-      }),
-      publicationsSubtitle: fields.text({
-        label: 'Publications subtitle',
-        validation: { isRequired: true },
-      }),
       notFoundHeading: fields.text({ label: '404 heading', validation: { isRequired: true } }),
       notFoundSubtitle: fields.text({ label: '404 subtitle', validation: { isRequired: true } }),
       content: markdown('404 body'),

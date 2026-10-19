@@ -1,5 +1,6 @@
 ---
 order: 3
+flag: "--ai"
 title: KI & Automatisierung
 items:
   - LLM-Integration

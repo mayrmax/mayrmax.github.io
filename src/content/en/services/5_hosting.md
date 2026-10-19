@@ -1,5 +1,6 @@
 ---
 order: 5
+flag: "--host eu"
 title: Hosting in Europe
 items:
   - Self-hosting with Coolify

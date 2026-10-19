@@ -19,6 +19,6 @@ This opportunity allowed me to **explore technologies** that are brand-new and p
 The most noteworthy projects that I created during the time was a project to create a [microservice architecture][documentmanagement],
 a project that realizes [collaborative note-taking][collaborativenotes] and my master thesis that explores [personal data stores][selfbox].
 
-[documentmanagement]: /projects#documentmanagement
-[collaborativenotes]: /projects#collaborativenotes
-[selfbox]: /projects#selfbox
+[documentmanagement]: /work#documentmanagement
+[collaborativenotes]: /work#collaborativenotes
+[selfbox]: /work#selfbox

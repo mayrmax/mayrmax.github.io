@@ -1,6 +1,9 @@
 ---
 import type { GetStaticPaths } from 'astro';
 
+import Container from '../../components/Container.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Prose from '../../components/Prose.astro';
 import { getShared } from '../../i18n/content';
 import { localeRoutes } from '../../i18n/routes';
 import { useTranslations } from '../../i18n/ui';
@@ -10,7 +13,7 @@ export const getStaticPaths = (() => localeRoutes()) satisfies GetStaticPaths;
 
 const { locale } = Astro.props;
 const t = useTranslations(locale);
-const datenschutz = await getShared('datenschutz');
+const doc = await getShared('datenschutz');
 ---
 
 <BaseLayout
@@ -19,8 +22,8 @@ const datenschutz = await getShared('datenschutz');
   title={t('title.datenschutz')}
   description={t('meta.datenschutz')}
 >
-  <div class="px-6 py-12">
-    <h1 class="text-[2rem] leading-tight font-semibold">{datenschutz.heading}</h1>
-    <div class="prose-content mt-4 max-w-4xl"><datenschutz.Content /></div>
-  </div>
+  <PageHeader heading={doc.heading} />
+  <Container class="pt-12">
+    <Prose class="max-w-prose"><doc.Content /></Prose>
+  </Container>
 </BaseLayout>

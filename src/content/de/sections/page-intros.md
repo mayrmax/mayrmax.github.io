@@ -1,16 +1,13 @@
 ---
 servicesSeoTitle: "Fractional CTO, .NET & KI-Beratung"
-projectsSeoTitle: "Projekte: .NET, Angular & Microservices"
-publicationsSeoTitle: "Arbeiten zu Personal Data Stores & WebRTC"
 blogSeoTitle: "Blog über dezentrales Web & Linked Data"
+workSeoTitle: "Arbeit: Projekte mit .NET, Orleans, Angular & GIS"
+workHeading: Arbeit
+workSubtitle: "Produkte, die ich baue und betreibe, Kundenprojekte seit der Selbstständigkeit, und was davor war."
 servicesHeading: Leistungen
 servicesSubtitle: Architektur, Backend, Web und KI.
 blogHeading: Blog
 blogSubtitle: Notizen zu dem, was mir beim Bauen begegnet — das dezentrale Web, Linked Data und wohin sich Software entwickelt.
-projectsHeading: Projekte
-projectsSubtitle: Eine Auswahl der Projekte, die ich über die Jahre gebaut habe — von Microservice-Plattformen und Personal Data Stores bis zu Echtzeit-Kollaboration und GPU-Rendering.
-publicationsHeading: Publikationen
-publicationsSubtitle: Meine Master- und Bachelorarbeiten zu Personal Data Stores, Echtzeitkommunikation mit WebRTC und Enterprise-Entwurfsmustern für Angular.
 notFoundHeading: "404"
 notFoundSubtitle: Seite nicht gefunden :(
 ---

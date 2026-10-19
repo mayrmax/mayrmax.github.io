@@ -131,6 +131,19 @@ for (const feed of await walk(SOURCE, 'feed.xml')) {
   count += 1;
 }
 
+// Pages the redesign retired no longer exist in the build, so they get stubs
+// pointing straight at their replacements rather than a detour via the 404.
+const retired = {
+  '/projects': '/work',
+  '/de/projects': '/de/work',
+  '/publications': '/about#theses',
+  '/de/publications': '/de/about#theses',
+};
+for (const [from, to] of Object.entries(retired)) {
+  await write(`${from.slice(1)}.html`, redirectPage(to));
+  count += 1;
+}
+
 // Crawlers have to be allowed in, or they never see the canonical tags.
 await write('robots.txt', `User-agent: *\nAllow: /\n`);
 

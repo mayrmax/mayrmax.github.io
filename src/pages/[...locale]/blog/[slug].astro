@@ -2,6 +2,8 @@
 import type { GetStaticPaths } from 'astro';
 import { getCollection, render } from 'astro:content';
 
+import Container from '../../../components/Container.astro';
+import Prose from '../../../components/Prose.astro';
 import { isLocale, localeParam, localePath } from '../../../i18n/config';
 import { entrySlug } from '../../../i18n/content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
@@ -37,15 +39,23 @@ const slug = entrySlug(post.id);
     url: new URL(localePath(locale, `/blog/${slug}`), Astro.site).href,
   }}
 >
-  <section class="bg-surface px-6 py-12">
-    <p class="text-sm">
-      <time datetime={toISODate(post.data.date)}>{formatDate(post.data.date, locale)}</time>
-    </p>
-    <h1 class="text-[2rem] leading-tight font-semibold">{post.data.title}</h1>
-    <p class="mt-1 text-xl text-ink-muted">{post.data.subtitle}</p>
-  </section>
+  <article>
+    <header class="border-b border-rule">
+      <Container class="pt-14 pb-12 sm:pt-20 sm:pb-16">
+        <p class="font-mono text-sm text-muted">
+          <time datetime={toISODate(post.data.date)}>{formatDate(post.data.date, locale)}</time>
+        </p>
+        <h1
+          class="hyphens-auto mt-4 max-w-[20ch] text-[clamp(36px,5.4vw,64px)] leading-[1.04] font-bold tracking-[-0.025em]"
+        >
+          {post.data.title}
+        </h1>
+        {post.data.subtitle && <p class="mt-4 text-xl text-muted">{post.data.subtitle}</p>}
+      </Container>
+    </header>
 
-  <section class="px-6 py-12">
-    <div class="prose-content"><Content /></div>
-  </section>
+    <Container class="pt-12">
+      <Prose class="max-w-prose"><Content /></Prose>
+    </Container>
+  </article>
 </BaseLayout>

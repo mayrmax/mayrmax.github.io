@@ -16,4 +16,4 @@ duration:
 In diesem Bachelorstudium habe ich Theorie und Praxis des **Software Engineering** gelernt.
 Ich habe mit den Grundlagen begonnen und mich anschließend auf **Web Engineering** spezialisiert.
 Am besten gefallen hat mir die **thematische Breite** des Studiums, in der man herausfinden konnte, was einen wirklich interessiert.
-Eines meiner größeren Webprojekte im Studium war ein [Biodiversitätsprojekt](/de/projects#biodiversity) für die Nationalparks Austria.
+Eines meiner größeren Webprojekte im Studium war ein [Biodiversitätsprojekt](/de/work#biodiversity) für die Nationalparks Austria.

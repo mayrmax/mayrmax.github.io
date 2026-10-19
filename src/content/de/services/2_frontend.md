@@ -1,5 +1,6 @@
 ---
 order: 2
+flag: "--frontend"
 title: Web-Frontend
 items:
   - Astro für Tempo und SEO

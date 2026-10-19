@@ -1,28 +1,32 @@
 ---
 import type { GetStaticPaths } from 'astro';
 
-import BulletList from '../../components/BulletList.astro';
-import Icon from '../../components/Icon.astro';
-import Rule from '../../components/Rule.astro';
-import SectionHeading from '../../components/SectionHeading.astro';
-import SocialLinks from '../../components/SocialLinks.astro';
+import Container from '../../components/Container.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Prose from '../../components/Prose.astro';
+import Row from '../../components/Row.astro';
+import SectionTitle from '../../components/SectionTitle.astro';
 import { getLocalizedRendered, getSection } from '../../i18n/content';
 import { localeRoutes } from '../../i18n/routes';
 import { useTranslations } from '../../i18n/ui';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { isNofollow } from '../../utils/links.mjs';
 
 export const getStaticPaths = (() => localeRoutes()) satisfies GetStaticPaths;
 
 const { locale } = Astro.props;
 const t = useTranslations(locale);
 
-const [bio, interests, skills, experience, education] = await Promise.all([
+const [bio, interests, skills, experience, education, theses] = await Promise.all([
   getSection('about-bio', locale),
   getSection('about-interests', locale),
   getSection('about-skills', locale),
   getLocalizedRendered('experience', locale),
   getLocalizedRendered('education', locale),
+  getLocalizedRendered('publications', locale),
 ]);
+
+const linkText = (url: string) => url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
 ---
 
 <BaseLayout
@@ -32,103 +36,160 @@ const [bio, interests, skills, experience, education] = await Promise.all([
   description={t('meta.about')}
   schema="profile"
 >
-  <section class="bg-surface px-6 py-12">
-    <SectionHeading title={bio.sectionHeading ?? ''} as="h1" />
+  <PageHeader heading={bio.heading ?? ''} />
 
-    <div class="grid gap-6 md:grid-cols-3">
+  <Container class="pt-14">
+    <div class="grid gap-10 md:grid-cols-[1fr_18rem] md:gap-16">
       <div>
+        <Prose class="max-w-2xl text-xl"><bio.Content /></Prose>
         {
-          bio.photo && (
-            <img
-              class="mx-auto size-[300px] max-w-full rounded-full object-cover"
-              src={bio.photo}
-              alt={bio.photoAlt ?? ''}
-              width="300"
-              height="300"
-            />
+          bio.links && (
+            <ul class="mt-7 flex flex-wrap gap-x-6 gap-y-2 font-mono text-[15px]">
+              {bio.links.map((link) => (
+                <li>
+                  <a
+                    class="underline underline-offset-4 hover:decoration-2"
+                    href={link.url}
+                    rel="me"
+                  >
+                    {linkText(link.url)}
+                  </a>
+                </li>
+              ))}
+            </ul>
           )
         }
       </div>
-
-      <div>
-        <h2 class="mb-4 text-xl">{bio.heading}</h2>
-        <div class="prose-content"><bio.Content /></div>
-        {bio.links && <SocialLinks locale={locale} links={bio.links} />}
-      </div>
-
-      <div>
-        <h2 class="mb-4 text-xl">{interests.heading}</h2>
-        <div class="prose-content"><interests.Content /></div>
-      </div>
+      {
+        bio.photo && (
+          <img
+            class="aspect-square w-full max-w-72 object-cover max-md:-order-1"
+            src={bio.photo}
+            alt={bio.photoAlt ?? ''}
+            width="600"
+            height="600"
+          />
+        )
+      }
     </div>
-  </section>
 
-  <section class="px-6 py-12 text-center">
-    <SectionHeading title={skills.heading ?? ''} />
-    <div class="prose-content mx-auto text-xl text-ink-muted"><skills.Content /></div>
+    <section class="pt-20">
+      <SectionTitle>{interests.heading}</SectionTitle>
+      <Prose class="max-w-2xl"><interests.Content /></Prose>
+    </section>
 
-    {
-      (skills.groups ?? []).map((group) => (
-        <Fragment>
-          <h3 class="mt-6 text-xl">{group.level}</h3>
-          <Rule variant="sub" />
-          <BulletList items={group.items} class="justify-center pb-2" />
-        </Fragment>
-      ))
-    }
-  </section>
+    <section class="pt-20">
+      <SectionTitle>{skills.heading}</SectionTitle>
+      <Prose class="mb-8 max-w-2xl"><skills.Content /></Prose>
+      <div class="border-t border-rule">
+        {
+          (skills.groups ?? []).map((group) => (
+            <Row>
+              <span slot="aside" class="font-mono text-[15px] text-muted md:pt-0.5">
+                {group.level}
+              </span>
+              <p>{group.items.join(', ')}</p>
+            </Row>
+          ))
+        }
+      </div>
+    </section>
 
-  <section class="bg-surface px-6 py-12">
-    <SectionHeading title={t('about.experience')} />
+    <section class="pt-20">
+      <SectionTitle>{t('about.experience')}</SectionTitle>
+      <div class="border-t border-rule">
+        {
+          experience.map(({ data, Content }) => (
+            <Row>
+              <span slot="aside" class="font-mono text-sm text-muted md:pt-1">
+                {data.duration.start}
+                <br class="max-md:hidden" />
+                <span class="md:hidden"> – </span>
+                {data.duration.end}
+              </span>
+              <h3 class="text-[22px] leading-snug font-bold tracking-[-0.01em]">
+                {data.position}{' '}
+                <span class="font-normal text-muted">
+                  @
+                  {data.company.url ? (
+                    <a
+                      class="underline underline-offset-4 hover:decoration-2"
+                      href={data.company.url}
+                      rel={isNofollow(data.company.url) ? 'nofollow' : undefined}
+                    >
+                      {data.company.name}
+                    </a>
+                  ) : (
+                    data.company.name
+                  )}
+                </span>
+              </h3>
+              <Prose class="mt-2 max-w-2xl">
+                <Content />
+              </Prose>
+              <p class="mt-3 text-base text-muted">{data.main_technologies.join(', ')}</p>
+            </Row>
+          ))
+        }
+      </div>
+    </section>
 
-    {
-      experience.map(({ data, Content }) => (
-        <article class="mb-6 text-center">
-          <div class="flex flex-wrap items-center justify-center gap-x-2">
-            <h3 class="text-xl font-bold">{data.position}</h3>
-            {data.company.url ? (
-              <a class="link" href={data.company.url}>
-                @{data.company.name}
-              </a>
-            ) : (
-              <span>@{data.company.name}</span>
-            )}
-          </div>
-          <div>
-            <span>{data.duration.start}</span> - <span>{data.duration.end}</span>
-          </div>
-          <Rule variant="sub" />
-          <BulletList items={data.main_technologies} class="justify-center pb-2" />
-          <div class="prose-content">
-            <Content />
-          </div>
-        </article>
-      ))
-    }
-  </section>
+    <section class="pt-20">
+      <SectionTitle>{t('about.education')}</SectionTitle>
+      <div class="border-t border-rule">
+        {
+          education.map(({ data, Content }) => (
+            <Row>
+              <span slot="aside" class="font-mono text-sm text-muted md:pt-1">
+                {data.duration.start}–{data.duration.end}
+              </span>
+              <h3 class="text-[22px] leading-snug font-bold tracking-[-0.01em]">
+                <a
+                  class="hover:underline hover:underline-offset-4"
+                  href={data.place.url}
+                  rel={isNofollow(data.place.url) ? 'nofollow' : undefined}
+                >
+                  {data.place.name}
+                </a>
+              </h3>
+              <p class="mt-1 text-muted">{data.details.join(', ')}</p>
+              <Prose class="mt-2 max-w-2xl">
+                <Content />
+              </Prose>
+            </Row>
+          ))
+        }
+      </div>
 
-  <section class="px-6 py-12">
-    <SectionHeading title={t('about.education')} />
-
-    {
-      education.map(({ data, Content }) => (
-        <article class="mb-6 text-center">
-          <div class="flex flex-wrap items-center justify-center gap-x-2">
-            <h3 class="text-xl font-bold">{data.place.name}</h3>
-            <a class="text-ink transition-colors hover:text-accent" href={data.place.url}>
-              <Icon name="link" size={16} title={t('link.website')} />
-            </a>
-          </div>
-          <BulletList items={data.details} class="justify-center" />
-          <div>
-            <span>{data.duration.start}</span>-<span>{data.duration.end}</span>
-          </div>
-          <Rule variant="sub" />
-          <div class="prose-content">
-            <Content />
-          </div>
-        </article>
-      ))
-    }
-  </section>
+      <h3 class="mt-14 mb-4 text-[22px] font-bold tracking-[-0.01em]" id="theses">
+        {t('about.theses')}
+      </h3>
+      <div class="border-t border-rule">
+        {
+          theses.map(({ data, Content }) => (
+            <details class="group border-b border-rule">
+              <summary class="grid cursor-pointer list-none gap-1 py-5 md:grid-cols-[11rem_1fr] md:gap-7 [&::-webkit-details-marker]:hidden">
+                <span class="font-mono text-sm text-muted md:pt-1">{data.year}</span>
+                <span>
+                  <span class="block font-bold">{data.title}</span>
+                  <span class="block text-base text-muted">
+                    <span class="font-mono group-open:hidden" aria-hidden="true">
+                      +{' '}
+                    </span>
+                    <span class="hidden font-mono group-open:inline" aria-hidden="true">
+                      −{' '}
+                    </span>
+                    {data.subtitle}, {data.tags.join(', ')}
+                  </span>
+                </span>
+              </summary>
+              <Prose class="max-w-2xl pb-6 text-base md:ml-[calc(11rem+1.75rem)]">
+                <Content />
+              </Prose>
+            </details>
+          ))
+        }
+      </div>
+    </section>
+  </Container>
 </BaseLayout>

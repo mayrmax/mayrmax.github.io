@@ -1,8 +1,9 @@
 ---
 import type { GetStaticPaths } from 'astro';
 
-import BulletList from '../../../components/BulletList.astro';
-import PageHero from '../../../components/PageHero.astro';
+import Container from '../../../components/Container.astro';
+import PageHeader from '../../../components/PageHeader.astro';
+import Row from '../../../components/Row.astro';
 import { localePath } from '../../../i18n/config';
 import { entrySlug, getLocalized, getSection } from '../../../i18n/content';
 import { localeRoutes } from '../../../i18n/routes';
@@ -24,22 +25,33 @@ const posts = (await getLocalized('blog', locale)).sort(
   title={intros.blogSeoTitle ?? intros.blogHeading ?? ''}
   description={intros.blogSubtitle}
 >
-  <PageHero heading={intros.blogHeading ?? ''} subtitle={intros.blogSubtitle} />
+  <PageHeader heading={intros.blogHeading ?? ''} subtitle={intros.blogSubtitle} />
 
-  {
-    posts.map((post) => (
-      <article class="px-6 pt-8">
-        <h2 class="mb-1 text-[2rem] leading-tight font-bold">
-          <a class="link" href={localePath(locale, `/blog/${entrySlug(post.id)}`)}>
-            {post.data.title}
-          </a>
-        </h2>
-        <p class="text-xl text-ink-muted">{post.data.subtitle}</p>
-        <BulletList items={post.data.categories} class="justify-start text-ink-muted" />
-        <time class="text-sm" datetime={toISODate(post.data.date)}>
-          {formatDate(post.data.date, locale)}
-        </time>
-      </article>
-    ))
-  }
+  <Container class="pt-16">
+    <div class="border-t border-rule">
+      {
+        posts.map((post) => (
+          <Row>
+            <time
+              slot="aside"
+              class="font-mono text-sm text-muted md:pt-1.5"
+              datetime={toISODate(post.data.date)}
+            >
+              {formatDate(post.data.date, locale)}
+            </time>
+            <h2 class="text-[22px] font-bold tracking-[-0.01em]">
+              <a
+                class="hover:underline hover:decoration-2 hover:underline-offset-4"
+                href={localePath(locale, `/blog/${entrySlug(post.id)}`)}
+              >
+                {post.data.title}
+              </a>
+            </h2>
+            {post.data.subtitle && <p class="mt-1">{post.data.subtitle}</p>}
+            <p class="mt-1 text-base text-muted">{post.data.categories.join(', ')}</p>
+          </Row>
+        ))
+      }
+    </div>
+  </Container>
 </BaseLayout>

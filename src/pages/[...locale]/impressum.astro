@@ -1,6 +1,9 @@
 ---
 import type { GetStaticPaths } from 'astro';
 
+import Container from '../../components/Container.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Prose from '../../components/Prose.astro';
 import { localePath } from '../../i18n/config';
 import { getShared } from '../../i18n/content';
 import { localeRoutes } from '../../i18n/routes';
@@ -11,7 +14,7 @@ export const getStaticPaths = (() => localeRoutes()) satisfies GetStaticPaths;
 
 const { locale } = Astro.props;
 const t = useTranslations(locale);
-const impressum = await getShared('impressum');
+const doc = await getShared('impressum');
 ---
 
 <BaseLayout
@@ -20,14 +23,14 @@ const impressum = await getShared('impressum');
   title={t('title.impressum')}
   description={t('meta.impressum')}
 >
-  <div class="px-6 py-12">
-    <h1 class="text-[2rem] leading-tight font-semibold">{impressum.heading}</h1>
-    <div class="prose-content mt-4 max-w-4xl"><impressum.Content /></div>
-    <p class="mt-8">
+  <PageHeader heading={doc.heading} />
+  <Container class="pt-12">
+    <Prose class="max-w-prose"><doc.Content /></Prose>
+    <p class="mt-10 max-w-prose">
       Informationen zur Verarbeitung personenbezogener Daten findest du in der <a
-        class="link"
+        class="underline underline-offset-4 hover:decoration-2"
         href={localePath(locale, '/datenschutz')}>Datenschutzerklärung</a
       >.
     </p>
-  </div>
+  </Container>
 </BaseLayout>

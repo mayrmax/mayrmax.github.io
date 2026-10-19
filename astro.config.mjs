@@ -45,21 +45,16 @@ export default defineConfig({
   fonts: [
     {
       provider: fontProviders.google(),
-      name: 'Abel',
-      cssVariable: '--font-display',
+      name: 'Hanken Grotesk',
+      cssVariable: '--font-hanken',
+      weights: [400, 500, 700],
       fallbacks: ['sans-serif'],
     },
     {
       provider: fontProviders.google(),
-      name: 'Lato',
-      cssVariable: '--font-body',
-      weights: [400, 700],
-      fallbacks: ['sans-serif'],
-    },
-    {
-      provider: fontProviders.google(),
-      name: 'Roboto Mono',
-      cssVariable: '--font-mono',
+      name: 'JetBrains Mono',
+      cssVariable: '--font-jetbrains',
+      weights: [400, 600],
       fallbacks: ['monospace'],
     },
   ],

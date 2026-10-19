@@ -104,6 +104,8 @@ const services = defineCollection({
   loader: localizedGlob('services'),
   schema: z.object({
     order: z.number(),
+    // Shown beside the service as a command-line flag, matching the hero prompt.
+    flag: z.string().optional(),
     title: z.string(),
     items: z.array(z.string()).default([]),
   }),
@@ -136,14 +138,13 @@ const sections = defineCollection({
   loader: localizedGlob('sections'),
   schema: z.object({
     // home
-    greeting: z.string().optional(),
-    name: z.string().optional(),
+    command: z.string().optional(),
+    headline: z.string().optional(),
     ctaLabel: z.string().optional(),
     // <title> override where the visible heading is too terse for search results;
     // the site name is still appended. Used by home and about-bio.
     seoTitle: z.string().optional(),
     // about-bio
-    sectionHeading: z.string().optional(),
     heading: z.string().optional(),
     photo: z.string().optional(),
     photoAlt: z.string().optional(),
@@ -152,25 +153,20 @@ const sections = defineCollection({
     groups: z.array(z.object({ level: z.string(), items: z.array(z.string()) })).optional(),
     // services
     subtitle: z.string().optional(),
-    referencesHeading: z.string().optional(),
-    referencesSubtitle: z.string().optional(),
     partnerHeading: z.string().optional(),
     partnerName: z.string().optional(),
     partnerUrl: z.url().optional(),
     partnerText: z.string().optional(),
     // page-intros
     servicesSeoTitle: z.string().optional(),
-    projectsSeoTitle: z.string().optional(),
-    publicationsSeoTitle: z.string().optional(),
+    workSeoTitle: z.string().optional(),
     blogSeoTitle: z.string().optional(),
     servicesHeading: z.string().optional(),
     servicesSubtitle: z.string().optional(),
+    workHeading: z.string().optional(),
+    workSubtitle: z.string().optional(),
     blogHeading: z.string().optional(),
     blogSubtitle: z.string().optional(),
-    projectsHeading: z.string().optional(),
-    projectsSubtitle: z.string().optional(),
-    publicationsHeading: z.string().optional(),
-    publicationsSubtitle: z.string().optional(),
     notFoundHeading: z.string().optional(),
     notFoundSubtitle: z.string().optional(),
   }),

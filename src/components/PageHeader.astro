@@ -1,0 +1,22 @@
+---
+import Container from './Container.astro';
+
+interface Props {
+  heading: string;
+  subtitle?: string;
+}
+
+const { heading, subtitle } = Astro.props;
+---
+
+<header class="border-b border-rule">
+  <Container class="pt-14 pb-14 sm:pt-20 sm:pb-18">
+    <h1
+      class="hyphens-auto max-w-[20ch] text-[clamp(40px,6vw,72px)] leading-[1.02] font-bold tracking-[-0.025em]"
+    >
+      {heading}
+    </h1>
+    {subtitle && <p class="mt-5 max-w-2xl text-xl text-muted">{subtitle}</p>}
+    <slot />
+  </Container>
+</header>

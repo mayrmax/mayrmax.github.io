@@ -1,9 +1,7 @@
 ---
-heading: WHAT I DO
+heading: Services
 subtitle: Architecture, backend, web and AI — from the concept through to production.
-referencesHeading: REFERENCES
-referencesSubtitle: A few things I have built and still stand behind.
-partnerHeading: SWEETPOPCORN.STUDIO
+partnerHeading: SweetPopcorn.Studio
 partnerName: SweetPopcorn.Studio
 partnerUrl: https://sweetpopcorn.studio/
 partnerText: Larger projects run through SweetPopcorn.Studio, where I am a shareholder and developer — a full team instead of one freelancer, when that is what the work needs.

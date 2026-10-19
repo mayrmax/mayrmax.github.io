@@ -15,4 +15,4 @@ duration:
 Meine höhere Ausbildung habe ich in Saalfelden ursprünglich im Bereich **Elektrotechnik** begonnen.
 Anwendungen für Endnutzer spielten in meinem Zweig nur eine Nebenrolle, doch über die angebotenen Lehrveranstaltungen
 entdeckte ich schnell meine **Liebe zum Programmieren**. Als Abschlussprojekt
-habe ich mich für ein Softwareprojekt entschieden, mit dem sich [digitale Notizen erstellen](/de/projects#mynoteboard) lassen.
+habe ich mich für ein Softwareprojekt entschieden, mit dem sich [digitale Notizen erstellen](/de/work#mynoteboard) lassen.

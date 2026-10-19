@@ -1,5 +1,6 @@
 ---
 order: 4
+flag: "--role cto"
 title: Fractional CTO
 items:
   - Technologie-Auswahl

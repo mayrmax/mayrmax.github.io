@@ -1,0 +1,24 @@
+---
+/**
+ * One line of a list: a narrow left column for the label (a flag, a year, a
+ * level) and the content beside it. Rows stack into a ruled list; wrap them in
+ * an element with `border-t border-rule`.
+ */
+interface Props {
+  id?: string;
+  class?: string;
+}
+
+const { id, class: className } = Astro.props;
+---
+
+<div
+  id={id}
+  class:list={[
+    'grid scroll-mt-8 gap-1 border-b border-rule py-6 md:grid-cols-[11rem_1fr] md:gap-7',
+    className,
+  ]}
+>
+  <div><slot name="aside" /></div>
+  <div class="min-w-0"><slot /></div>
+</div>

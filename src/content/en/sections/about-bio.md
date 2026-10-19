@@ -1,6 +1,5 @@
 ---
 seoTitle: "AI Solution Architect & .NET Developer"
-sectionHeading: ABOUT ME
 heading: Hello, I'm Max.
 photo: /assets/images/me.webp
 photoAlt: Max Mayr

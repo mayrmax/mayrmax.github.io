@@ -1,7 +1,7 @@
 ---
-ctaLabel: "Was ich für dich tun kann"
-greeting: Hallo, mein Name ist
-name: Max Mayr.
+command: "build --backend dotnet --ai llm,rag --host eu"
+headline: "Software, die in zwei Jahren noch Sinn ergibt."
+ctaLabel: "Leistungen ansehen"
 ---
 
-Ich bin AI Solution Architect in Innsbruck und baue .NET-Backends, schnelle Web-Frontends und die KI, die beides verbindet.
+Ich bin Max, AI Solution Architect in Innsbruck. Ich baue .NET-Backends, schnelle Web-Frontends und die KI, die beides verbindet.
