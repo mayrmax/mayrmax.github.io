@@ -2,5 +2,5 @@ dist
 .astro
 package-lock.json
 
-# Content files are data, not code.
+# Content is written by Keystatic; leaving it alone keeps CMS saves diff-free.
 src/content

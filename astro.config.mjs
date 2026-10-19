@@ -3,6 +3,18 @@ import { defineConfig, fontProviders } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
+// Keystatic runs in local mode: its admin UI is an SSR route, so it is loaded
+// only while the dev server is up. The production build therefore stays fully
+// static (no adapter, no React in the output) and keeps deploying to GitHub Pages.
+const isDevServer = process.argv.includes('dev') || process.env.npm_lifecycle_event === 'dev';
+
+const keystaticIntegrations = isDevServer
+  ? await Promise.all([
+      import('@astrojs/react').then((m) => m.default()),
+      import('@keystatic/astro').then((m) => m.default()),
+    ])
+  : [];
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://mayrmax.github.io',
@@ -52,6 +64,7 @@ export default defineConfig({
         locales: { en: 'en', de: 'de' },
       },
     }),
+    ...keystaticIntegrations,
   ],
   vite: {
     plugins: [tailwindcss()],
