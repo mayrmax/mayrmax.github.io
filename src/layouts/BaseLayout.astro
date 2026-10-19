@@ -1,0 +1,86 @@
+---
+import { Font } from 'astro:assets';
+
+import '../styles/global.css';
+
+import Footer from '../components/Footer.astro';
+import Navigation from '../components/Navigation.astro';
+import { htmlLang, localePath, locales, ogLocale, type Locale } from '../i18n/config';
+import { useTranslations } from '../i18n/ui';
+
+interface Props {
+  locale: Locale;
+  /** Path without a locale prefix, e.g. `/about`. Drives the nav highlight,
+      the language switcher and the alternate-language links. */
+  path: string;
+  title: string;
+  description?: string;
+  /** Keep the page out of search results and off the canonical trail. */
+  noindex?: boolean;
+}
+
+const { locale, path, title, description, noindex = false } = Astro.props;
+const t = useTranslations(locale);
+
+const metaDescription = description ?? t('meta.description');
+const canonical = new URL(localePath(locale, path), Astro.site).href;
+---
+
+<!doctype html>
+<html lang={htmlLang[locale]}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+
+    <meta name="author" content="Max Mayr" />
+    <meta name="description" content={metaDescription} />
+    <meta name="keywords" content={t('meta.keywords')} />
+
+    {
+      noindex ? (
+        <meta name="robots" content="noindex" />
+      ) : (
+        <Fragment>
+          <link rel="canonical" href={canonical} />
+          {locales.map((alternate) => (
+            <link
+              rel="alternate"
+              hreflang={htmlLang[alternate]}
+              href={new URL(localePath(alternate, path), Astro.site).href}
+            />
+          ))}
+          <meta property="og:url" content={canonical} />
+        </Fragment>
+      )
+    }
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={metaDescription} />
+    <meta property="og:locale" content={ogLocale[locale]} />
+
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐱‍👤</text></svg>"
+    />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Max Mayr"
+      href={localePath(locale, '/feed.xml')}
+    />
+
+    <Font cssVariable="--font-display" preload />
+    <Font cssVariable="--font-body" preload />
+    <Font cssVariable="--font-mono" />
+  </head>
+  <body>
+    <Navigation locale={locale} path={path} />
+    <slot />
+    <Footer locale={locale} />
+    <script>
+      import '../scripts/main';
+    </script>
+  </body>
+</html>

@@ -1,0 +1,44 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { getCollection, render } from 'astro:content';
+
+import { localeParam, isLocale } from '../../../i18n/config';
+import { entrySlug } from '../../../i18n/content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { formatDate, toISODate } from '../../../utils/date';
+
+export const getStaticPaths = (async () => {
+  const posts = await getCollection('blog');
+  return posts.map((post) => {
+    const locale = post.id.slice(0, post.id.indexOf('/'));
+    if (!isLocale(locale)) throw new Error(`Blog entry outside a locale directory: ${post.id}`);
+    return {
+      params: { locale: localeParam(locale), slug: entrySlug(post.id) },
+      props: { post, locale },
+    };
+  });
+}) satisfies GetStaticPaths;
+
+const { post, locale } = Astro.props;
+const { Content } = await render(post);
+const slug = entrySlug(post.id);
+---
+
+<BaseLayout
+  locale={locale}
+  path={`/blog/${slug}`}
+  title={post.data.title}
+  description={post.data.subtitle}
+>
+  <section class="bg-surface px-6 py-12">
+    <p class="text-sm">
+      <time datetime={toISODate(post.data.date)}>{formatDate(post.data.date, locale)}</time>
+    </p>
+    <h1 class="text-[2rem] leading-tight font-semibold">{post.data.title}</h1>
+    <p class="mt-1 text-xl text-ink-muted">{post.data.subtitle}</p>
+  </section>
+
+  <section class="px-6 py-12">
+    <div class="prose-content"><Content /></div>
+  </section>
+</BaseLayout>

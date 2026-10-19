@@ -1,0 +1,35 @@
+---
+import type { GetStaticPaths } from 'astro';
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getSection } from '../../i18n/content';
+import { localePath } from '../../i18n/config';
+import { localeRoutes } from '../../i18n/routes';
+import { useTranslations } from '../../i18n/ui';
+
+export const getStaticPaths = (() => localeRoutes()) satisfies GetStaticPaths;
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const home = await getSection('home', locale);
+---
+
+<BaseLayout locale={locale} path="/" title={t('title.home')}>
+  <section class="flex min-h-[calc(100vh-3.25rem)] flex-col justify-center px-6 py-12">
+    <div>
+      <h2 class="mb-7 ml-1 font-body text-[26px] tracking-[-2px] text-ink-faint">
+        {home.greeting}
+      </h2>
+      <h1
+        class="mt-1 mb-12 font-mono text-[64px] leading-none tracking-[-4px] sm:text-[100px] sm:tracking-[-7px]"
+      >
+        <a class="text-black" href={localePath(locale, '/about')}>{home.name}</a>
+      </h1>
+      <div
+        class="prose-content max-w-4xl font-body text-2xl tracking-[2px] text-ink-faint sm:text-[34px]"
+      >
+        <home.Content />
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,26 @@
+---
+import { getSection } from '../i18n/content';
+import { defaultLocale, localePath, locales, localeName } from '../i18n/config';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// GitHub Pages only serves the 404 page at the site root, so it is English with
+// a link across to the German home page.
+const intros = await getSection('page-intros', defaultLocale);
+---
+
+<BaseLayout locale={defaultLocale} path="/404" title="404 — Page not found" noindex>
+  <div class="mx-auto max-w-2xl px-6 py-12 text-center">
+    <h1 class="my-8 text-6xl leading-none tracking-tight">{intros.notFoundHeading}</h1>
+    <p><strong>{intros.notFoundSubtitle}</strong></p>
+    <div class="prose-content mt-2"><intros.Content /></div>
+    <p class="mt-8 flex justify-center gap-3 font-mono">
+      {
+        locales.map((locale) => (
+          <a class="link" href={localePath(locale, '/')} hreflang={locale}>
+            {localeName[locale]}
+          </a>
+        ))
+      }
+    </p>
+  </div>
+</BaseLayout>

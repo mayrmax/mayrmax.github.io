@@ -1,0 +1,21 @@
+---
+interface Props {
+  items: readonly string[];
+  class?: string;
+}
+
+const { items, class: className = 'justify-center' } = Astro.props;
+---
+
+<div class:list={['flex flex-wrap items-center gap-x-[5px]', className]}>
+  {
+    items.map((item, index) => (
+      <Fragment>
+        <span>{item}</span>
+        {index < items.length - 1 && (
+          <span class="inline-block size-[5px] bg-bullet" aria-hidden="true" />
+        )}
+      </Fragment>
+    ))
+  }
+</div>

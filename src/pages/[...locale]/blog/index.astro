@@ -1,0 +1,45 @@
+---
+import type { GetStaticPaths } from 'astro';
+
+import BulletList from '../../../components/BulletList.astro';
+import PageHero from '../../../components/PageHero.astro';
+import { localePath } from '../../../i18n/config';
+import { entrySlug, getLocalized, getSection } from '../../../i18n/content';
+import { localeRoutes } from '../../../i18n/routes';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { formatDate, toISODate } from '../../../utils/date';
+
+export const getStaticPaths = (() => localeRoutes()) satisfies GetStaticPaths;
+
+const { locale } = Astro.props;
+const intros = await getSection('page-intros', locale);
+const posts = (await getLocalized('blog', locale)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+---
+
+<BaseLayout
+  locale={locale}
+  path="/blog"
+  title={intros.blogHeading ?? ''}
+  description={intros.blogSubtitle}
+>
+  <PageHero heading={intros.blogHeading ?? ''} subtitle={intros.blogSubtitle} />
+
+  {
+    posts.map((post) => (
+      <article class="px-6 pt-8">
+        <h2 class="mb-1 text-[2rem] leading-tight font-bold">
+          <a class="link" href={localePath(locale, `/blog/${entrySlug(post.id)}`)}>
+            {post.data.title}
+          </a>
+        </h2>
+        <p class="text-xl text-ink-muted">{post.data.subtitle}</p>
+        <BulletList items={post.data.categories} class="justify-start text-ink-muted" />
+        <time class="text-sm" datetime={toISODate(post.data.date)}>
+          {formatDate(post.data.date, locale)}
+        </time>
+      </article>
+    ))
+  }
+</BaseLayout>

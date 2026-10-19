@@ -1,0 +1,37 @@
+---
+import { icons, type IconName } from './icons';
+
+interface Props {
+  name: IconName;
+  /** Rendered size in pixels; matches the surrounding text by default. */
+  size?: number;
+  class?: string;
+  title?: string;
+}
+
+const { name, size = 20, class: className, title } = Astro.props;
+const icon = icons[name];
+const strokeAttrs = icon.stroke
+  ? {
+      fill: 'none',
+      stroke: 'currentColor',
+      'stroke-width': '2',
+      'stroke-linecap': 'round' as const,
+      'stroke-linejoin': 'round' as const,
+    }
+  : { fill: 'currentColor' };
+---
+
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 24 24"
+  width={size}
+  height={size}
+  role={title ? 'img' : 'presentation'}
+  aria-hidden={title ? undefined : 'true'}
+  class={className}
+  {...strokeAttrs}
+>
+  {title && <title>{title}</title>}
+  <Fragment set:html={icon.body} />
+</svg>

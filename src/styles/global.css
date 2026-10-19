@@ -1,0 +1,150 @@
+@import 'tailwindcss';
+
+@theme {
+  /* Typefaces are downloaded and self-hosted by Astro's font pipeline;
+     the --font-* variables are declared in astro.config.mjs. */
+  --font-display: var(--font-display), sans-serif;
+  --font-body: var(--font-body), sans-serif;
+  --font-mono: var(--font-mono), monospace;
+
+  /* The salmon underline that marks every link. */
+  --color-accent: #ef8b80;
+
+  /* Terminal prompt segments in the navbar brand. */
+  --color-term-blue: #2c8bd2;
+  --color-term-red: #ff6059;
+  --color-term-yellow: #f7c143;
+  --color-term-green: #859916;
+
+  /* Neutrals carried over from the previous design. */
+  --color-ink: #363636;
+  --color-ink-muted: #4a4a4a;
+  --color-ink-faint: #696969;
+  --color-rule: #cccccc;
+  --color-bullet: #808080;
+  --color-surface: #f5f5f5;
+  --color-surface-footer: #fafafa;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--color-ink-muted);
+    background-color: white;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    color: var(--color-ink);
+  }
+
+  strong {
+    font-weight: 700;
+    color: var(--color-ink);
+  }
+}
+
+@layer components {
+  /* Links get a thick salmon underline that fills in on hover. Applied to
+     content links only, so icon links can opt out. */
+  .link {
+    border-bottom: 2px solid var(--color-accent);
+    box-shadow: inset 0 -4px 0 var(--color-accent);
+    transition: background-color 100ms cubic-bezier(0.33, 0.66, 0.66, 1);
+  }
+
+  .link:hover {
+    background-color: var(--color-accent);
+  }
+
+  /* Prose rendered from markdown: only links and lists need styling, since
+     headings and emphasis inherit from the base layer. */
+  .prose-content a {
+    border-bottom: 2px solid var(--color-accent);
+    box-shadow: inset 0 -4px 0 var(--color-accent);
+    transition: background-color 100ms cubic-bezier(0.33, 0.66, 0.66, 1);
+  }
+
+  .prose-content a:hover {
+    background-color: var(--color-accent);
+  }
+
+  .prose-content p + p {
+    margin-top: 0.75rem;
+  }
+
+  .prose-content h2 {
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+  }
+
+  .prose-content h2:not(:first-child) {
+    margin-top: 2rem;
+  }
+
+  /* Square-bulleted list, matching the old `.is-ul` treatment. */
+  .prose-content ul {
+    margin-top: 0.75rem;
+    list-style: none;
+  }
+
+  .prose-content ul li {
+    padding-left: 1.25rem;
+    text-indent: -1.25rem;
+  }
+
+  .prose-content ul li::before {
+    content: '\25A0';
+    display: inline-block;
+    width: 1.25rem;
+    text-indent: 0;
+    color: var(--color-bullet);
+  }
+
+  /* One segment of the terminal prompt, with the arrow that points at the next
+     one. Each segment sets --segment to its own colour. */
+  .term-segment {
+    position: relative;
+    padding-left: 15px;
+    font-style: normal;
+    color: black;
+    background-color: var(--segment);
+  }
+
+  .term-segment:first-child {
+    padding-left: 4px;
+  }
+
+  .term-segment::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    z-index: 3;
+    width: 0;
+    height: 0;
+    margin-right: -10px;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 10px solid var(--segment, white);
+  }
+}
+
+@keyframes blink {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.blinker {
+  animation: blink 1s cubic-bezier(1, 0, 0, 1) infinite;
+}

@@ -1,0 +1,16 @@
+---
+interface Props {
+  /** `section` is the wide rule under a page heading, `sub` the short one. */
+  variant?: 'section' | 'sub';
+}
+
+const { variant = 'section' } = Astro.props;
+---
+
+<div
+  class:list={[
+    'mx-auto h-[3px] max-w-full bg-rule',
+    variant === 'section' ? 'mt-2 mb-6 w-[450px]' : 'my-2 w-[150px]',
+  ]}
+>
+</div>

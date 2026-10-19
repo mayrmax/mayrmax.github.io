@@ -1,0 +1,44 @@
+---
+import type { GetStaticPaths } from 'astro';
+
+import BulletList from '../../components/BulletList.astro';
+import PageHero from '../../components/PageHero.astro';
+import Rule from '../../components/Rule.astro';
+import { getLocalizedRendered, getSection } from '../../i18n/content';
+import { localeRoutes } from '../../i18n/routes';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export const getStaticPaths = (() => localeRoutes()) satisfies GetStaticPaths;
+
+const { locale } = Astro.props;
+const intros = await getSection('page-intros', locale);
+const publications = await getLocalizedRendered('publications', locale);
+---
+
+<BaseLayout
+  locale={locale}
+  path="/publications"
+  title={intros.publicationsHeading ?? ''}
+  description={intros.publicationsSubtitle}
+>
+  <PageHero heading={intros.publicationsHeading ?? ''} subtitle={intros.publicationsSubtitle} />
+
+  {
+    publications.map(({ data, Content }) => (
+      <section class="px-6 pt-12 text-center">
+        <article>
+          <h2 class="text-[2rem] leading-tight font-bold">{data.title}</h2>
+          <div class="flex flex-wrap items-center justify-center gap-x-2">
+            <h3 class="text-xl font-bold">{data.subtitle}</h3>
+            <span>{data.year}</span>
+          </div>
+          <BulletList items={data.tags} class="justify-center text-xl text-ink-muted" />
+          <Rule variant="sub" />
+          <div class="prose-content">
+            <Content />
+          </div>
+        </article>
+      </section>
+    ))
+  }
+</BaseLayout>

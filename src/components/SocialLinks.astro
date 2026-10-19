@@ -1,0 +1,30 @@
+---
+import Icon from './Icon.astro';
+import type { IconName } from './icons';
+import type { Locale } from '../i18n/config';
+import { useTranslations, type UiKey } from '../i18n/ui';
+
+interface Props {
+  locale: Locale;
+  links: ReadonlyArray<{ platform: IconName; url: string }>;
+}
+
+const { locale, links } = Astro.props;
+const t = useTranslations(locale);
+---
+
+<div class="flex items-center gap-3">
+  <div class="h-[3px] w-full bg-rule" aria-hidden="true"></div>
+  {
+    links.map((link) => (
+      <a
+        href={link.url}
+        class="shrink-0 text-ink transition-colors hover:text-accent"
+        rel="me noopener"
+      >
+        <Icon name={link.platform} size={24} title={t(`link.${link.platform}` as UiKey)} />
+      </a>
+    ))
+  }
+  <div class="h-[3px] w-full bg-rule" aria-hidden="true"></div>
+</div>
