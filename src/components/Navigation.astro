@@ -9,9 +9,13 @@ interface Props {
   locale: Locale;
   /** Path without a locale prefix, e.g. `/about`. */
   path: string;
+  /** Paths per language when they differ from `path` (see BaseLayout). */
+  alternates?: Partial<Record<Locale, string>>;
 }
 
-const { locale, path } = Astro.props;
+const { locale, path, alternates } = Astro.props;
+// Without a translation the switcher leads to the other language's blog index.
+const switchPath = (candidate: Locale) => (alternates ? (alternates[candidate] ?? '/blog') : path);
 const t = useTranslations(locale);
 
 const isCurrent = (itemPath: string) => path === itemPath || path.startsWith(`${itemPath}/`);
@@ -68,7 +72,7 @@ const isCurrent = (itemPath: string) => path === itemPath || path.startsWith(`${
                   ) : (
                     <a
                       class="hover:text-ink"
-                      href={localePath(candidate, path)}
+                      href={localePath(candidate, switchPath(candidate))}
                       hreflang={candidate}
                     >
                       {localeName[candidate]}

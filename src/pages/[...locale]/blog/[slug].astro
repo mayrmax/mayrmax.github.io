@@ -6,7 +6,7 @@ import Contact from '../../../components/Contact.astro';
 import Container from '../../../components/Container.astro';
 import Prose from '../../../components/Prose.astro';
 import { isLocale, localeParam, localePath } from '../../../i18n/config';
-import { entrySlug, getLocalized } from '../../../i18n/content';
+import { blogAlternates, entrySlug, getLocalized } from '../../../i18n/content';
 import { useTranslations } from '../../../i18n/ui';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { formatDate, toISODate } from '../../../utils/date';
@@ -29,6 +29,7 @@ const { post, locale } = Astro.props;
 const t = useTranslations(locale);
 const { Content, headings } = await render(post);
 const slug = entrySlug(post.id);
+const alternates = await blogAlternates(post);
 const { title, description, date, updated, tags, note } = post.data;
 
 // A table of contents only pays off once a post has a few sections.
@@ -49,6 +50,7 @@ const neighbours = [
 <BaseLayout
   locale={locale}
   path={`/blog/${slug}`}
+  alternates={alternates}
   title={title}
   description={description}
   schema="article"

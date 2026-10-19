@@ -1,5 +1,7 @@
 // @ts-check
 import { defineConfig, fontProviders } from 'astro/config';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
+
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
@@ -20,6 +22,22 @@ const keystaticIntegrations = isDevServer
 // rewrites it on startup from Coolify's COOLIFY_URL, so this is only the
 // default — see docker-entrypoint.d/10-site-origin.sh.
 const site = process.env.SITE_URL ?? 'https://mayrmax.com';
+
+/** Blog posts grouped by translationKey: `[{ en: '/blog/x', de: '/de/blog/y' }]`. */
+const blogTranslations = Object.values(
+  ['en', 'de'].reduce((groups, locale) => {
+    const dir = `src/content/${locale}/blog`;
+    if (!existsSync(dir)) return groups;
+    for (const file of readdirSync(dir).filter((name) => name.endsWith('.md'))) {
+      const slug = file.replace(/\.md$/, '');
+      const key =
+        readFileSync(`${dir}/${file}`, 'utf8').match(/^translationKey:\s*["']?([^"'\n]+)/m)?.[1] ??
+        slug;
+      groups[key] = { ...groups[key], [locale]: `${locale === 'en' ? '' : '/de'}/blog/${slug}` };
+    }
+    return groups;
+  }, {}),
+);
 
 // https://astro.build/config
 export default defineConfig({
@@ -63,6 +81,19 @@ export default defineConfig({
       i18n: {
         defaultLocale: 'en',
         locales: { en: 'en', de: 'de' },
+      },
+      // The i18n option pairs pages by identical path, but blog posts have a
+      // slug per language; pair those by their translationKey instead.
+      serialize(item) {
+        const pathname = new URL(item.url).pathname;
+        const group = blogTranslations.find((paths) => Object.values(paths).includes(pathname));
+        if (group) {
+          item.links = Object.entries(group).map(([lang, path]) => ({
+            lang,
+            url: new URL(path, site).href,
+          }));
+        }
+        return item;
       },
     }),
     ...keystaticIntegrations,

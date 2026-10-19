@@ -76,6 +76,11 @@ function blogCollection(locale: LocaleId) {
         label: 'Tags',
         itemLabel: (props) => props.value,
       }),
+      translationKey: fields.text({
+        label: 'Translation key',
+        description:
+          'The same value in the English and the German post links them as translations. Defaults to the slug.',
+      }),
       note: fields.text({
         label: 'Note',
         description: 'Optional boxed remark above the text.',

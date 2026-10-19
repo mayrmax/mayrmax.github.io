@@ -3,6 +3,7 @@ title: "Eine Reise ins dezentrale Web"
 description: "Linked Data, die Datapods von Solid, eine persönliche API, eine digitale Seele und autonome Agenten: Notizen vom Oktober 2018, geschrieben auf der Suche nach dem Thema meiner Masterarbeit."
 date: 2018-10-08T12:00:00.000Z
 updated: 2026-10-19T12:00:00.000Z
+translationKey: decentralised-web
 tags:
   - Linked Data
   - Solid

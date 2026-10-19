@@ -95,6 +95,14 @@ ordered by `date`, newest first.
 A reference with `featured` ticked gets the full treatment on /work and appears
 on the home page; the rest form the compact list underneath.
 
+### Blog posts and their translations
+
+Each language gives a post its own slug, the file name, so the German and the
+English version can each have a readable URL. The two are paired by a shared
+`translationKey` in the frontmatter, which drives the language switcher, the
+hreflang links and the sitemap; a post without a translation only links to the
+other language's blog index.
+
 ### Preview images and favicon
 
 Every page gets its own social preview image — the prompt with a page-specific
@@ -110,7 +118,7 @@ which is why they are not taken from Astro's font pipeline.
 
 `/projects` and `/publications` were folded into `/work` and `/about`, and the
 five 2018 posts `/blog/decentralized-1` to `-5` into one essay,
-`/blog/decentralized-web`, each old URL pointing at its section. nginx 301s the
+`/blog/journey-into-the-decentralised-web` (German: `/de/blog/reise-ins-dezentrale-web`), each old URL pointing at its section. nginx 301s the
 old URLs, and the GitHub Pages stubs point straight at the new ones.
 
 ## Deployment

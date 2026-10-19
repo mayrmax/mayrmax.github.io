@@ -73,3 +73,22 @@ export async function getShared(name: string) {
   const { Content } = await render(entry);
   return { ...entry.data, Content };
 }
+
+/**
+ * Where a blog post lives in each language, e.g. `{ en: '/blog/x', de: '/blog/y' }`.
+ * Slugs differ per language, so translations are paired by `translationKey`.
+ */
+export async function blogAlternates(
+  post: CollectionEntry<'blog'>,
+): Promise<Partial<Record<Locale, string>>> {
+  const key = (entry: CollectionEntry<'blog'>) => entry.data.translationKey ?? entrySlug(entry.id);
+  const posts = await getCollection('blog');
+  return Object.fromEntries(
+    posts
+      .filter((candidate) => key(candidate) === key(post))
+      .map((candidate) => [
+        candidate.id.slice(0, candidate.id.indexOf('/')),
+        `/blog/${entrySlug(candidate.id)}`,
+      ]),
+  );
+}

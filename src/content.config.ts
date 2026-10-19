@@ -51,6 +51,9 @@ const blog = defineCollection({
     tags: z.array(z.string()).default([]),
     // A boxed remark above the text, e.g. that a post is kept as written years ago.
     note: z.string().optional(),
+    // Each language has its own slug (the file name); posts with the same key are
+    // translations of each other. Defaults to the slug.
+    translationKey: z.string().optional(),
   }),
 });
 

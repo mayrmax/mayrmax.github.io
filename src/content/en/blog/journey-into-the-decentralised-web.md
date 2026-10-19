@@ -3,6 +3,7 @@ title: "A journey into the decentralised web"
 description: "Linked Data, Solid's data pods, a personal API, a digital soul and autonomous agents: notes from October 2018, written while I was looking for my master's thesis topic."
 date: 2018-10-08T12:00:00.000Z
 updated: 2026-10-19T12:00:00.000Z
+translationKey: decentralised-web
 tags:
   - Linked Data
   - Solid

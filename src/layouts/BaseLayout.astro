@@ -23,6 +23,9 @@ interface Props {
   /** Path without a locale prefix, e.g. `/about`. Drives the nav highlight,
       the language switcher and the alternate-language links. */
   path: string;
+  /** Paths per language when they differ from `path`, as for blog posts. A
+      language that is missing has no translation of this page. */
+  alternates?: Partial<Record<Locale, string>>;
   /** Page name; the site name is appended for the <title>. */
   title: string;
   description?: string;
@@ -37,6 +40,7 @@ interface Props {
 const {
   locale,
   path,
+  alternates,
   title,
   description,
   noindex = false,
@@ -53,6 +57,8 @@ const documentTitle = title === siteName ? title : `${title} — ${siteName}`;
 
 const metaDescription = description ?? t('meta.description');
 const canonical = new URL(localePath(locale, path), Astro.site).href;
+const alternatePath = (candidate: Locale) => (alternates ? alternates[candidate] : path);
+const defaultPath = alternatePath(defaultLocale);
 // Every page has its own preview (src/pages/og); the 404 borrows the home page's.
 const socialImage = new URL(ogImagePath(locale, noindex ? '/' : path), Astro.site).href;
 ---
@@ -74,18 +80,25 @@ const socialImage = new URL(ogImagePath(locale, noindex ? '/' : path), Astro.sit
       ) : (
         <Fragment>
           <link rel="canonical" href={canonical} />
-          {locales.map((alternate) => (
+          {locales.map((alternate) => {
+            const alternateHref = alternatePath(alternate);
+            return (
+              alternateHref && (
+                <link
+                  rel="alternate"
+                  hreflang={htmlLang[alternate]}
+                  href={new URL(localePath(alternate, alternateHref), Astro.site).href}
+                />
+              )
+            );
+          })}
+          {defaultPath && (
             <link
               rel="alternate"
-              hreflang={htmlLang[alternate]}
-              href={new URL(localePath(alternate, path), Astro.site).href}
+              hreflang="x-default"
+              href={new URL(localePath(defaultLocale, defaultPath), Astro.site).href}
             />
-          ))}
-          <link
-            rel="alternate"
-            hreflang="x-default"
-            href={new URL(localePath(defaultLocale, path), Astro.site).href}
-          />
+          )}
           <meta property="og:url" content={canonical} />
         </Fragment>
       )
@@ -139,7 +152,7 @@ const socialImage = new URL(ogImagePath(locale, noindex ? '/' : path), Astro.sit
         <StructuredData locale={locale} page={schema} article={article} services={services} />
       )
     }
-    <Navigation locale={locale} path={path} />
+    <Navigation locale={locale} path={path} alternates={alternates} />
     <!-- Pages that end on the contact block run straight into the footer. -->
     <main class="pb-24 [&:has(>[data-contact]:last-child)]:pb-0">
       <slot />
