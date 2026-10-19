@@ -100,8 +100,9 @@ on the home page; the rest form the compact list underneath.
 Every page gets its own social preview image — the prompt with a page-specific
 command, the page's claim, and the portrait — rendered at build time by satori
 (layout to SVG) and sharp (SVG to JPEG) in `src/og/`. A new blog post gets one
-automatically. The favicon is the prompt's first segment, rendered the same way
-so the letter is a path rather than text that depends on installed fonts. The
+automatically. The favicon is the mark beside the name in the navigation, an
+"m" with the prompt's green cursor, rendered the same way so the letter is a
+path rather than text that depends on installed fonts. The
 fonts live in `src/og/fonts/` with their OFL licences; satori cannot read WOFF2,
 which is why they are not taken from Astro's font pipeline.
 

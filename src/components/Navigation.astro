@@ -1,6 +1,7 @@
 ---
 import Container from './Container.astro';
 import Icon from './Icon.astro';
+import Mark from './Mark.astro';
 import { localeName, locales, localePath, type Locale } from '../i18n/config';
 import { navigation, useTranslations } from '../i18n/ui';
 
@@ -18,7 +19,13 @@ const isCurrent = (itemPath: string) => path === itemPath || path.startsWith(`${
 
 <Container>
   <nav class="relative flex items-center justify-between py-5.5" aria-label={t('nav.label')}>
-    <a class="font-mono text-base font-semibold" href={localePath(locale, '/')}>max mayr</a>
+    <a
+      class="flex items-center gap-2.5 font-mono text-base font-semibold"
+      href={localePath(locale, '/')}
+    >
+      <Mark />
+      max mayr
+    </a>
 
     <button
       type="button"
