@@ -16,6 +16,7 @@ export const ui = {
     'title.home': 'Home',
     'title.about': 'About',
     'title.impressum': 'Impressum',
+    'title.datenschutz': 'Datenschutz',
     'nav.language': 'Change language',
     'about.experience': 'WORK EXPERIENCE',
     'about.education': 'EDUCATION',
@@ -24,6 +25,7 @@ export const ui = {
     'footer.sourceLicense': 'The source code is licensed',
     'footer.contentLicense': 'The website content is licensed',
     'footer.impressum': 'Impressum',
+    'footer.datenschutz': 'Datenschutz',
     'meta.description':
       'AI Solution Architect in Innsbruck — C# / .NET, Astro, Angular, AI integration and IoT.',
     'meta.keywords':
@@ -44,6 +46,7 @@ export const ui = {
     'title.home': 'Startseite',
     'title.about': 'Über mich',
     'title.impressum': 'Impressum',
+    'title.datenschutz': 'Datenschutz',
     'nav.language': 'Sprache wechseln',
     'about.experience': 'BERUFSERFAHRUNG',
     'about.education': 'AUSBILDUNG',
@@ -52,6 +55,7 @@ export const ui = {
     'footer.sourceLicense': 'Der Quellcode steht unter der Lizenz',
     'footer.contentLicense': 'Die Inhalte der Website stehen unter der Lizenz',
     'footer.impressum': 'Impressum',
+    'footer.datenschutz': 'Datenschutz',
     'meta.description':
       'AI Solution Architect in Innsbruck — C# / .NET, Astro, Angular, KI-Integration und IoT.',
     'meta.keywords':

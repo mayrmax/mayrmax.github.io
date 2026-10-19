@@ -398,7 +398,7 @@ export default config({
         'educationDe',
         'publicationsDe',
       ],
-      'Both languages': ['impressum'],
+      'Both languages': ['impressum', 'datenschutz'],
     },
   },
   collections: {
@@ -430,6 +430,15 @@ export default config({
     aboutInterestsDe: aboutInterestsSingleton('de'),
     aboutSkillsDe: aboutSkillsSingleton('de'),
     pageIntrosDe: pageIntrosSingleton('de'),
+    datenschutz: singleton({
+      label: 'Datenschutz (German, both languages)',
+      path: 'src/content/shared/datenschutz',
+      format: { contentField: 'content' },
+      schema: {
+        heading: fields.text({ label: 'Heading', validation: { isRequired: true } }),
+        content: markdown('Datenschutzerklärung'),
+      },
+    }),
     impressum: singleton({
       label: 'Impressum (German, both languages)',
       path: 'src/content/shared/impressum',

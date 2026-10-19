@@ -1,0 +1,21 @@
+---
+import type { GetStaticPaths } from 'astro';
+
+import { getShared } from '../../i18n/content';
+import { localeRoutes } from '../../i18n/routes';
+import { useTranslations } from '../../i18n/ui';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export const getStaticPaths = (() => localeRoutes()) satisfies GetStaticPaths;
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const datenschutz = await getShared('datenschutz');
+---
+
+<BaseLayout locale={locale} path="/datenschutz" title={t('title.datenschutz')}>
+  <div class="px-6 py-12">
+    <h1 class="text-[2rem] leading-tight font-semibold">{datenschutz.heading}</h1>
+    <div class="prose-content mt-4 max-w-4xl"><datenschutz.Content /></div>
+  </div>
+</BaseLayout>

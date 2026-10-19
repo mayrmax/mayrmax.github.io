@@ -20,7 +20,8 @@ const t = useTranslations(locale);
     }
     <a class="link" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
   </p>
-  <a class="link mt-4 inline-block" href={localePath(locale, '/impressum')}
-    >{t('footer.impressum')}</a
-  >
+  <p class="mt-4 flex justify-center gap-4">
+    <a class="link" href={localePath(locale, '/impressum')}>{t('footer.impressum')}</a>
+    <a class="link" href={localePath(locale, '/datenschutz')}>{t('footer.datenschutz')}</a>
+  </p>
 </footer>
