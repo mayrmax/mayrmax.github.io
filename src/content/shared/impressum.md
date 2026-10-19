@@ -2,32 +2,59 @@
 heading: Impressum
 ---
 
-Informationspflicht laut §5 E-Commerce Gesetz, §14 Unternehmensgesetzbuch, §63 Gewerbeordnung und Offenlegungspflicht laut §25 Mediengesetz.
+Informationspflicht laut § 5 Abs. 1 ECG, § 14 UGB, § 63 GewO und Offenlegungspflicht laut § 25 MedienG.
 
-Maximilian Mayr
+## Herausgeber
 
-4020 Linz, Österreich
+Maximilian Mayr \
+Einzelunternehmen \
+Inhaber: Maximilian Mayr \
+Fürstenweg 36 \
+6020 Innsbruck \
+Tirol, Österreich
 
-E-Mail: max(dot)mayr@gmail.com
+## Unternehmensgegenstand
 
-Quelle: Erstellt mit dem Impressum Generator von firmenwebseiten.at in Kooperation mit pressefeuer.at
+IT-Dienstleistungen
 
-## EU-Streitschlichtung
+## UID-Nummer
 
-Angaben zur Online-Streitbeilegung: Verbraucher haben die Möglichkeit, Beschwerden an die [Online Streitbeilegungsplattform](https://ec.europa.eu/consumers/odr/main/index.cfm?event=main.home2.show&lng=DE) der EU zu richten. Sie können allfällige Beschwerde auch an die oben angegebene E-Mail-Adresse richten.
+ATU79450327
 
-## Haftung für Inhalte dieser Webseite
+## Kontakt
 
-Wir entwickeln die Inhalte dieser Webseite ständig weiter und bemühen uns korrekte und aktuelle Informationen bereitzustellen. Leider können wir keine Haftung für die Korrektheit aller Inhalte auf dieser Webseite übernehmen, speziell für jene die seitens Dritter bereitgestellt wird. Sollten Ihnen problematische oder rechtswidrige Inhalte auffallen, bitte wir Sie uns umgehend zu kontaktieren, Sie finden die Kontaktdaten im Impressum.
+E-Mail: max(dot)mayr@gmail.com \
+Website: [mayrmax.com](https://mayrmax.com)
 
-## Haftung für Links auf dieser Webseite
+## Zuständige Kammer
 
-Unsere Webseite enthält Links zu anderen Webseiten für deren Inhalt wir nicht verantwortlich sind. Wenn Ihnen rechtswidrige Links auf unserer Webseite auffallen, bitte wir Sie uns zu kontaktieren, Sie finden die Kontaktdaten im Impressum.
+WKO Tirol
 
-## Urheberrechtshinweis
+## Aufsichtsbehörde
 
-Alle Inhalte dieser Webseite (Bilder, Fotos, Texte, Videos) unterliegen dem Urheberrecht. Falls notwendig, werden wir die unerlaubte Nutzung von Teilen der Inhalte unserer Seite rechtlich verfolgen.
+Bezirkshauptmannschaft Innsbruck
 
-## Bildernachweis
+## Berufsbezeichnung
 
-Die Bilder, Fotos und Grafiken auf dieser Webseite sind urheberrechtlich geschützt.
+Software Engineer \
+Verleihungsstaat: Österreich
+
+Anwendbare und berufsrechtliche Vorschriften: GewO, UGB, abrufbar unter [www.ris.bka.gv.at](https://www.ris.bka.gv.at).
+
+Für weitere Informationen hinsichtlich der gewerbe- und berufsrechtlichen Vorschriften informieren Sie sich bitte unter [firmen.wko.at](https://firmen.wko.at).
+
+## Verbraucherstreitbeilegung
+
+Verbraucher:innen können sich an Streitschlichtungsstellen wenden. Ich bin weder bereit noch verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.
+
+## Disclaimer
+
+Die Inhalte dieser Website wurden mit größtmöglicher Sorgfalt und unter Beachtung von Rechten Dritter (zB Urheberrecht) erstellt. Zwar wird diese Website regelmäßig auf Aktualität, Vollständigkeit und Richtigkeit überprüft, dies kann jedoch trotzdem nicht gewährleistet werden. Ich ersuche daher bei Unklarheiten direkt mit mir Kontakt aufzunehmen.
+
+Eine Haftung für die Inhalte auf dieser Website und insbesondere die gesetzten Links wird nur im Rahmen von Art 4 ff DSA (Digital Services Act) übernommen. Die Links werden ebenfalls unter größtmöglicher Sorgfalt gesetzt und auch überprüft. Dennoch kann nicht garantiert werden, dass sich die verlinkte Seite nicht ohne mein Wissen und Zutun ändert.
+
+Zum Zeitpunkt der Verlinkung haben sich diese Links rechtskonform dargestellt. Sollte ich auf ein rechtliches Problem aufmerksam (gemacht) werden, so wird der betreffende Link umgehend entfernt.
+
+## Urheberrecht
+
+An den Inhalten auf dieser Website habe ich die erforderlichen Nutzungs- bzw. Verwertungsrechte. Eine Verwendung der Inhalte dieser Webseite (insbesondere Bilder) ohne meine ausdrückliche Zustimmung ist nicht gestattet.
