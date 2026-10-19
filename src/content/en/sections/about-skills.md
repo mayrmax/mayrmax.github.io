@@ -3,21 +3,25 @@ heading: TECHNICAL SKILLS
 groups:
   - level: Expert
     items:
-      - TypeScript
-      - JavaScript
+      - C# / .NET
       - Angular
-      - Node.JS
-      - Nest.JS
+      - TypeScript
+      - Astro
+      - Software Architecture
   - level: Advanced
     items:
-      - C#
-      - Java
-      - Spring
+      - LLM Integration
+      - RAG
+      - PostgreSQL
+      - DDD & Domain Events
+      - Azure
+      - Docker
   - level: Other
     items:
-      - Neo4J
-      - GraphQL
-      - TypeORM
+      - Microsoft Orleans
+      - Meilisearch
+      - IoT & DTDL
+      - Node.JS
 ---
 
-I discovered my **love for programming** early on and learned a lot of stuff by myself. Later I wanted to dive deeper and attended a university, where I further **shaped my skills**. I worked in a wide variety of areas from mobile, desktop, IoT, and the web. Nowadays I mostly work on **web projects** based on [Node.JS](https://nodejs.org/) and [TypeScript](https://www.typescriptlang.org/).
+I discovered my **love for programming** early on and learned a lot of it by myself, then went to university to dive deeper and **shape those skills**. I have worked across mobile, desktop, IoT and the web. Today my centre of gravity is **C# / [.NET](https://dotnet.microsoft.com/)** on the backend — performance, security and scalable cloud architecture — paired with [Astro](https://astro.build/) for web projects that need to be fast and findable, and [Angular](https://angular.dev/) for complex single-page applications.

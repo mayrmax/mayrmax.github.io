@@ -12,6 +12,8 @@ links:
     url: https://twitter.com/max_mayr
 ---
 
-Ich bin **Software Engineer** in Linz, 🇦🇹. Ich liebe es, **Dinge zu schaffen**, die im Internet leben. Mein Ziel ist es, **Software zu entwickeln**, die **Menschen** in ihrem Alltag **hilft** — indem sie Probleme löst, von denen sie vielleicht noch gar nichts wissen.
+Ich bin **AI Solution Architect** in Innsbruck, 🇦🇹. Ich unterstütze Unternehmen dabei, die technischen Herausforderungen zu lösen, die sich nicht nebenbei erledigen lassen — von der **Architektur** bis zur Implementierung.
 
-In meinen privaten Projekten spiele ich gerne mit den **neuesten Technologien** und Patterns herum.
+Meine Arbeit liegt dort, wo drei Dinge zusammenkommen: **Enterprise-Backends** in C# / .NET, **schnelle Web-Frontends** mit Astro und Angular, und der praktische Einsatz von **KI und Automatisierung** — LLM-Integration, RAG und IoT. Als **Fractional CTO** berate ich außerdem bei der Technologie-Auswahl, führe Code-Audits durch und bringe Entwicklungsprozesse in Ordnung.
+
+Was ich liefere, soll in zwei Jahren noch Sinn ergeben. Keinen Spaghetti-Code, sondern **nachhaltige Lösungen**, die das Business voranbringen.

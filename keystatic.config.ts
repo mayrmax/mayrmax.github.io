@@ -118,7 +118,10 @@ function experienceCollection(locale: LocaleId) {
       company: fields.object(
         {
           name: fields.text({ label: 'Company', validation: { isRequired: true } }),
-          url: fields.url({ label: 'Company URL', validation: { isRequired: true } }),
+          url: fields.url({
+            label: 'Company URL',
+            description: 'Optional — leave empty for self-employment.',
+          }),
         },
         { label: 'Company' },
       ),

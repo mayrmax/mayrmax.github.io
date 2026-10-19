@@ -12,6 +12,8 @@ links:
     url: https://twitter.com/max_mayr
 ---
 
-I'm a **software engineer** based in Linz, 🇦🇹. I love **creating things** that live on the internet. My goal is to **create software** that **helps people** in their daily lives by **solving problems** they might not even know they have.
+I'm an **AI solution architect** based in Innsbruck, 🇦🇹. I help companies solve the technical problems they cannot solve on the side — from the **architecture** right through to the implementation.
 
-I like to fiddle around with the **newest technologies** and patterns in my private projects.
+My work sits where three things meet: **enterprise backends** in C# / .NET, **fast web frontends** built with Astro and Angular, and the practical use of **AI and automation** — LLM integration, RAG, and IoT. As a **fractional CTO** I also advise on technology choices, run code audits and clean up development processes.
+
+What I deliver is meant to still make sense in two years. No spaghetti code — **sustainable solutions** that move the business forward.

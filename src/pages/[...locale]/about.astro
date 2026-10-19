@@ -80,9 +80,13 @@ const [bio, interests, skills, experience, education] = await Promise.all([
         <article class="mb-6 text-center">
           <div class="flex flex-wrap items-center justify-center gap-x-2">
             <h3 class="text-xl font-bold">{data.position}</h3>
-            <a class="link" href={data.company.url}>
-              @{data.company.name}
-            </a>
+            {data.company.url ? (
+              <a class="link" href={data.company.url}>
+                @{data.company.name}
+              </a>
+            ) : (
+              <span>@{data.company.name}</span>
+            )}
           </div>
           <div>
             <span>{data.duration.start}</span> - <span>{data.duration.end}</span>

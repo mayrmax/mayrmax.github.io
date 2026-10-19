@@ -3,21 +3,25 @@ heading: TECHNISCHE FÄHIGKEITEN
 groups:
   - level: Experte
     items:
-      - TypeScript
-      - JavaScript
+      - C# / .NET
       - Angular
-      - Node.JS
-      - Nest.JS
+      - TypeScript
+      - Astro
+      - Softwarearchitektur
   - level: Fortgeschritten
     items:
-      - C#
-      - Java
-      - Spring
+      - LLM-Integration
+      - RAG
+      - PostgreSQL
+      - DDD & Domain Events
+      - Azure
+      - Docker
   - level: Weiteres
     items:
-      - Neo4J
-      - GraphQL
-      - TypeORM
+      - Microsoft Orleans
+      - Meilisearch
+      - IoT & DTDL
+      - Node.JS
 ---
 
-Ich habe meine **Liebe zum Programmieren** früh entdeckt und mir vieles selbst beigebracht. Später wollte ich tiefer einsteigen und habe studiert, wo ich meine **Fähigkeiten weiter geschärft** habe. Ich habe in ganz unterschiedlichen Bereichen gearbeitet — von Mobile über Desktop und IoT bis zum Web. Heute arbeite ich hauptsächlich an **Webprojekten** auf Basis von [Node.JS](https://nodejs.org/) und [TypeScript](https://www.typescriptlang.org/).
+Ich habe meine **Liebe zum Programmieren** früh entdeckt und mir vieles selbst beigebracht, bin dann zum Studium gegangen, um tiefer einzusteigen und meine **Fähigkeiten zu schärfen**. Ich habe in Mobile, Desktop, IoT und im Web gearbeitet. Heute liegt mein Schwerpunkt auf **C# / [.NET](https://dotnet.microsoft.com/)** im Backend — Performance, Security und skalierbare Cloud-Architektur — kombiniert mit [Astro](https://astro.build/) für Webprojekte, die schnell und auffindbar sein müssen, und [Angular](https://angular.dev/) für komplexe Single-Page-Anwendungen.

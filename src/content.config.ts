@@ -56,7 +56,8 @@ const experience = defineCollection({
   schema: z.object({
     order: z.number(),
     position: z.string(),
-    company: z.object({ name: z.string(), url: z.url() }),
+    // Self-employment has no company page, so the link is optional.
+    company: z.object({ name: z.string(), url: z.url().optional() }),
     duration,
     main_technologies: z.array(z.string()).default([]),
   }),

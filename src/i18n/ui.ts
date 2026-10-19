@@ -23,8 +23,10 @@ export const ui = {
     'footer.sourceLicense': 'The source code is licensed',
     'footer.contentLicense': 'The website content is licensed',
     'footer.impressum': 'Impressum',
-    'meta.description': 'Software Engineer & Software Architect',
-    'meta.keywords': 'Portfolio, Max Mayr, Software Engineering, Blog',
+    'meta.description':
+      'AI Solution Architect in Innsbruck — C# / .NET, Astro, Angular, AI integration and IoT.',
+    'meta.keywords':
+      'Max Mayr, AI Solution Architect, C#, .NET, Astro, Angular, LLM, RAG, IoT, Fractional CTO, Innsbruck',
     'link.github': 'GitHub',
     'link.linkedin': 'LinkedIn',
     'link.twitter': 'Twitter',
@@ -48,8 +50,10 @@ export const ui = {
     'footer.sourceLicense': 'Der Quellcode steht unter der Lizenz',
     'footer.contentLicense': 'Die Inhalte der Website stehen unter der Lizenz',
     'footer.impressum': 'Impressum',
-    'meta.description': 'Software Engineer & Software-Architekt',
-    'meta.keywords': 'Portfolio, Max Mayr, Software Engineering, Blog',
+    'meta.description':
+      'AI Solution Architect in Innsbruck — C# / .NET, Astro, Angular, KI-Integration und IoT.',
+    'meta.keywords':
+      'Max Mayr, AI Solution Architect, C#, .NET, Astro, Angular, LLM, RAG, IoT, Fractional CTO, Innsbruck',
     'link.github': 'GitHub',
     'link.linkedin': 'LinkedIn',
     'link.twitter': 'Twitter',
