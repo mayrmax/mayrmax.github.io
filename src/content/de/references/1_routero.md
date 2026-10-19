@@ -1,15 +1,18 @@
 ---
 order: 1
+featured: true
 name: routero
 url: https://www.routero.eu/
 role: Plattform für die Streckenkompatibilitätsprüfung
 duration:
-  start: 2023
+  start: 2024
   end: Heute
 technologies:
   - C# / .NET
   - Angular
   - PostgreSQL
+  - QuestPDF
+  - Linked Data
   - GIS
 ---
 

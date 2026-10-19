@@ -6,11 +6,13 @@ import Rule from '../../components/Rule.astro';
 import SectionHeading from '../../components/SectionHeading.astro';
 import { getLocalizedRendered, getSection } from '../../i18n/content';
 import { localeRoutes } from '../../i18n/routes';
+import { useTranslations } from '../../i18n/ui';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 export const getStaticPaths = (() => localeRoutes()) satisfies GetStaticPaths;
 
 const { locale } = Astro.props;
+const t = useTranslations(locale);
 
 const [page, intros, services, references] = await Promise.all([
   getSection('services', locale),
@@ -18,6 +20,11 @@ const [page, intros, services, references] = await Promise.all([
   getLocalizedRendered('services', locale),
   getLocalizedRendered('references', locale),
 ]);
+
+const featured = references.filter((reference) => reference.data.featured);
+const more = references.filter((reference) => !reference.data.featured);
+const years = ({ start, end }: { start: string; end: string }) =>
+  start === end ? start : `${start}–${end}`;
 ---
 
 <BaseLayout
@@ -79,7 +86,7 @@ const [page, intros, services, references] = await Promise.all([
     }
 
     {
-      references.map(({ data, Content }) => (
+      featured.map(({ data, Content }) => (
         <article class="mb-8 text-center">
           <div class="flex flex-wrap items-center justify-center gap-x-2">
             <h3 class="text-xl font-bold">
@@ -103,6 +110,36 @@ const [page, intros, services, references] = await Promise.all([
           </div>
         </article>
       ))
+    }
+
+    {
+      more.length > 0 && (
+        <div class="mx-auto mt-16 max-w-4xl">
+          <h3 class="mb-4 text-xl font-bold">{t('services.moreProjects')}</h3>
+          <ul class="border-t border-rule">
+            {more.map(({ data }) => (
+              <li class="grid gap-1 border-b border-rule py-3 sm:grid-cols-[13rem_1fr_6rem] sm:gap-6">
+                <span class="font-bold text-ink">
+                  {data.url ? (
+                    <a class="link" href={data.url}>
+                      {data.name}
+                    </a>
+                  ) : (
+                    data.name
+                  )}
+                </span>
+                <span>
+                  {data.role}
+                  {data.technologies.length > 0 && (
+                    <span class="block text-sm text-ink-faint">{data.technologies.join(', ')}</span>
+                  )}
+                </span>
+                <span class="text-sm text-ink-faint sm:text-right">{years(data.duration)}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )
     }
   </section>
 </BaseLayout>

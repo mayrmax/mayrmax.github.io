@@ -223,6 +223,11 @@ function referencesCollection(locale: LocaleId) {
         description: 'Lower numbers appear first on the page.',
         validation: { isRequired: true },
       }),
+      featured: fields.checkbox({
+        label: 'Featured',
+        description: 'Shown large with its description. Unticked entries form the compact list.',
+        defaultValue: false,
+      }),
       name: fields.slug({ name: { label: 'Name' } }),
       url: fields.url({ label: 'URL', description: 'Optional.' }),
       role: fields.text({ label: 'What it is', validation: { isRequired: true } }),

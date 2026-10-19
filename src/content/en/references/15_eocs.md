@@ -1,5 +1,6 @@
 ---
-order: 5
+order: 15
+featured: false
 name: eOCS
 url: https://www.eurofunk.com/products/command-control/eocs
 role: Digital command center for emergency services

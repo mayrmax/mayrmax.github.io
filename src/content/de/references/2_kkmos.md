@@ -1,19 +1,23 @@
 ---
 order: 2
+featured: true
 name: kkmOS
 url: https://kkmos.eu/
 role: Plattform für Krisen- und Katastrophenmanagement
 duration:
-  start: 2023
+  start: 2025
   end: Heute
 technologies:
   - C# / .NET
   - Angular
   - PostgreSQL
   - Marten
+  - Event Sourcing
+  - EF Core
+  - SignalR
+  - QuestPDF
   - Webhooks
   - OGC / GIS
-  - LLM-Integration
 ---
 
 Eine Plattform für Behörden, Einsatzorganisationen und Unternehmen, die Lagen jenseits des Regelbetriebs bewältigen müssen — Naturkatastrophen, Großschadensereignisse, Großveranstaltungen. Sie verbindet **digitale Lagekarte**, **Einsatztagebuch** und Stabsverwaltung, wobei Meldungen zwischen Landes-, Bezirks- und Gemeindeebene weitergereicht werden.

@@ -1,5 +1,6 @@
 ---
-order: 4
+order: 14
+featured: false
 name: Tributech IoT Stack
 url: https://www.tributech.io/
 role: Digital twin platform on DTDL
@@ -10,7 +11,10 @@ technologies:
   - C# / .NET
   - Microsoft Orleans
   - DTDL
-  - IoT
+  - Linked Data
+  - Angular
+  - NestJS
+  - Electron
 ---
 
 An **IoT stack** built around the Digital Twin Definition Language on **Microsoft Orleans**, letting users define their own vocabulary and query the resulting knowledge graph through a range of APIs.

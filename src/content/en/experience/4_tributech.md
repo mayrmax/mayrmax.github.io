@@ -11,8 +11,11 @@ main_technologies:
   - C# / .NET
   - Microsoft Orleans
   - DTDL
-  - IoT
+  - Linked Data
+  - IIoT
   - Angular
+  - NestJS
+  - Electron
   - Azure, GitHub CI/CD
   - Docker
 ---

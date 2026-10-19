@@ -109,11 +109,16 @@ const services = defineCollection({
   }),
 });
 
-/** Work worth pointing at, listed under the services. */
+/**
+ * Work worth pointing at, listed under the services. Featured entries get the
+ * full treatment; the rest form a compact list, so recent client work shows
+ * without burying the flagships.
+ */
 const references = defineCollection({
   loader: localizedGlob('references'),
   schema: z.object({
     order: z.number(),
+    featured: z.boolean().default(false),
     name: z.string(),
     url: z.url().optional(),
     role: z.string(),

@@ -1,19 +1,23 @@
 ---
 order: 2
+featured: true
 name: kkmOS
 url: https://kkmos.eu/
 role: Crisis and disaster management platform
 duration:
-  start: 2023
+  start: 2025
   end: Present
 technologies:
   - C# / .NET
   - Angular
   - PostgreSQL
   - Marten
+  - Event Sourcing
+  - EF Core
+  - SignalR
+  - QuestPDF
   - Webhooks
   - OGC / GIS
-  - LLM Integration
 ---
 
 A platform for authorities, emergency services and companies handling the incidents that fall outside routine operations — natural disasters, major accidents, mass gatherings. It combines a **digital situation map**, an **incident logbook** and staff management, with reports passing between state, district and municipal level.
