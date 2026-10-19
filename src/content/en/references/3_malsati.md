@@ -10,7 +10,6 @@ duration:
 technologies:
   - C# / .NET
   - Astro
-  - Angular
   - React
   - PostgreSQL
   - EF Core

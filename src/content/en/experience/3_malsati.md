@@ -10,7 +10,6 @@ duration:
 main_technologies:
   - C# / .NET
   - Astro
-  - Angular
   - PostgreSQL
   - DDD
   - Domain Events
