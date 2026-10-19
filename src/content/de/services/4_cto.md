@@ -8,4 +8,4 @@ items:
   - Team-Mentoring
 ---
 
-Technische Führung ohne Vollzeitstelle. Ich berate bei der **Technologie-Auswahl**, führe **Code-Audits** durch, die zeigen, was Sie tatsächlich bekommen haben, und bringe Ordnung in die Art, wie Ihr Team liefert. Sinnvoll, wenn Sie das Urteil öfter brauchen als den Kopf.
+Technische Führung ohne Vollzeitstelle. Ich berate bei der **Technologie-Auswahl**, führe **Code-Audits** durch, die zeigen, was du tatsächlich bekommen hast, und bringe Ordnung in die Art, wie dein Team liefert. Sinnvoll, wenn du das Urteil öfter brauchst als den Kopf.

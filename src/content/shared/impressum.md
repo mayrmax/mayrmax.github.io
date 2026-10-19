@@ -41,7 +41,7 @@ Verleihungsstaat: Österreich
 
 Anwendbare und berufsrechtliche Vorschriften: GewO, UGB, abrufbar unter [www.ris.bka.gv.at](https://www.ris.bka.gv.at).
 
-Für weitere Informationen hinsichtlich der gewerbe- und berufsrechtlichen Vorschriften informieren Sie sich bitte unter [firmen.wko.at](https://firmen.wko.at).
+Für weitere Informationen hinsichtlich der gewerbe- und berufsrechtlichen Vorschriften informiere dich bitte unter [firmen.wko.at](https://firmen.wko.at).
 
 ## Verbraucherstreitbeilegung
 
