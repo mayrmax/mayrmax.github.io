@@ -42,19 +42,27 @@ Außerdem werte ich die Server-Log-Files in zusammengefasster Form aus, um zu se
 
 Die Rechtsgrundlage ist einerseits die Erfüllung des Vertrags, konkret die kostenlose Zurverfügungstellung dieser Webseite (Art 6 Abs 1 lit b DSGVO), mein überwiegendes Interesse an der Sicherheit und Funktionstüchtigkeit der Webseite (Art 6 Abs 1 lit f DSGVO) und schlussendlich sind diese technisch für den Betrieb der Webseite erforderlich (§ 165 Abs 3 TKG).
 
-## 8. Keine Cookies, keine Tracking-Skripte, keine Einbindungen Dritter
+## 8. Zugriffsstatistik mit Plausible
 
-Diese Website setzt **keine Cookies**, führt **keine Analyse- oder Tracking-Skripte** in deinem Browser aus und bindet **keine Inhalte Dritter** ein. Die Zugriffsstatistik entsteht ausschließlich auf dem Server, aus den Server-Log-Files (siehe Punkt 7). Es gibt daher auch keinen Cookie-Manager und keine Einwilligung, die du erteilen oder widerrufen müsstest.
+Um zu sehen, welche Inhalte gelesen werden, nutze ich [Plausible Analytics](https://plausible.io/). Plausible ist Open Source und läuft selbst gehostet auf meinem eigenen Server unter plausible.mayrmax.com. Die Daten gehen an niemanden sonst, auch nicht an den Hersteller von Plausible.
+
+Plausible setzt **keine Cookies** und speichert nichts auf deinem Gerät. Beim Aufruf einer Seite werden die aufgerufene Adresse, die Seite, von der du kommst (Referrer), Browser, Betriebssystem, Gerätetyp und der aus deiner IP-Adresse abgeleitete ungefähre Standort (Land, gegebenenfalls Region und Stadt) erfasst. Deine IP-Adresse selbst wird nicht gespeichert. Um mehrere Aufrufe am selben Tag als einen Besuch zu zählen, wird aus IP-Adresse und Browserkennung zusammen mit einem täglich wechselnden Zufallswert eine Prüfsumme gebildet; der Zufallswert wird nach 24 Stunden gelöscht. Damit ist weder ein Rückschluss auf deine Person noch ein Wiedererkennen über mehrere Tage möglich. Ausgewertet werden nur zusammengefasste Zahlen.
+
+Rechtsgrundlage ist mein berechtigtes Interesse, die Website anhand anonymer Zugriffszahlen zu verbessern (Art 6 Abs 1 lit f DSGVO). Wenn du nicht erfasst werden willst, kannst du das Script mit jedem gängigen Werbe- oder Script-Blocker unterbinden; die Website funktioniert ohne es genauso.
+
+## 9. Keine Cookies, keine Einbindungen Dritter
+
+Diese Website setzt **keine Cookies** und bindet **keine Inhalte Dritter** ein. Die Zugriffsstatistik (Punkte 7 und 8) läuft ausschließlich auf meinem eigenen Server und ohne Cookies. Es gibt daher auch keinen Cookie-Manager und keine Einwilligung, die du erteilen oder widerrufen müsstest.
 
 Schriftarten werden von diesem Server ausgeliefert und nicht von einem externen Anbieter nachgeladen. Beim Aufruf dieser Website wird folglich keine Verbindung zu Servern Dritter hergestellt und es werden keine Daten an Dritte übermittelt.
 
 Wählst du über den Schalter in der Navigation ein helles oder dunkles Design, speichert dein Browser diese Einstellung lokal (im sogenannten Local Storage). Sie verlässt deinen Browser nie und wird nicht an mich übertragen. Du kannst sie jederzeit löschen, indem du die Website-Daten in deinem Browser entfernst.
 
-## 9. Kontakt per E-Mail
+## 10. Kontakt per E-Mail
 
 Wenn du mir eine E-Mail schreibst, verarbeite ich deine E-Mail-Adresse, deinen Namen und den Inhalt deiner Nachricht, um deine Anfrage zu beantworten. Geht es um ein mögliches Projekt, ist die Rechtsgrundlage Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Maßnahmen), sonst mein berechtigtes Interesse, Anfragen zu beantworten (Art. 6 Abs. 1 lit. f DSGVO). Die E-Mails liegen bei meinem E-Mail-Provider (siehe Punkt 5). Ich lösche deine Nachricht, sobald deine Anfrage erledigt ist, es sei denn, gesetzliche Aufbewahrungspflichten stehen dem entgegen.
 
-## 10. Verlinkung auf externe Plattformen
+## 11. Verlinkung auf externe Plattformen
 
 Diese Website verlinkt auf meine Profile bei externen Plattformen. Ein solcher Link überträgt für sich genommen keine Daten — erst wenn du ihm folgst, verarbeitet der jeweilige Anbieter deine Daten als eigener Verantwortlicher auf Basis seiner eigenen Datenschutzerklärung. Auf Art und Umfang dieser Verarbeitung habe ich keinen Einfluss.
 

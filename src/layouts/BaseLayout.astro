@@ -143,6 +143,22 @@ const socialImage = new URL(ogImagePath(locale, noindex ? '/' : path), Astro.sit
         document.documentElement.dataset.theme = theme;
       })();
     </script>
+    <!-- Cookieless statistics, self-hosted on plausible.mayrmax.com (Datenschutz, section 8). -->
+    <script async src="https://plausible.mayrmax.com/js/pa-4T9u1E4Litq24bfdUQiaw.js" is:inline
+    ></script>
+    <script is:inline>
+      window.plausible =
+        window.plausible ||
+        function () {
+          (plausible.q = plausible.q || []).push(arguments);
+        };
+      plausible.init =
+        plausible.init ||
+        function (i) {
+          plausible.o = i || {};
+        };
+      plausible.init();
+    </script>
     <Font cssVariable="--font-hanken" preload />
     <Font cssVariable="--font-jetbrains" preload />
   </head>
