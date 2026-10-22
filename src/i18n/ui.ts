@@ -20,6 +20,7 @@ export const ui = {
     'title.about': 'About',
     'title.impressum': 'Impressum',
     'title.datenschutz': 'Datenschutz',
+    'title.appPrivacy': 'Privacy policy',
     'about.experience': 'Work experience',
     'about.education': 'Education',
     'about.theses': 'Theses',
@@ -52,6 +53,7 @@ export const ui = {
       'Datenschutzerklärung für mayrmax.com: keine Cookies, kein Tracking, keine Einbindungen Dritter. Verarbeitung von Server-Logs und Betroffenenrechte nach DSGVO.',
     'meta.keywords':
       'Max Mayr, AI Solution Architect, C#, .NET, Astro, Angular, LLM, RAG, IoT, Technical SEO, Fractional CTO, Innsbruck',
+    'meta.appPrivacy': 'Which personal data the app processes, why, and what you can do about it.',
   },
   de: {
     'nav.label': 'Hauptnavigation',
@@ -67,6 +69,7 @@ export const ui = {
     'title.about': 'Über mich',
     'title.impressum': 'Impressum',
     'title.datenschutz': 'Datenschutz',
+    'title.appPrivacy': 'Datenschutzerklärung',
     'about.experience': 'Berufserfahrung',
     'about.education': 'Ausbildung',
     'about.theses': 'Abschlussarbeiten',
@@ -99,6 +102,8 @@ export const ui = {
       'Datenschutzerklärung für mayrmax.com: keine Cookies, kein Tracking, keine Einbindungen Dritter. Verarbeitung von Server-Logs und Betroffenenrechte nach DSGVO.',
     'meta.keywords':
       'Max Mayr, AI Solution Architect, C#, .NET, Astro, Angular, LLM, RAG, IoT, Technical SEO, Fractional CTO, Innsbruck',
+    'meta.appPrivacy':
+      'Welche personenbezogenen Daten die App verarbeitet, wozu, und welche Rechte du hast.',
   },
 } as const satisfies Record<Locale, Record<string, string>>;
 

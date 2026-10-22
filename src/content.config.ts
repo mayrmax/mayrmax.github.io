@@ -183,6 +183,20 @@ const sections = defineCollection({
   }),
 });
 
+/**
+ * One privacy policy per app, shown at /apps/<filename>/privacy (German:
+ * /de/apps/<filename>/datenschutz) and linked from the store listings. Until an
+ * app is `listed` its policy is reachable by link only: noindex and left out of
+ * the sitemap.
+ */
+const privacy = defineCollection({
+  loader: localizedGlob('privacy'),
+  schema: z.object({
+    app: z.string(),
+    listed: z.boolean().default(false),
+  }),
+});
+
 /** The Impressum is legal boilerplate and stays German for both languages. */
 const shared = defineCollection({
   loader: glob({ base: './src/content/shared', pattern: '**/*.md' }),
@@ -198,6 +212,7 @@ export const collections = {
   projects,
   publications,
   sections,
+  privacy,
   shared,
 };
 

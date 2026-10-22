@@ -3,6 +3,8 @@ import { getCollection } from 'astro:content';
 
 import { isLocale, locales, type Locale } from '../../i18n/config';
 import { entrySlug, getSection, getShared } from '../../i18n/content';
+import { appPrivacyPath } from '../../i18n/routes';
+import { useTranslations } from '../../i18n/ui';
 import { renderCard, type CardContent } from '../../og/card';
 import { ogImagePath } from '../../og/paths';
 
@@ -76,6 +78,22 @@ export const getStaticPaths = (async () => {
       card: {
         command: `cat blog/${slug}`,
         headline: post.data.title,
+        role: 'AI Solution Architect',
+      },
+    });
+  }
+
+  // Unlisted policies are noindex and borrow the home page's image.
+  for (const policy of await getCollection('privacy', ({ data }) => data.listed)) {
+    const locale = policy.id.slice(0, policy.id.indexOf('/'));
+    if (!isLocale(locale)) continue;
+    const path = appPrivacyPath(locale, entrySlug(policy.id));
+    cards.push({
+      path,
+      locale,
+      card: {
+        command: `cat ${path.slice(1)}`,
+        headline: `${policy.data.app} – ${useTranslations(locale)('title.appPrivacy')}`,
         role: 'AI Solution Architect',
       },
     });

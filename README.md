@@ -62,6 +62,7 @@ src/
 │   │   ├── experience/   about page
 │   │   ├── education/    about page
 │   │   ├── publications/ theses, about page
+│   │   ├── privacy/      one privacy policy per app → /apps/<filename>/privacy
 │   │   └── sections/     editable copy for the home, about and services pages
 │   ├── de/           German content, same shape
 │   └── shared/       language-independent documents (Impressum, Datenschutz)
@@ -102,6 +103,15 @@ English version can each have a readable URL. The two are paired by a shared
 `translationKey` in the frontmatter, which drives the language switcher, the
 hreflang links and the sitemap; a post without a translation only links to the
 other language's blog index.
+
+### App privacy policies
+
+Each app gets its own privacy policy in `src/content/<locale>/privacy/<app>.md`,
+for the store listings to link to: `/apps/<app>/privacy` in English and
+`/de/apps/<app>/datenschutz` in German. Nothing on the site links to them. Until
+`listed: true` is set in the frontmatter, a policy is `noindex`, left out of the
+sitemap and has no preview image of its own, so it is reachable by link only.
+Set it once the app is in the stores and worth advertising.
 
 ### Preview images and favicon
 

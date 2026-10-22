@@ -260,6 +260,32 @@ function referencesCollection(locale: LocaleId) {
   });
 }
 
+function privacyCollection(locale: LocaleId) {
+  return collection({
+    label: `App privacy policies (${locale.toUpperCase()})`,
+    path: `src/content/${locale}/privacy/*`,
+    slugField: 'app',
+    format: { contentField: 'content' },
+    columns: ['app', 'listed'],
+    schema: {
+      app: fields.slug({
+        name: { label: 'App name' },
+        slug: {
+          label: 'URL slug',
+          description: 'Keep it identical across languages: /apps/<slug>/privacy.',
+        },
+      }),
+      listed: fields.checkbox({
+        label: 'Listed',
+        description:
+          'Tick once the app is in the stores. Until then the page is reachable by link only: noindex and not in the sitemap.',
+        defaultValue: false,
+      }),
+      content: markdown('Privacy policy'),
+    },
+  });
+}
+
 function servicesPageSingleton(locale: LocaleId) {
   return singleton({
     label: `Services page (${locale.toUpperCase()})`,
@@ -432,6 +458,7 @@ export default config({
         'experienceEn',
         'educationEn',
         'publicationsEn',
+        'privacyEn',
       ],
       Deutsch: [
         'homeDe',
@@ -448,6 +475,7 @@ export default config({
         'experienceDe',
         'educationDe',
         'publicationsDe',
+        'privacyDe',
       ],
       'Both languages': ['impressum', 'datenschutz'],
     },
@@ -460,6 +488,7 @@ export default config({
     experienceEn: experienceCollection('en'),
     educationEn: educationCollection('en'),
     publicationsEn: publicationsCollection('en'),
+    privacyEn: privacyCollection('en'),
     servicesDe: servicesCollection('de'),
     referencesDe: referencesCollection('de'),
     blogDe: blogCollection('de'),
@@ -467,6 +496,7 @@ export default config({
     experienceDe: experienceCollection('de'),
     educationDe: educationCollection('de'),
     publicationsDe: publicationsCollection('de'),
+    privacyDe: privacyCollection('de'),
   },
   singletons: {
     homeEn: homeSingleton('en'),

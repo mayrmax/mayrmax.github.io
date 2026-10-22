@@ -10,3 +10,11 @@ export function localeRoutes() {
     props: { locale } satisfies { locale: Locale },
   }));
 }
+
+/**
+ * Where an app's privacy policy lives, without the locale prefix. The last
+ * segment is in the page's own language, since the store listings link to it.
+ */
+export function appPrivacyPath(locale: Locale, app: string): string {
+  return `/apps/${app}/${locale === 'de' ? 'datenschutz' : 'privacy'}`;
+}

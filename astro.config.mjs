@@ -5,6 +5,9 @@ import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
+import { localePath } from './src/i18n/config';
+import { appPrivacyPath } from './src/i18n/routes';
+
 // Keystatic runs in local mode: its admin UI is an SSR route, so it is loaded
 // only while the dev server is up. The production build therefore stays fully
 // static (no adapter, no React in the output) and keeps deploying to GitHub Pages.
@@ -37,6 +40,18 @@ const blogTranslations = Object.values(
     }
     return groups;
   }, {}),
+);
+
+/** App privacy policies that are not `listed` yet: reachable by link, not in the sitemap. */
+const unlistedPaths = new Set(
+  ['en', 'de'].flatMap((locale) => {
+    const dir = `src/content/${locale}/privacy`;
+    if (!existsSync(dir)) return [];
+    return readdirSync(dir)
+      .filter((name) => name.endsWith('.md'))
+      .filter((name) => !/^listed:\s*true\b/m.test(readFileSync(`${dir}/${name}`, 'utf8')))
+      .map((name) => localePath(locale, appPrivacyPath(locale, name.replace(/\.md$/, ''))));
+  }),
 );
 
 // https://astro.build/config
@@ -82,6 +97,7 @@ export default defineConfig({
         defaultLocale: 'en',
         locales: { en: 'en', de: 'de' },
       },
+      filter: (page) => !unlistedPaths.has(new URL(page).pathname),
       // The i18n option pairs pages by identical path, but blog posts have a
       // slug per language; pair those by their translationKey instead.
       serialize(item) {
