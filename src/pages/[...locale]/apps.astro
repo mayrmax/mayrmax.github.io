@@ -1,0 +1,125 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { getEntry } from 'astro:content';
+
+import Contact from '../../components/Contact.astro';
+import Container from '../../components/Container.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Prose from '../../components/Prose.astro';
+import Row from '../../components/Row.astro';
+import { localePath } from '../../i18n/config';
+import { getLocalizedRendered, getSection } from '../../i18n/content';
+import { appPrivacyPath, localeRoutes } from '../../i18n/routes';
+import { useTranslations } from '../../i18n/ui';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export const getStaticPaths = (() => localeRoutes()) satisfies GetStaticPaths;
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const [intros, apps] = await Promise.all([
+  getSection('page-intros', locale),
+  getLocalizedRendered('apps', locale),
+]);
+
+// An app's privacy policy is linked once it is listed (see the privacy collection).
+const privacyLinks = Object.fromEntries(
+  await Promise.all(
+    apps.map(async ({ slug }) => {
+      const policy = await getEntry('privacy', `${locale}/${slug}`);
+      return [slug, policy?.data.listed ? localePath(locale, appPrivacyPath(locale, slug)) : null];
+    }),
+  ),
+);
+---
+
+<BaseLayout
+  locale={locale}
+  path="/apps"
+  title={intros.appsSeoTitle ?? intros.appsHeading ?? ''}
+  description={intros.appsSubtitle}
+>
+  <PageHeader heading={intros.appsHeading ?? ''} subtitle={intros.appsSubtitle} />
+
+  <Container class="pt-16">
+    <div class="border-t border-rule">
+      {
+        apps.map(({ slug, data, Content }) => {
+          const stores = [
+            { label: 'App Store', url: data.appStore },
+            { label: 'Google Play', url: data.googlePlay },
+          ].filter((store) => store.url);
+          return (
+            <Row id={slug}>
+              <Fragment slot="aside">
+                <img
+                  class="size-20 rounded-[22%] border border-(--edge)"
+                  src={data.icon}
+                  alt=""
+                  width="192"
+                  height="192"
+                />
+                <h2 class="mt-4 text-[26px] leading-[1.1] font-bold tracking-[-0.015em]">
+                  {data.name}
+                </h2>
+                <p class="mt-1 font-mono text-sm text-muted">
+                  {[t(`apps.${data.kind}`), ...data.platforms].join(' · ')}
+                </p>
+              </Fragment>
+              <p class="max-w-2xl font-medium">{data.tagline}</p>
+              <Prose class="mt-2 max-w-2xl">
+                <Content />
+              </Prose>
+              <p class="mt-3 text-base text-muted">{data.technologies.join(', ')}</p>
+              <div class="mt-6 flex flex-wrap items-center gap-x-7 gap-y-4">
+                {stores.length > 0 ? (
+                  stores.map((store) => (
+                    <a
+                      class="inline-block bg-ink px-5.5 py-3.5 font-bold text-paper hover:bg-ink/85 focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-pl-blue"
+                      href={store.url}
+                    >
+                      {store.label}
+                    </a>
+                  ))
+                ) : (
+                  <span class="inline-block border border-ink px-3 py-1.5 font-mono text-sm">
+                    {t('apps.comingSoon')}
+                  </span>
+                )}
+                {privacyLinks[slug] && (
+                  <a
+                    class="text-base underline decoration-1 underline-offset-4 hover:decoration-2"
+                    href={privacyLinks[slug]}
+                  >
+                    {t('apps.privacy')}
+                  </a>
+                )}
+              </div>
+              {data.screenshots.length > 0 && (
+                <ul
+                  class="mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4"
+                  aria-label={`${data.name}: ${t('apps.screenshots')}`}
+                >
+                  {data.screenshots.map((shot) => (
+                    <li class="w-40 shrink-0 snap-start sm:w-48">
+                      <img
+                        class="w-full rounded-lg border border-rule"
+                        src={shot.src}
+                        alt={shot.alt}
+                        width="540"
+                        height="1080"
+                        loading="lazy"
+                      />
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </Row>
+          );
+        })
+      }
+    </div>
+  </Container>
+  <Contact locale={locale} />
+</BaseLayout>

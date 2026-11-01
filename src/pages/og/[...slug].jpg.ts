@@ -49,6 +49,11 @@ export const getStaticPaths = (async () => {
           role,
         },
       },
+      {
+        path: '/apps',
+        locale,
+        card: { command: 'ls apps', headline: intros.appsSeoTitle ?? '', role },
+      },
       { path: '/about', locale, card: { command: 'whoami', headline: bio.seoTitle ?? '', role } },
       {
         path: '/blog',

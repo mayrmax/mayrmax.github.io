@@ -3,6 +3,9 @@ servicesSeoTitle: "Fractional CTO, .NET & KI-Beratung"
 blogSeoTitle: "Blog über dezentrales Web & Linked Data"
 workSeoTitle: "Arbeit: Projekte mit .NET, Orleans, Angular & GIS"
 workHeading: Arbeit
+appsSeoTitle: "Mobile Apps & Spiele für iOS & Android"
+appsHeading: Apps & Spiele
+appsSubtitle: Mobile Apps und Spiele, die ich selbst entwerfe, baue und betreibe.
 workSubtitle: "Produkte, die ich baue und betreibe, Kundenprojekte seit der Selbstständigkeit, und was davor war."
 servicesHeading: Leistungen
 servicesSubtitle: Architektur, Backend, Web und KI.

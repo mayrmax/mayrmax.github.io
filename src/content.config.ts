@@ -168,11 +168,14 @@ const sections = defineCollection({
     // page-intros
     servicesSeoTitle: z.string().optional(),
     workSeoTitle: z.string().optional(),
+    appsSeoTitle: z.string().optional(),
     blogSeoTitle: z.string().optional(),
     servicesHeading: z.string().optional(),
     servicesSubtitle: z.string().optional(),
     workHeading: z.string().optional(),
     workSubtitle: z.string().optional(),
+    appsHeading: z.string().optional(),
+    appsSubtitle: z.string().optional(),
     blogHeading: z.string().optional(),
     blogSubtitle: z.string().optional(),
     notFoundHeading: z.string().optional(),
@@ -180,6 +183,27 @@ const sections = defineCollection({
     // contact
     email: z.email().optional(),
     emailSubject: z.string().optional(),
+  }),
+});
+
+/**
+ * My own apps and games, listed on /apps. One without a store link shows as
+ * coming soon; set `appStore` and `googlePlay` once it is out.
+ */
+const apps = defineCollection({
+  loader: localizedGlob('apps'),
+  schema: z.object({
+    order: z.number(),
+    kind: z.enum(['app', 'game']),
+    name: z.string(),
+    tagline: z.string(),
+    // Paths under public/, like the about page's photo.
+    icon: z.string(),
+    platforms: z.array(z.string()).default([]),
+    appStore: z.url().optional(),
+    googlePlay: z.url().optional(),
+    technologies: z.array(z.string()).default([]),
+    screenshots: z.array(z.object({ src: z.string(), alt: z.string() })).default([]),
   }),
 });
 
@@ -212,6 +236,7 @@ export const collections = {
   projects,
   publications,
   sections,
+  apps,
   privacy,
   shared,
 };

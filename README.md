@@ -62,6 +62,7 @@ src/
 │   │   ├── experience/   about page
 │   │   ├── education/    about page
 │   │   ├── publications/ theses, about page
+│   │   ├── apps/         my own apps and games     → /apps
 │   │   ├── privacy/      one privacy policy per app → /apps/<filename>/privacy
 │   │   └── sections/     editable copy for the home, about and services pages
 │   ├── de/           German content, same shape
@@ -104,14 +105,23 @@ English version can each have a readable URL. The two are paired by a shared
 hreflang links and the sitemap; a post without a translation only links to the
 other language's blog index.
 
+### Apps and games
+
+`/apps` lists my own apps and games, one file each in
+`src/content/<locale>/apps/`, with `kind` set to `app` or `game`. Screenshots
+and icons live in `public/assets/apps/<app>/`, resized to WebP (the store
+screenshots of Paddle Perfect come from its fastlane folder, 540 px wide). An
+entry without `appStore` or `googlePlay` shows as coming soon; once it has a
+store link and its privacy policy is `listed`, the page links both.
+
 ### App privacy policies
 
 Each app gets its own privacy policy in `src/content/<locale>/privacy/<app>.md`,
 for the store listings to link to: `/apps/<app>/privacy` in English and
-`/de/apps/<app>/datenschutz` in German. Nothing on the site links to them. Until
-`listed: true` is set in the frontmatter, a policy is `noindex`, left out of the
-sitemap and has no preview image of its own, so it is reachable by link only.
-Set it once the app is in the stores and worth advertising.
+`/de/apps/<app>/datenschutz` in German. Until `listed: true` is set in the
+frontmatter, a policy is `noindex`, left out of the sitemap, has no preview image
+of its own and is not linked from `/apps`, so it is reachable by link only. Set
+it once the app is in the stores.
 
 ### Preview images and favicon
 

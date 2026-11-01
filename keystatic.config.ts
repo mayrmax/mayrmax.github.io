@@ -260,6 +260,61 @@ function referencesCollection(locale: LocaleId) {
   });
 }
 
+function appsCollection(locale: LocaleId) {
+  return collection({
+    label: `Apps & games (${locale.toUpperCase()})`,
+    path: `src/content/${locale}/apps/*`,
+    slugField: 'name',
+    format: { contentField: 'content' },
+    columns: ['order', 'name'],
+    schema: {
+      order: fields.integer({
+        label: 'Order',
+        description: 'Lower numbers appear first on the page.',
+        validation: { isRequired: true },
+      }),
+      kind: fields.select({
+        label: 'Kind',
+        options: [
+          { label: 'App', value: 'app' },
+          { label: 'Game', value: 'game' },
+        ],
+        defaultValue: 'app',
+      }),
+      name: fields.slug({
+        name: { label: 'Name' },
+        slug: {
+          label: 'URL slug',
+          description:
+            'Keep it identical across languages and to the privacy policy: /apps#<slug>, /apps/<slug>/privacy.',
+        },
+      }),
+      tagline: fields.text({ label: 'Tagline', validation: { isRequired: true } }),
+      icon: fields.text({
+        label: 'Icon path',
+        description: 'Under public/, e.g. /assets/apps/<slug>/icon.webp.',
+        validation: { isRequired: true },
+      }),
+      platforms: technologyList('Platforms'),
+      appStore: fields.url({
+        label: 'App Store URL',
+        description:
+          'Leave both store URLs empty while the app is not out: it shows as coming soon.',
+      }),
+      googlePlay: fields.url({ label: 'Google Play URL' }),
+      technologies: technologyList('Technologies'),
+      screenshots: fields.array(
+        fields.object({
+          src: fields.text({ label: 'Image path', validation: { isRequired: true } }),
+          alt: fields.text({ label: 'Alt text', validation: { isRequired: true } }),
+        }),
+        { label: 'Screenshots', itemLabel: (props) => props.fields.src.value },
+      ),
+      content: markdown('Description'),
+    },
+  });
+}
+
 function privacyCollection(locale: LocaleId) {
   return collection({
     label: `App privacy policies (${locale.toUpperCase()})`,
@@ -427,8 +482,14 @@ function pageIntrosSingleton(locale: LocaleId) {
         label: 'Work SEO title',
         description: 'Search result title; "— Max Mayr" is appended. Falls back to the heading.',
       }),
+      appsSeoTitle: fields.text({
+        label: 'Apps SEO title',
+        description: 'Search result title; "— Max Mayr" is appended. Falls back to the heading.',
+      }),
       workHeading: fields.text({ label: 'Work heading', validation: { isRequired: true } }),
       workSubtitle: fields.text({ label: 'Work subtitle', validation: { isRequired: true } }),
+      appsHeading: fields.text({ label: 'Apps heading', validation: { isRequired: true } }),
+      appsSubtitle: fields.text({ label: 'Apps subtitle', validation: { isRequired: true } }),
       blogHeading: fields.text({ label: 'Blog heading', validation: { isRequired: true } }),
       blogSubtitle: fields.text({ label: 'Blog subtitle', validation: { isRequired: true } }),
       notFoundHeading: fields.text({ label: '404 heading', validation: { isRequired: true } }),
@@ -448,6 +509,7 @@ export default config({
         'servicesPageEn',
         'servicesEn',
         'referencesEn',
+        'appsEn',
         'aboutBioEn',
         'aboutInterestsEn',
         'aboutSkillsEn',
@@ -465,6 +527,7 @@ export default config({
         'servicesPageDe',
         'servicesDe',
         'referencesDe',
+        'appsDe',
         'aboutBioDe',
         'aboutInterestsDe',
         'aboutSkillsDe',
@@ -483,6 +546,7 @@ export default config({
   collections: {
     servicesEn: servicesCollection('en'),
     referencesEn: referencesCollection('en'),
+    appsEn: appsCollection('en'),
     blogEn: blogCollection('en'),
     projectsEn: projectsCollection('en'),
     experienceEn: experienceCollection('en'),
@@ -491,6 +555,7 @@ export default config({
     privacyEn: privacyCollection('en'),
     servicesDe: servicesCollection('de'),
     referencesDe: referencesCollection('de'),
+    appsDe: appsCollection('de'),
     blogDe: blogCollection('de'),
     projectsDe: projectsCollection('de'),
     experienceDe: experienceCollection('de'),
