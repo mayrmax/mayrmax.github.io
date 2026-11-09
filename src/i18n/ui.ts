@@ -22,6 +22,7 @@ export const ui = {
     'title.impressum': 'Impressum',
     'title.datenschutz': 'Datenschutz',
     'title.appPrivacy': 'Privacy policy',
+    'title.appSupport': 'Support',
     'about.experience': 'Work experience',
     'about.education': 'Education',
     'about.theses': 'Theses',
@@ -33,6 +34,7 @@ export const ui = {
     'apps.comingSoon': 'Coming soon',
     'apps.screenshots': 'Screenshots',
     'apps.privacy': 'Privacy policy',
+    'apps.support': 'Support',
     'contact.anchor': 'contact',
     'blog.minutes': 'min read',
     'blog.updated': 'updated',
@@ -60,6 +62,7 @@ export const ui = {
     'meta.keywords':
       'Max Mayr, AI Solution Architect, C#, .NET, Astro, Angular, LLM, RAG, IoT, Technical SEO, Fractional CTO, Innsbruck',
     'meta.appPrivacy': 'Which personal data the app processes, why, and what you can do about it.',
+    'meta.appSupport': 'Answers to common questions and how to get in touch.',
   },
   de: {
     'nav.label': 'Hauptnavigation',
@@ -77,6 +80,7 @@ export const ui = {
     'title.impressum': 'Impressum',
     'title.datenschutz': 'Datenschutz',
     'title.appPrivacy': 'Datenschutzerklärung',
+    'title.appSupport': 'Support',
     'about.experience': 'Berufserfahrung',
     'about.education': 'Ausbildung',
     'about.theses': 'Abschlussarbeiten',
@@ -88,6 +92,7 @@ export const ui = {
     'apps.comingSoon': 'Bald verfügbar',
     'apps.screenshots': 'Screenshots',
     'apps.privacy': 'Datenschutzerklärung',
+    'apps.support': 'Support',
     'contact.anchor': 'kontakt',
     'blog.minutes': 'Min. Lesezeit',
     'blog.updated': 'aktualisiert',
@@ -116,6 +121,7 @@ export const ui = {
       'Max Mayr, AI Solution Architect, C#, .NET, Astro, Angular, LLM, RAG, IoT, Technical SEO, Fractional CTO, Innsbruck',
     'meta.appPrivacy':
       'Welche personenbezogenen Daten die App verarbeitet, wozu, und welche Rechte du hast.',
+    'meta.appSupport': 'Antworten auf häufige Fragen und wie du mich erreichst.',
   },
 } as const satisfies Record<Locale, Record<string, string>>;
 

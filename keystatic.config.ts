@@ -341,6 +341,32 @@ function privacyCollection(locale: LocaleId) {
   });
 }
 
+function supportCollection(locale: LocaleId) {
+  return collection({
+    label: `App support pages (${locale.toUpperCase()})`,
+    path: `src/content/${locale}/support/*`,
+    slugField: 'app',
+    format: { contentField: 'content' },
+    columns: ['app', 'listed'],
+    schema: {
+      app: fields.slug({
+        name: { label: 'App name' },
+        slug: {
+          label: 'URL slug',
+          description: 'Keep it identical across languages: /apps/<slug>/support.',
+        },
+      }),
+      listed: fields.checkbox({
+        label: 'Listed',
+        description:
+          'Tick once the app is in the stores. Until then the page is reachable by link only: noindex and not in the sitemap.',
+        defaultValue: false,
+      }),
+      content: markdown('Support page'),
+    },
+  });
+}
+
 function servicesPageSingleton(locale: LocaleId) {
   return singleton({
     label: `Services page (${locale.toUpperCase()})`,
@@ -553,6 +579,7 @@ export default config({
     educationEn: educationCollection('en'),
     publicationsEn: publicationsCollection('en'),
     privacyEn: privacyCollection('en'),
+    supportEn: supportCollection('en'),
     servicesDe: servicesCollection('de'),
     referencesDe: referencesCollection('de'),
     appsDe: appsCollection('de'),
@@ -562,6 +589,7 @@ export default config({
     educationDe: educationCollection('de'),
     publicationsDe: publicationsCollection('de'),
     privacyDe: privacyCollection('de'),
+    supportDe: supportCollection('de'),
   },
   singletons: {
     homeEn: homeSingleton('en'),

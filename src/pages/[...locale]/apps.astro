@@ -9,7 +9,7 @@ import Prose from '../../components/Prose.astro';
 import Row from '../../components/Row.astro';
 import { localePath } from '../../i18n/config';
 import { getLocalizedRendered, getSection } from '../../i18n/content';
-import { appPrivacyPath, localeRoutes } from '../../i18n/routes';
+import { appPrivacyPath, appSupportPath, localeRoutes } from '../../i18n/routes';
 import { useTranslations } from '../../i18n/ui';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
@@ -22,6 +22,16 @@ const [intros, apps] = await Promise.all([
   getSection('page-intros', locale),
   getLocalizedRendered('apps', locale),
 ]);
+
+// An app's support page is linked once it is listed (see the support collection).
+const supportLinks = Object.fromEntries(
+  await Promise.all(
+    apps.map(async ({ slug }) => {
+      const page = await getEntry('support', `${locale}/${slug}`);
+      return [slug, page?.data.listed ? localePath(locale, appSupportPath(locale, slug)) : null];
+    }),
+  ),
+);
 
 // An app's privacy policy is linked once it is listed (see the privacy collection).
 const privacyLinks = Object.fromEntries(
@@ -86,6 +96,14 @@ const privacyLinks = Object.fromEntries(
                   <span class="inline-block border border-ink px-3 py-1.5 font-mono text-sm">
                     {t('apps.comingSoon')}
                   </span>
+                )}
+                {supportLinks[slug] && (
+                  <a
+                    class="text-base underline decoration-1 underline-offset-4 hover:decoration-2"
+                    href={supportLinks[slug]}
+                  >
+                    {t('apps.support')}
+                  </a>
                 )}
                 {privacyLinks[slug] && (
                   <a

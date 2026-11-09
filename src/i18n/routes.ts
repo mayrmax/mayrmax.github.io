@@ -18,3 +18,8 @@ export function localeRoutes() {
 export function appPrivacyPath(locale: Locale, app: string): string {
   return `/apps/${app}/${locale === 'de' ? 'datenschutz' : 'privacy'}`;
 }
+
+/** Where an app's support page lives, without the locale prefix (same slug in both languages). */
+export function appSupportPath(_locale: Locale, app: string): string {
+  return `/apps/${app}/support`;
+}

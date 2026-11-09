@@ -221,6 +221,18 @@ const privacy = defineCollection({
   }),
 });
 
+/**
+ * One support page per app (FAQ and contact), shown at /apps/<filename>/support in
+ * both languages and linked from the store listings. Same `listed` rule as privacy.
+ */
+const support = defineCollection({
+  loader: localizedGlob('support'),
+  schema: z.object({
+    app: z.string(),
+    listed: z.boolean().default(false),
+  }),
+});
+
 /** The Impressum is legal boilerplate and stays German for both languages. */
 const shared = defineCollection({
   loader: glob({ base: './src/content/shared', pattern: '**/*.md' }),
@@ -238,6 +250,7 @@ export const collections = {
   sections,
   apps,
   privacy,
+  support,
   shared,
 };
 
