@@ -6,7 +6,7 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
 import { localePath } from './src/i18n/config';
-import { appPrivacyPath } from './src/i18n/routes';
+import { appPrivacyPath, appSupportPath } from './src/i18n/routes';
 
 // Keystatic runs in local mode: its admin UI is an SSR route, so it is loaded
 // only while the dev server is up. The production build therefore stays fully
@@ -42,16 +42,21 @@ const blogTranslations = Object.values(
   }, {}),
 );
 
-/** App privacy policies that are not `listed` yet: reachable by link, not in the sitemap. */
+/** App privacy and support pages that are not `listed` yet: reachable by link, not in the sitemap. */
 const unlistedPaths = new Set(
-  ['en', 'de'].flatMap((locale) => {
-    const dir = `src/content/${locale}/privacy`;
-    if (!existsSync(dir)) return [];
-    return readdirSync(dir)
-      .filter((name) => name.endsWith('.md'))
-      .filter((name) => !/^listed:\s*true\b/m.test(readFileSync(`${dir}/${name}`, 'utf8')))
-      .map((name) => localePath(locale, appPrivacyPath(locale, name.replace(/\.md$/, ''))));
-  }),
+  ['en', 'de'].flatMap((locale) =>
+    [
+      ['privacy', appPrivacyPath],
+      ['support', appSupportPath],
+    ].flatMap(([collection, pathOf]) => {
+      const dir = `src/content/${locale}/${collection}`;
+      if (!existsSync(dir)) return [];
+      return readdirSync(dir)
+        .filter((name) => name.endsWith('.md'))
+        .filter((name) => !/^listed:\s*true\b/m.test(readFileSync(`${dir}/${name}`, 'utf8')))
+        .map((name) => localePath(locale, pathOf(locale, name.replace(/\.md$/, ''))));
+    }),
+  ),
 );
 
 // https://astro.build/config

@@ -7,48 +7,57 @@ import PageHeader from '../../../../components/PageHeader.astro';
 import Prose from '../../../../components/Prose.astro';
 import { isLocale, localeParam, type Locale } from '../../../../i18n/config';
 import { entrySlug } from '../../../../i18n/content';
-import { appPrivacyPath } from '../../../../i18n/routes';
+import { appPrivacyPath, appSupportPath } from '../../../../i18n/routes';
 import { useTranslations } from '../../../../i18n/ui';
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
 
+/** Per-app pages: the privacy policy and the support page, one entry per language each. */
 export const getStaticPaths = (async () => {
-  const localeOf = (entry: CollectionEntry<'privacy'>): Locale => {
+  type Entry = CollectionEntry<'privacy'> | CollectionEntry<'support'>;
+  const localeOf = (entry: Entry): Locale => {
     const locale = entry.id.slice(0, entry.id.indexOf('/'));
-    if (!isLocale(locale)) throw new Error(`Privacy entry outside a locale directory: ${entry.id}`);
+    if (!isLocale(locale)) throw new Error(`App page outside a locale directory: ${entry.id}`);
     return locale;
   };
-  const policies = await getCollection('privacy');
-  return policies.map((policy) => {
-    const locale = localeOf(policy);
-    const app = entrySlug(policy.id);
-    const alternates = Object.fromEntries(
-      policies
-        .filter((candidate) => entrySlug(candidate.id) === app)
-        .map((candidate) => [localeOf(candidate), appPrivacyPath(localeOf(candidate), app)]),
-    );
-    const path = appPrivacyPath(locale, app);
-    return {
-      params: { locale: localeParam(locale), app, page: path.split('/').pop() },
-      props: { policy, locale, path, alternates },
-    };
-  });
+  const kinds = [
+    { kind: 'privacy' as const, entries: await getCollection('privacy'), pathOf: appPrivacyPath },
+    { kind: 'support' as const, entries: await getCollection('support'), pathOf: appSupportPath },
+  ];
+  return kinds.flatMap(({ kind, entries, pathOf }) =>
+    (entries as Entry[]).map((entry) => {
+      const locale = localeOf(entry);
+      const app = entrySlug(entry.id);
+      const alternates = Object.fromEntries(
+        (entries as Entry[])
+          .filter((candidate) => entrySlug(candidate.id) === app)
+          .map((candidate) => [localeOf(candidate), pathOf(localeOf(candidate), app)]),
+      );
+      const path = pathOf(locale, app);
+      return {
+        params: { locale: localeParam(locale), app, page: path.split('/').pop() },
+        props: { entry, kind, locale, path, alternates },
+      };
+    }),
+  );
 }) satisfies GetStaticPaths;
 
-const { policy, locale, path, alternates } = Astro.props;
+const { entry, kind, locale, path, alternates } = Astro.props;
 const t = useTranslations(locale);
-const { Content } = await render(policy);
-const { app, listed } = policy.data;
+const { Content } = await render(entry);
+const { app, listed } = entry.data;
+const subtitle = kind === 'support' ? t('title.appSupport') : t('title.appPrivacy');
+const description = kind === 'support' ? t('meta.appSupport') : t('meta.appPrivacy');
 ---
 
 <BaseLayout
   locale={locale}
   path={path}
   alternates={alternates}
-  title={`${app} – ${t('title.appPrivacy')}`}
-  description={t('meta.appPrivacy')}
+  title={`${app} – ${subtitle}`}
+  description={description}
   noindex={!listed}
 >
-  <PageHeader heading={app} subtitle={t('title.appPrivacy')} />
+  <PageHeader heading={app} subtitle={subtitle} />
   <Container class="pt-12">
     <Prose class="max-w-prose"><Content /></Prose>
   </Container>
