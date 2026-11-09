@@ -23,7 +23,7 @@ ATU79450327
 
 ## Kontakt
 
-E-Mail: max(dot)mayr@gmail.com \
+E-Mail: hello@mayrmax.com \
 Website: [mayrmax.com](https://mayrmax.com)
 
 ## Zuständige Kammer

@@ -11,7 +11,7 @@ This privacy policy applies to the game Paddle Perfect for iOS and Android (the 
 
 Maximilian Mayr \
 Fürstenweg 36, 6020 Innsbruck, Austria \
-max(dot)mayr@gmail.com
+hello@mayrmax.com
 
 ## 2. Overview
 
@@ -70,7 +70,7 @@ Paddle Perfect is meant for a general audience and is not directed at children. 
 
 You have the right of access (Art. 15 GDPR), rectification (Art. 16), erasure (Art. 17), restriction of processing (Art. 18), data portability (Art. 20), and to object to processing based on legitimate interests (Art. 21). You can withdraw any consent at any time with effect for the future.
 
-Because the app works without an account, I can only match data to you if you tell me your player ID or make the request from within the app (for example via _Delete my data_). To make a request, write to max(dot)mayr@gmail.com.
+Because the app works without an account, I can only match data to you if you tell me your player ID or make the request from within the app (for example via _Delete my data_). To make a request, write to hello@mayrmax.com.
 
 If you believe the processing of your data violates data protection law, you can lodge a complaint with a supervisory authority. In Austria this is the [Datenschutzbehörde](https://www.dsb.gv.at/), Barichgasse 40–42, 1030 Vienna.
 

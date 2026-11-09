@@ -11,7 +11,7 @@ Diese Datenschutzerklärung gilt für das Spiel Paddle Perfect für iOS und Andr
 
 Maximilian Mayr \
 Fürstenweg 36, 6020 Innsbruck, Österreich \
-max(dot)mayr@gmail.com
+hello@mayrmax.com
 
 ## 2. Überblick
 
@@ -70,7 +70,7 @@ Paddle Perfect richtet sich an ein allgemeines Publikum und nicht gezielt an Kin
 
 Du hast das Recht auf Auskunft (Art 15 DSGVO), Berichtigung (Art 16), Löschung (Art 17), Einschränkung der Verarbeitung (Art 18), Datenübertragbarkeit (Art 20) und Widerspruch gegen Verarbeitungen auf Grundlage berechtigter Interessen (Art 21). Eine erteilte Einwilligung kannst du jederzeit mit Wirkung für die Zukunft widerrufen.
 
-Da die App ohne Konto auskommt, kann ich Daten nur zuordnen, wenn du mir deine Spieler-ID nennst oder die Anfrage aus der App heraus stellst (z. B. über _Meine Daten löschen_). Schreib mir dafür an max(dot)mayr@gmail.com.
+Da die App ohne Konto auskommt, kann ich Daten nur zuordnen, wenn du mir deine Spieler-ID nennst oder die Anfrage aus der App heraus stellst (z. B. über _Meine Daten löschen_). Schreib mir dafür an hello@mayrmax.com.
 
 Wenn du meinst, dass die Verarbeitung deiner Daten gegen das Datenschutzrecht verstößt, kannst du dich bei der Aufsichtsbehörde beschweren. In Österreich ist das die [Datenschutzbehörde](https://www.dsb.gv.at/), Barichgasse 40–42, 1030 Wien.
 

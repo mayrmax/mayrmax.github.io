@@ -8,7 +8,7 @@ Mit dieser Datenschutzerklärung informiere ich dich darüber, wie ich die von d
 
 Maximilian Mayr \
 Fürstenweg 36, 6020 Innsbruck \
-max(dot)mayr@gmail.com
+hello@mayrmax.com
 
 ## 2. Personenbezogene Daten
 

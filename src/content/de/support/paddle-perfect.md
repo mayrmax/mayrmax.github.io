@@ -3,7 +3,7 @@ app: Paddle Perfect
 listed: false
 ---
 
-Fragen, Fehler oder Ideen? Schreib mir an [max.mayr@gmail.com](mailto:max.mayr@gmail.com?subject=Paddle%20Perfect) – am besten mit Gerät, iOS- bzw. Android-Version und der App-Version (steht in den Einstellungen ganz unten).
+Fragen, Fehler oder Ideen? Schreib mir an [support@mayrmax.com](mailto:support@mayrmax.com?subject=Paddle%20Perfect) – am besten mit Gerät, iOS- bzw. Android-Version und der App-Version (steht in den Einstellungen ganz unten).
 
 ## Häufige Fragen
 

@@ -1,7 +1,7 @@
 ---
 heading: "Let's talk about your project."
 ctaLabel: "Write an email"
-email: max.mayr@gmail.com
+email: hello@mayrmax.com
 emailSubject: "Project enquiry via mayrmax.com"
 ---
 
