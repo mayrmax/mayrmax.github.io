@@ -37,6 +37,6 @@ Tap the entry on the leaderboard and choose "Report player" – or send me an em
 
 ### What's the best way to steer?
 
-In the settings you can choose between tilt, finger steering (the canoe follows your finger) and relative touch steering (the canoe copies your swipe, your finger can be anywhere). With tilt, the way you hold the phone when you set off counts as straight – so hold it at the start the way you want to play.
+In the main menu you choose between finger and tilt. With finger steering you swipe left or right and the canoe copies your movement – your finger can be anywhere on the screen. With tilt, the way you hold the phone when you set off counts as straight – so hold it at the start the way you want to play.
 
 [Privacy policy](/apps/paddle-perfect/privacy) · [Imprint](/impressum)
