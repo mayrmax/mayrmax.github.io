@@ -37,6 +37,6 @@ Tippe in der Rangliste auf den Eintrag und wähle „Spieler melden“ – oder 
 
 ### Wie steuere ich am besten?
 
-In den Einstellungen kannst du zwischen Neigen, Fingersteuerung (das Kanu folgt deinem Finger) und relativer Fingersteuerung (das Kanu macht deine Wischbewegung mit, der Finger kann überall liegen) wählen. Beim Neigen gilt die Haltung beim Losfahren als gerade – halte das Handy am Start so, wie du spielen willst.
+Im Hauptmenü wählst du zwischen Finger und Neigen. Mit dem Finger wischst du nach links oder rechts, und das Kanu macht deine Bewegung mit – der Finger kann überall auf dem Bildschirm liegen. Beim Neigen gilt die Haltung beim Losfahren als gerade – halte das Handy am Start so, wie du spielen willst.
 
 [Datenschutzerklärung](/de/apps/paddle-perfect/datenschutz) · [Impressum](/de/impressum)
